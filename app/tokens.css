@@ -1,0 +1,71 @@
+/*
+ * Design tokens — the ONLY place colors, fonts, and scale values live.
+ *
+ * The brand identity is not designed yet (Phase 2). Everything here is a
+ * neutral placeholder. Applying the real brand means editing this file and
+ * nothing else: no component may use a raw hex value, font name, or ad-hoc
+ * size — only these tokens (directly or via the Tailwind theme below).
+ */
+
+:root {
+  /* ---- Color: neutral placeholder scale (not a brand palette) ---- */
+  --color-ink: #1c1c1a; /* primary text */
+  --color-ink-muted: #565651; /* secondary text — 7:1+ on paper */
+  --color-ink-faint: #6e6e68; /* metadata text — 4.5:1+ on paper */
+  --color-paper: #ffffff; /* page background */
+  --color-paper-shade: #f4f3f0; /* alternate section background */
+  --color-line: #dcdad4; /* borders, rules */
+  --color-accent: #234061; /* links, focus — restrained placeholder */
+  --color-accent-ink: #ffffff; /* text on accent */
+
+  /* ---- Type: system stacks until the brand chooses faces ---- */
+  --font-heading: georgia, "times new roman", serif;
+  --font-body: -apple-system, blinkmacsystemfont, "segoe ui", roboto,
+    helvetica, arial, sans-serif;
+
+  /* Type scale */
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.1875rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 2.875rem;
+
+  --leading-tight: 1.15;
+  --leading-normal: 1.65;
+
+  /* ---- Space & shape ---- */
+  --space-section: 5rem; /* vertical rhythm between page sections */
+  --space-section-sm: 3rem;
+  --measure: 42rem; /* max width for running text */
+  --container: 72rem; /* max width for the page shell */
+  --radius: 2px;
+  --focus-ring: 2px solid var(--color-accent);
+  --focus-offset: 3px;
+}
+
+/* Map tokens into Tailwind v4 theme so utilities resolve to them. */
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-ink-faint: var(--color-ink-faint);
+  --color-paper: var(--color-paper);
+  --color-paper-shade: var(--color-paper-shade);
+  --color-line: var(--color-line);
+  --color-accent: var(--color-accent);
+  --color-accent-ink: var(--color-accent-ink);
+
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+
+  --text-xs: var(--text-xs);
+  --text-sm: var(--text-sm);
+  --text-base: var(--text-base);
+  --text-lg: var(--text-lg);
+  --text-xl: var(--text-xl);
+  --text-2xl: var(--text-2xl);
+  --text-3xl: var(--text-3xl);
+  --text-4xl: var(--text-4xl);
+}

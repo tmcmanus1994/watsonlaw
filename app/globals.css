@@ -1,0 +1,67 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  line-height: var(--leading-tight);
+  text-wrap: balance;
+}
+
+/* One visible, consistent focus treatment everywhere. */
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+/* Long-form article styling for markdown-rendered news posts. */
+.prose {
+  max-width: var(--measure);
+}
+.prose p,
+.prose ul,
+.prose ol,
+.prose blockquote {
+  margin-block: 1.1em;
+}
+.prose h2 {
+  font-size: var(--text-xl);
+  margin-block: 1.6em 0.6em;
+}
+.prose h3 {
+  font-size: var(--text-lg);
+  margin-block: 1.4em 0.5em;
+}
+.prose a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose blockquote {
+  border-left: 3px solid var(--color-line);
+  padding-left: 1.25rem;
+  color: var(--color-ink-muted);
+}
+.prose ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+.prose ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+}
