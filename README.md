@@ -1,18 +1,19 @@
-# Watson Law — Website
+# Watson & Watson — Website
 
-Six-page site for a father-and-son appellate and constitutional litigation
-boutique in Little Rock, Arkansas. Next.js (App Router) + TypeScript +
-Tailwind CSS v4, deployed on Vercel.
+Site for an appellate and constitutional litigation firm in Arkansas.
+Next.js (App Router) + TypeScript + Tailwind CSS v4 + Keystatic, deployed
+on Vercel. Design source of truth: `docs/design-reference.pdf`.
 
-**The firm name is not registered yet** — the repo name is a working label
-only. See "Swapping in the firm name" below.
+⚠️ The firm name is the expected filing but **not yet registered**, and the
+expected domain is **not bought**. Everything name-related flows from
+`config/site.ts` (see below).
 
 ## Local development
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
-npm run build    # production build (also the pre-push sanity check)
+npm run dev      # http://localhost:3000  (Keystatic admin at /keystatic, local mode)
+npm run build    # production build — the pre-push sanity check
 npm run lint
 ```
 
@@ -20,68 +21,78 @@ npm run lint
 
 | What | Where |
 | --- | --- |
-| Firm name, tagline, address, phone, email, socials, contact recipient | `config/site.ts` |
+| Firm name, offices, phones, mailing address, recipients, jurisdictions | `config/site.ts` |
 | Design tokens — every color, font, size, spacing value | `app/tokens.css` |
-| Practice areas (5) | `content/practice-areas.ts` |
-| Attorney profiles (2) | `content/attorneys.ts` |
-| News posts (markdown + frontmatter stub) | `content/news/*.md` |
-| Headshots (800×1000, 4:5) | `public/images/attorneys/` |
+| Font files (Source Serif 4, Libre Franklin — self-hosted, OFL) | `app/fonts/` |
+| Homepage hero + courthouse band media slots | `content/home.ts` |
+| Practice areas (client's verbatim blurbs) | `content/practice-areas.ts` |
+| Attorney profiles (Brett is `draft: true` pending his sheet) | `content/attorneys.ts` |
+| News posts (markdown; written via /keystatic) | `content/news/` |
+| News PDF attachments / images | `public/files/news/`, `public/images/news/` |
+| Court photography (pre-graded stills from Trav) | `public/images/courts/` |
+| Hero footage + poster | `public/media/`, `public/images/hero/` |
 
-Routes: `/` · `/firm` · `/attorneys` (+ `/attorneys/[slug]`) · `/practice`
-(+ `/practice/[slug]`) · `/news` (+ `/news/[slug]`) · `/contact`. Dynamic
-pages generate statically from the content files above.
+## The one-file name rule
 
-## Swapping in the firm name (Constraint 1)
+Nothing outside `config/site.ts` hardcodes the firm name. The wordmark,
+monogram, and favicon are typographic components generated from config —
+when registration lands (or changes), edit `name`/`legalName` there and
+everything follows. Exception noted in code: `app/icon.tsx` keeps literal
+palette hex values because the favicon renderer can't read CSS variables —
+keep them in sync with `app/tokens.css`.
 
-Nothing outside `config/site.ts` hardcodes the name. When registration
-lands, edit `name` and `legalName` there — nav, footer, page titles,
-OpenGraph, JSON-LD, and the contact email subject all follow.
+## Brand rules enforced in code
 
-## Swapping in the brand (Constraint 3)
+- Oxblood (`--color-accent`) is only ever hairlines, labels, numerals,
+  link states, and the monogram rule — never a background or fill.
+- Print stylesheet drops oxblood to ink (`app/tokens.css`).
+- Headings are Source Serif 4 at regular weight; labels/nav are Libre
+  Franklin caps with wide tracking (`.label` in `app/globals.css`).
 
-All colors, font stacks, and scale values are tokens in `app/tokens.css`.
-Applying the real identity = editing that file. If the brand uses a hosted
-font, load it in `app/layout.tsx` via `next/font` and point the
-`--font-heading` / `--font-body` tokens at it — still no component changes.
+## Media pipeline (photos land late — zero layout shift)
 
-## Dropping in real content
-
-- **Copy (~Aug 24):** replace the placeholder strings in `content/*.ts` and
-  the page ledes. Blurbs are sized for 75–125 words, bios for 150–250.
-- **Headshots (week of Aug 25):** overwrite the PNGs in
+- **Headshots** (week of Sept 14): overwrite the PNGs in
   `public/images/attorneys/` at 800×1000 (4:5). Dimensions are locked in
-  `content/attorneys.ts`, so the layout will not shift.
-- **Disclaimer / intake language:** client-supplied. Slots are marked with
-  `TODO: client-supplied` comments in `components/SiteFooter.tsx` and
-  `app/contact/page.tsx`.
+  `content/attorneys.ts`.
+- **Court stills**: drop pre-graded files in `public/images/courts/` and
+  set the paths in `content/home.ts` (band) — no CSS re-grading on top.
+- **Hero footage**: 6–10s muted H.264 loop, compressed hard, into
+  `public/media/`; set `videoSrc` in `content/home.ts`. Static still shows
+  on mobile and for reduced-motion visitors; the placeholder still is
+  marked and lives at `public/images/hero/`.
+- **Lottie wordmark**: when the .dotlottie file lands, put it in
+  `public/media/` and set `brandLottieSrc` in `config/site.ts`. It plays
+  once and settles; static mark is always the fallback.
+
+## News / Keystatic
+
+Admin at `/keystatic` (excluded from robots + sitemap). Local mode in dev;
+production uses Keystatic Cloud auth — setup steps at the bottom of
+`docs/PUBLISHING.md`, editor guide at the top. Posts are plain markdown in
+`content/news/`; the site renders them statically via `lib/news.ts`
+(headings, quotes, links, `[^1]` footnotes, PDF attachments).
 
 ## Contact form
 
-Server action in `app/contact/actions.ts`. Spam protection is a honeypot
-field plus a minimum-time check — no third-party service. Delivery uses the
-Resend API free tier (100 emails/day) when these env vars are set:
+`app/contact/actions.ts` delivers to **both** addresses in
+`site.contactRecipients` via Resend. Required env:
 
-- `RESEND_API_KEY` — from a (free) Resend account, pending client approval
-- `CONTACT_FROM` — verified sender (defaults to Resend's onboarding sender)
+- `RESEND_API_KEY` — without it, production **fails loudly** (the form
+  shows an error with the direct emails; dev logs-and-continues and says so
+  in the UI). Message bodies are never logged.
+- `CONTACT_FROM` — verified sender (defaults to Resend's onboarding sender).
 
-Without a key, submissions are validated and logged so the form is testable.
-The recipient is `contactRecipient` in `config/site.ts`.
+Spam protection is a honeypot plus a minimum-time check — no third-party
+service.
 
-## News section
+## Deploying / transfer
 
-Currently a file-based stub: markdown with frontmatter in `content/news/`,
-parsed in `lib/news.ts`. Pages consume only the `NewsPost` shape, so the CMS
-chosen in `docs/(C) News Stack Decision.md` (awaiting approval) replaces
-`lib/news.ts` without touching page components.
-
-## Deploying to Vercel
-
-1. Import the GitHub repo at vercel.com/new (framework auto-detects).
-2. Set `NEXT_PUBLIC_SITE_URL` to the deployment URL (used for canonical
-   URLs, sitemap, and JSON-LD).
-3. Do **not** connect a domain yet — the firm name isn't registered.
-
-Note: Vercel's free Hobby tier is licensed for non-commercial use. Fine for
-previews during the build; pick the production host (Vercel Pro vs. a
-free-for-commercial alternative) before launch — client approval required
-for any paid option (contract Term 5).
+1. Import the repo at vercel.com/new (Next.js auto-detects). Set
+   `NEXT_PUBLIC_SITE_URL`, `RESEND_API_KEY`, `CONTACT_FROM`,
+   `NEXT_PUBLIC_KEYSTATIC_PROJECT`.
+2. Enable **Preview Comments** on the deployment for the client review
+   round.
+3. Do **not** connect a domain until the name is registered.
+4. At launch, the repo and Vercel project transfer to the client — nothing
+   in the code references a GitHub org or Vercel team, so transfer is
+   Settings → Transfer on both platforms plus re-entering the env vars.

@@ -15,28 +15,29 @@ export default function NewsPage() {
 
   return (
     <>
-      <PageIntro
-        title="News"
-        lede="Articles and commentary from the firm."
-      />
-      <div className="mx-auto max-w-[var(--container)] px-5 py-16">
-        <ul className="grid gap-6">
+      <PageIntro kicker={site.name} title="News" />
+      <div className="mx-auto max-w-[var(--container)] px-5 py-[var(--space-section-sm)]">
+        <ul>
           {posts.map((post) => (
-            <li key={post.slug} className="border border-line p-8">
-              <p className="text-xs uppercase tracking-widest text-ink-faint">
-                <time dateTime={post.date}>{formatDate(post.date)}</time>
-              </p>
-              <h2 className="mt-2 text-xl">
-                <Link
-                  href={`/news/${post.slug}`}
-                  className="text-ink no-underline hover:underline"
-                >
-                  {post.title}
-                </Link>
-              </h2>
-              <p className="mt-3 max-w-[var(--measure)] text-ink-muted">
-                {post.excerpt}
-              </p>
+            <li key={post.slug} className="border-b border-rule">
+              <Link
+                href={`/news/${post.slug}`}
+                className="group grid gap-2 py-8 no-underline md:grid-cols-[10rem_1fr] md:gap-8"
+              >
+                <time dateTime={post.date} className="label pt-1 text-gray">
+                  {formatDate(post.date)}
+                </time>
+                <span>
+                  <span className="font-serif text-h3 text-ink underline decoration-transparent decoration-2 underline-offset-4 group-hover:decoration-accent">
+                    {post.title}
+                  </span>
+                  {post.excerpt && (
+                    <span className="mt-2 block max-w-[var(--measure)] text-[length:var(--text-small)] text-gray">
+                      {post.excerpt}
+                    </span>
+                  )}
+                </span>
+              </Link>
             </li>
           ))}
         </ul>

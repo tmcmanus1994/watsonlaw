@@ -2,15 +2,15 @@
 type: decision
 client: Brett Watson + Noah Watson
 project: Website & Brand Identity
-status: awaiting Trav approval
+status: approved — implemented in the Sept 2 build (Keystatic, cloud auth mode)
 created: 2026-08-19
 tags: [website, client, cms, decision]
 ---
 
 # News Stack Decision — How the News Section Publishes
 
-**Status: ⛔ Awaiting approval. Nothing implemented yet.** The scaffold ships with a
-file-based markdown stub that the chosen option swaps into.
+**Status: ✅ Approved and implemented** (Sept 2 build — admin at `/keystatic`, cloud
+auth pending the Keystatic Cloud project; see `docs/PUBLISHING.md`).
 
 > Sourcing note: this research environment could not reach the vendors' own pricing pages
 > directly (network egress blocked), so figures below come from vendor docs and multiple

@@ -5,6 +5,9 @@ import { submitContact, type ContactFormState } from "@/app/contact/actions";
 
 const initialState: ContactFormState = { status: "idle", message: "" };
 
+const inputClasses =
+  "border border-rule bg-paper px-3 py-2 text-ink";
+
 export function ContactForm() {
   const [state, formAction, pending] = useActionState(submitContact, initialState);
   // Set on first interaction; the server rejects submissions where the gap
@@ -13,7 +16,7 @@ export function ContactForm() {
 
   if (state.status === "sent") {
     return (
-      <p role="status" className="border border-line bg-paper-shade p-6">
+      <p role="status" className="border border-rule bg-paper-deep p-6">
         {state.message}
       </p>
     );
@@ -36,7 +39,7 @@ export function ContactForm() {
       </div>
 
       <div className="grid gap-1.5">
-        <label htmlFor="name" className="text-sm font-semibold">
+        <label htmlFor="name" className="label text-ink">
           Name
         </label>
         <input
@@ -45,12 +48,12 @@ export function ContactForm() {
           type="text"
           required
           autoComplete="name"
-          className="border border-line bg-paper px-3 py-2"
+          className={inputClasses}
         />
       </div>
 
       <div className="grid gap-1.5">
-        <label htmlFor="email" className="text-sm font-semibold">
+        <label htmlFor="email" className="label text-ink">
           Email
         </label>
         <input
@@ -59,12 +62,25 @@ export function ContactForm() {
           type="email"
           required
           autoComplete="email"
-          className="border border-line bg-paper px-3 py-2"
+          className={inputClasses}
         />
       </div>
 
       <div className="grid gap-1.5">
-        <label htmlFor="message" className="text-sm font-semibold">
+        <label htmlFor="phone" className="label text-ink">
+          Phone <span className="normal-case tracking-normal">(optional)</span>
+        </label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          autoComplete="tel"
+          className={inputClasses}
+        />
+      </div>
+
+      <div className="grid gap-1.5">
+        <label htmlFor="message" className="label text-ink">
           Message
         </label>
         <textarea
@@ -72,12 +88,17 @@ export function ContactForm() {
           name="message"
           required
           rows={7}
-          className="border border-line bg-paper px-3 py-2"
+          className={inputClasses}
         />
       </div>
 
       {state.status === "error" && (
-        <p role="alert" className="text-sm text-ink">
+        <p role="alert" className="border-l-2 border-accent pl-4 text-[length:var(--text-small)]">
+          {state.message}
+        </p>
+      )}
+      {state.status === "sent-dev" && (
+        <p role="status" className="border-l-2 border-rule pl-4 text-[length:var(--text-small)] text-gray">
           {state.message}
         </p>
       )}
@@ -85,7 +106,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="justify-self-start bg-accent px-6 py-3 text-sm text-accent-ink disabled:opacity-60"
+        className="label justify-self-start border border-ink px-6 py-3 text-ink hover:border-accent hover:text-accent disabled:opacity-60"
       >
         {pending ? "Sending…" : "Send message"}
       </button>

@@ -4,8 +4,8 @@
 body {
   background: var(--color-paper);
   color: var(--color-ink);
-  font-family: var(--font-body);
-  font-size: var(--text-base);
+  font-family: var(--font-serif);
+  font-size: var(--text-body);
   line-height: var(--leading-normal);
 }
 
@@ -13,9 +13,29 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-heading);
+  font-family: var(--font-serif);
+  font-weight: 400; /* headings are regular weight per the deck */
   line-height: var(--leading-tight);
   text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--text-h1);
+}
+h2 {
+  font-size: var(--text-h2);
+}
+h3 {
+  font-size: var(--text-h3);
+}
+
+/* Kickers, section labels, captions — Libre Franklin caps with tracking. */
+.label {
+  font-family: var(--font-label);
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
 }
 
 /* One visible, consistent focus treatment everywhere. */
@@ -26,7 +46,20 @@ h4 {
 
 ::selection {
   background: var(--color-accent);
-  color: var(--color-accent-ink);
+  color: var(--color-paper);
+}
+
+/* Text links: ink at rest, oxblood underline on hover/active (deck rule). */
+.link {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--color-rule);
+  text-underline-offset: 3px;
+}
+.link:hover,
+.link:active {
+  color: var(--color-accent);
+  text-decoration-color: var(--color-accent);
 }
 
 /* Long-form article styling for markdown-rendered news posts. */
@@ -40,22 +73,29 @@ h4 {
   margin-block: 1.1em;
 }
 .prose h2 {
-  font-size: var(--text-xl);
+  font-size: var(--text-h3);
   margin-block: 1.6em 0.6em;
 }
 .prose h3 {
-  font-size: var(--text-lg);
+  font-size: var(--text-body);
+  font-weight: 600;
   margin-block: 1.4em 0.5em;
 }
 .prose a {
-  color: var(--color-accent);
+  color: var(--color-ink);
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-decoration-color: var(--color-rule);
+  text-underline-offset: 3px;
+}
+.prose a:hover,
+.prose a:active {
+  color: var(--color-accent);
+  text-decoration-color: var(--color-accent);
 }
 .prose blockquote {
-  border-left: 3px solid var(--color-line);
+  border-left: 2px solid var(--color-accent);
   padding-left: 1.25rem;
-  color: var(--color-ink-muted);
+  color: var(--color-gray);
 }
 .prose ul {
   list-style: disc;
@@ -64,4 +104,21 @@ h4 {
 .prose ol {
   list-style: decimal;
   padding-left: 1.5rem;
+}
+.prose hr {
+  border: 0;
+  border-top: var(--hairline);
+  margin-block: 2em;
+}
+
+/* Reduced motion: nothing autoplays, nothing animates. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

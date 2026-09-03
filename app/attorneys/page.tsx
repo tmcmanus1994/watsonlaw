@@ -13,30 +13,29 @@ export const metadata: Metadata = {
 export default function AttorneysPage() {
   return (
     <>
-      <PageIntro
-        title="Attorneys"
-        lede="[Placeholder lede — replaced when bios are drafted.]"
-      />
-      <div className="mx-auto max-w-[var(--container)] px-5 py-16">
-        <ul className="grid gap-10 sm:grid-cols-2">
+      <PageIntro kicker={site.name} title="Attorneys" />
+      <div className="mx-auto max-w-[var(--container)] px-5 py-[var(--space-section-sm)]">
+        <ul className="grid gap-12 sm:grid-cols-2">
           {attorneys.map((attorney) => (
             <li key={attorney.slug}>
               <Link
                 href={`/attorneys/${attorney.slug}`}
-                className="group block no-underline"
+                className="group block max-w-sm no-underline"
               >
                 <Image
                   src={attorney.headshot.src}
                   alt={attorney.headshot.alt}
                   width={attorney.headshot.width}
                   height={attorney.headshot.height}
-                  className="w-full max-w-sm border border-line"
+                  className="w-full border border-rule"
                   sizes="(min-width: 640px) 24rem, 100vw"
                 />
-                <h2 className="mt-4 text-xl text-ink group-hover:underline">
+                <h2 className="mt-5 font-serif text-h3 text-ink underline decoration-transparent decoration-2 underline-offset-4 group-hover:decoration-accent">
                   {attorney.name}
                 </h2>
-                <p className="mt-1 text-sm text-ink-muted">{attorney.title}</p>
+                <p className="mt-2 text-[length:var(--text-small)] text-gray">
+                  {attorney.homeCredential}
+                </p>
               </Link>
             </li>
           ))}

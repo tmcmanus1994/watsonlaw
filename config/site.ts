@@ -1,38 +1,92 @@
 /**
  * Single source of truth for firm identity and contact details.
  *
- * The firm name is NOT yet registered with the Arkansas Secretary of State.
- * Nothing outside this file may hardcode the name — nav, footer, metadata,
- * JSON-LD, and email templates all read from here. When the name lands,
- * updating `name` (and `legalName`) below is the entire change.
+ * ⚠️ The name "Watson & Watson LLP" is the expected filing but is NOT yet
+ * registered with the Arkansas Secretary of State, and the expected domain
+ * (watsonlawllp.com) is NOT bought. Nothing outside this file may hardcode
+ * the name — nav, footer, wordmark, monogram, metadata, JSON-LD, and email
+ * subjects all read from here, so a name change stays a one-file edit.
  */
 
 export const site = {
-  /** Display name used in nav, titles, footer. Placeholder until registration. */
-  name: "[Firm Name]",
-  /** Formal registered entity name for JSON-LD / legal contexts. */
-  legalName: "[Firm Name, PLLC]",
-  tagline: "Appellate & Constitutional Litigation", // descriptive, not brand copy
+  name: "Watson & Watson",
+  legalName: "Watson & Watson LLP",
+  /** Kicker line used in the hero and metadata. */
+  tagline: "Appellate & Constitutional Litigation · Arkansas",
   description:
-    "A father-and-son appellate and constitutional litigation boutique in Little Rock, Arkansas.",
+    "An appellate and constitutional litigation firm in Arkansas, practicing before the Arkansas courts, the U.S. Courts of Appeals, and the Supreme Court of the United States.",
 
   /** Canonical production URL. Vercel preview URLs are injected via env. */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com",
 
-  address: {
-    street: "[Street Address]",
-    city: "Little Rock",
+  offices: [
+    {
+      city: "North Little Rock",
+      attorney: "Noah P. Watson",
+      phone: "(501) 388-4514",
+    },
+    {
+      city: "Searcy",
+      attorney: "Brett D. Watson",
+      phone: "(501) 281-2468",
+    },
+  ],
+  mailingAddress: {
+    line1: "PO Box 707",
+    city: "Searcy",
     state: "AR",
-    zip: "[ZIP]",
+    zip: "72145-0707",
   },
-  phone: "[Phone]",
-  email: "[email@example.com]",
 
-  /** Where the contact form delivers. Placeholder until the client confirms. */
-  contactRecipient: "[intake@example.com]",
+  /** Contact form submissions deliver to BOTH addresses. */
+  contactRecipients: ["watson@bdwpllc.com", "noah.watson57@gmail.com"],
 
-  /** Add entries as the client provides them, e.g. { label: "LinkedIn", href: "..." } */
+  jurisdictions: [
+    "Arkansas courts",
+    "United States Courts of Appeals",
+    "Supreme Court of the United States",
+  ],
+
+  /**
+   * Optional .lottie file for the animated wordmark (Trav is producing it).
+   * When the file lands, put it in /public/media and set the path here —
+   * BrandMark hydrates it automatically; static mark ships until then.
+   */
+  brandLottieSrc: null as string | null,
+
+  /** Add entries as the client provides them. */
   socials: [] as { label: string; href: string }[],
 } as const;
 
 export type Site = typeof site;
+
+/**
+ * Entity suffix ("LLP") derived from the legal name, so the wordmark keeps
+ * working if the name or suffix changes.
+ */
+export function entitySuffix(): string {
+  return site.legalName.startsWith(site.name)
+    ? site.legalName.slice(site.name.length).trim()
+    : "";
+}
+
+/**
+ * The wordmark stacks the name on two lines, split at the ampersand
+ * ("WATSON &" / "WATSON"). Falls back to a single line without one.
+ */
+export function wordmarkLines(): string[] {
+  const i = site.name.indexOf("&");
+  if (i === -1) return [site.name];
+  return [site.name.slice(0, i + 1).trim(), site.name.slice(i + 1).trim()];
+}
+
+/**
+ * Monogram initials — first letter of each name segment around the
+ * ampersand (W / W today), stacked with the oxblood rule between.
+ */
+export function monogramInitials(): string[] {
+  return site.name
+    .split("&")
+    .map((part) => part.trim().charAt(0).toUpperCase())
+    .filter(Boolean);
+}

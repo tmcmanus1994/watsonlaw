@@ -1,47 +1,55 @@
 /*
  * Design tokens — the ONLY place colors, fonts, and scale values live.
  *
- * The brand identity is not designed yet (Phase 2). Everything here is a
- * neutral placeholder. Applying the real brand means editing this file and
- * nothing else: no component may use a raw hex value, font name, or ad-hoc
- * size — only these tokens (directly or via the Tailwind theme below).
+ * Palette and type are the client-approved identity (docs/design-reference.pdf).
+ * No component may use a raw hex value, font name, or ad-hoc size — only
+ * these tokens (directly or via the Tailwind theme below).
+ *
+ * Oxblood (--color-accent) usage rules from the deck — enforce in review:
+ * hairline rules, small-caps labels, practice-index numerals, link
+ * hover/active states, the monogram's center rule. NEVER a background,
+ * NEVER a filled block, NEVER behind text.
  */
 
 :root {
-  /* ---- Color: neutral placeholder scale (not a brand palette) ---- */
-  --color-ink: #1c1c1a; /* primary text */
-  --color-ink-muted: #565651; /* secondary text — 7:1+ on paper */
-  --color-ink-faint: #6e6e68; /* metadata text — 4.5:1+ on paper */
-  --color-paper: #ffffff; /* page background */
-  --color-paper-shade: #f4f3f0; /* alternate section background */
-  --color-line: #dcdad4; /* borders, rules */
-  --color-accent: #234061; /* links, focus — restrained placeholder */
-  --color-accent-ink: #ffffff; /* text on accent */
+  /* ---- Approved palette ---- */
+  --color-ink: #1a1b1e; /* text, headlines */
+  --color-paper: #f7f3ea; /* page background — warm */
+  --color-gray: #675f52; /* secondary text */
+  --color-rule: #dcd5c6; /* hairlines, borders, placeholder blocks */
+  --color-accent: #5c1f1f; /* oxblood — see usage rules above */
 
-  /* ---- Type: system stacks until the brand chooses faces ---- */
-  --font-heading: georgia, "times new roman", serif;
-  --font-body: -apple-system, blinkmacsystemfont, "segoe ui", roboto,
-    helvetica, arial, sans-serif;
+  /* Derived neutrals (tints of the palette, not new colors) */
+  --color-paper-deep: #efe9dc; /* quiet alternate band */
+  --color-scrim: #14120e; /* hero/photo scrim base — applied at varying alpha */
 
-  /* Type scale */
-  --text-xs: 0.8125rem;
-  --text-sm: 0.9375rem;
-  --text-base: 1.0625rem;
-  --text-lg: 1.1875rem;
-  --text-xl: 1.375rem;
-  --text-2xl: 1.75rem;
-  --text-3xl: 2.25rem;
-  --text-4xl: 2.875rem;
+  /* ---- Type ----
+   * Font family values are injected by next/font in app/layout.tsx as
+   * --font-source-serif / --font-libre-franklin. Components only ever use
+   * the two semantic tokens below.
+   */
+  --font-serif: var(--font-source-serif), georgia, "times new roman", serif;
+  --font-label: var(--font-libre-franklin), -apple-system, "segoe ui", arial,
+    sans-serif;
 
+  /* Approved scale */
+  --text-body: 1.0625rem;
+  --text-h1: 2.75rem;
+  --text-h2: 2rem;
+  --text-h3: 1.375rem;
+  --text-label: 0.75rem; /* caps, 600, wide tracking */
+  --text-small: 0.9375rem;
+
+  --tracking-label: 0.18em;
   --leading-tight: 1.15;
   --leading-normal: 1.65;
 
   /* ---- Space & shape ---- */
-  --space-section: 5rem; /* vertical rhythm between page sections */
+  --space-section: 5rem;
   --space-section-sm: 3rem;
   --measure: 42rem; /* max width for running text */
   --container: 72rem; /* max width for the page shell */
-  --radius: 2px;
+  --hairline: 1px solid var(--color-rule);
   --focus-ring: 2px solid var(--color-accent);
   --focus-offset: 3px;
 }
@@ -49,23 +57,26 @@
 /* Map tokens into Tailwind v4 theme so utilities resolve to them. */
 @theme inline {
   --color-ink: var(--color-ink);
-  --color-ink-muted: var(--color-ink-muted);
-  --color-ink-faint: var(--color-ink-faint);
   --color-paper: var(--color-paper);
-  --color-paper-shade: var(--color-paper-shade);
-  --color-line: var(--color-line);
+  --color-gray: var(--color-gray);
+  --color-rule: var(--color-rule);
   --color-accent: var(--color-accent);
-  --color-accent-ink: var(--color-accent-ink);
+  --color-paper-deep: var(--color-paper-deep);
 
-  --font-heading: var(--font-heading);
-  --font-body: var(--font-body);
+  --font-serif: var(--font-serif);
+  --font-label: var(--font-label);
 
-  --text-xs: var(--text-xs);
-  --text-sm: var(--text-sm);
-  --text-base: var(--text-base);
-  --text-lg: var(--text-lg);
-  --text-xl: var(--text-xl);
-  --text-2xl: var(--text-2xl);
-  --text-3xl: var(--text-3xl);
-  --text-4xl: var(--text-4xl);
+  --text-body: var(--text-body);
+  --text-h1: var(--text-h1);
+  --text-h2: var(--text-h2);
+  --text-h3: var(--text-h3);
+  --text-label: var(--text-label);
+  --text-small: var(--text-small);
+}
+
+/* One-color print: oxblood becomes ink (per the deck). */
+@media print {
+  :root {
+    --color-accent: var(--color-ink);
+  }
 }

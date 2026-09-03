@@ -3,28 +3,50 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { site } from "@/config/site";
+import { BrandMark } from "@/components/BrandMark";
 import { navItems } from "@/lib/nav";
 
+/**
+ * On the homepage the header sits over the hero photograph in paper;
+ * everywhere else it's a quiet paper bar with a hairline. Nav is Libre
+ * Franklin caps; the active page carries the underline (oxblood on paper,
+ * paper over photography — per the deck).
+ */
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const overHero = pathname === "/";
 
   return (
-    <header className="border-b border-line bg-paper">
+    <header
+      className={
+        overHero
+          ? "absolute inset-x-0 top-0 z-10 text-paper [--nav-underline:var(--color-paper)]"
+          : "border-b border-rule bg-paper text-ink [--nav-underline:var(--color-accent)]"
+      }
+    >
       <div className="mx-auto flex max-w-[var(--container)] items-center justify-between gap-6 px-5 py-4">
-        <Link
-          href="/"
-          className="font-heading text-lg tracking-wide text-ink no-underline"
-        >
-          {site.name}
+        <Link href="/" className="no-underline text-current">
+          <BrandMark
+            variant="stacked"
+            withLottie
+            className="text-[0.72rem] md:text-[0.8rem]"
+          />
+          <span className="sr-only">Home</span>
         </Link>
 
         <nav aria-label="Main" className="hidden md:block">
-          <ul className="flex items-center gap-7">
+          <ul className="flex items-center gap-6">
             {navItems.map((item) => (
               <li key={item.href}>
-                <NavLink href={item.href} current={pathname === item.href}>
+                <NavLink
+                  href={item.href}
+                  current={
+                    item.href === "/"
+                      ? pathname === "/"
+                      : pathname.startsWith(item.href)
+                  }
+                >
                   {item.label}
                 </NavLink>
               </li>
@@ -34,23 +56,31 @@ export function SiteHeader() {
 
         <button
           type="button"
-          className="md:hidden"
+          className="label md:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((v) => !v)}
         >
-          <span className="text-sm">{open ? "Close" : "Menu"}</span>
+          {open ? "Close" : "Menu"}
         </button>
       </div>
 
       {open && (
-        <nav aria-label="Main" id="mobile-nav" className="border-t border-line md:hidden">
+        <nav
+          aria-label="Main"
+          id="mobile-nav"
+          className="border-y border-rule bg-paper text-ink md:hidden [--nav-underline:var(--color-accent)]"
+        >
           <ul className="px-5 py-3">
             {navItems.map((item) => (
-              <li key={item.href} className="py-2">
+              <li key={item.href} className="py-2.5">
                 <NavLink
                   href={item.href}
-                  current={pathname === item.href}
+                  current={
+                    item.href === "/"
+                      ? pathname === "/"
+                      : pathname.startsWith(item.href)
+                  }
                   onClick={() => setOpen(false)}
                 >
                   {item.label}
@@ -81,8 +111,10 @@ function NavLink({
       onClick={onClick}
       aria-current={current ? "page" : undefined}
       className={
-        "text-sm no-underline hover:underline " +
-        (current ? "text-ink font-semibold" : "text-ink-muted")
+        "label inline-block border-b-2 pb-0.5 no-underline text-current " +
+        (current
+          ? "border-[var(--nav-underline)]"
+          : "border-transparent hover:border-[var(--nav-underline)]")
       }
     >
       {children}

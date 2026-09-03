@@ -5,44 +5,69 @@ import { site } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "The Firm",
-  description: `About ${site.name} — ${site.description}`,
+  description: site.description,
 };
 
+/*
+ * ⚠️ CONTENT GAP — flagged for Trav to resolve with Noah.
+ * The intake's "why did you start this firm" came back empty, so this page
+ * carries clearly-marked draft copy assembled ONLY from intake facts (the
+ * client's own thirty-second takeaway, the firm-wide appeals figure, the
+ * jurisdictions list, and the client's litigation-strategy wording). No
+ * invented history, values, or mission language.
+ */
 export default function FirmPage() {
   return (
     <>
-      <PageIntro
-        title="The Firm"
-        lede="[Placeholder lede — firm story copy arrives with the client intake.]"
-      />
-      <div className="mx-auto max-w-[var(--container)] px-5 py-16">
-        <div className="prose">
+      <PageIntro kicker={site.name} title="The Firm" />
+      <div className="mx-auto max-w-[var(--container)] px-5 py-[var(--space-section-sm)] md:py-[var(--space-section)]">
+        <p className="label inline-block border border-rule px-3 py-2 text-gray">
+          Draft · firm story pending — assembled from intake facts only
+        </p>
+
+        <div className="prose mt-8">
           <p>
-            [Placeholder — the firm narrative is drafted from the client
-            intake. Structure only.] Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat.
-          </p>
-          <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum. Sed ut perspiciatis unde omnis iste natus
-            error sit voluptatem accusantium doloremque laudantium.
-          </p>
-          <p>
-            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-            aut fugit, sed quia consequuntur magni dolores eos qui ratione
-            voluptatem sequi nesciunt, neque porro quisquam est qui dolorem
-            ipsum quia dolor sit amet, consectetur, adipisci velit.
-          </p>
-          <p>
-            Meet <Link href="/attorneys">the attorneys</Link> or read about{" "}
-            <Link href="/practice">our practice</Link>.
+            {site.name} is an appellate and constitutional litigation firm in
+            Arkansas — a firm that handles appeals and provides strategic
+            guidance throughout all litigation. The firm has handled more than
+            four hundred appeals.
           </p>
         </div>
+
+        <section aria-labelledby="jurisdictions" className="mt-12 max-w-[var(--measure)]">
+          <h2 id="jurisdictions" className="label border-b border-rule pb-2 text-accent">
+            Jurisdictions
+          </h2>
+          <ul className="mt-4 grid gap-2">
+            {site.jurisdictions.map((jurisdiction) => (
+              <li key={jurisdiction} className="font-serif text-h3">
+                {jurisdiction}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section aria-labelledby="with-trial-counsel" className="mt-12 max-w-[var(--measure)]">
+          <h2 id="with-trial-counsel" className="label border-b border-rule pb-2 text-accent">
+            With Trial Counsel
+          </h2>
+          <div className="prose mt-4">
+            <p>
+              The firm works alongside clients and their trial attorneys from
+              before a complaint is filed through trial — drafting, editing,
+              and arguing dispositive motions; ensuring issues are preserved
+              for appellate review; and building trial-court records that
+              shape the outcome of future appeals.
+            </p>
+            <p>
+              Read more under{" "}
+              <Link href="/practice/litigation-strategy">
+                Litigation Strategy
+              </Link>
+              , or meet <Link href="/attorneys">the attorneys</Link>.
+            </p>
+          </div>
+        </section>
       </div>
     </>
   );

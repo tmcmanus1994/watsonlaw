@@ -3,22 +3,27 @@
 import { site } from "@/config/site";
 
 export type ContactFormState = {
-  status: "idle" | "sent" | "error";
+  status: "idle" | "sent" | "sent-dev" | "error";
   message: string;
 };
 
+const DIRECT_EMAILS = site.contactRecipients.join(" or ");
+
 /**
- * Server-side contact form handler.
+ * Server-side contact form handler. Mirrors the firm's previous inquiry
+ * form: name · email · phone · message. Delivers to BOTH recipients in
+ * config/site.ts via the Resend API.
  *
- * Spam protection (no third-party service, per Term 5):
- *  - honeypot field ("company") that humans never see or fill
- *  - minimum-time check: submissions faster than 3s are bots
- *  - server-side validation of every field
+ * Spam protection (no third-party service): honeypot field, minimum-time
+ * check, server-side validation.
  *
- * Delivery: posts to the Resend API (free tier: 100 emails/day) when
- * RESEND_API_KEY is set. Without the key (local dev / preview before the
- * client approves the account) it logs and reports success so the form is
- * testable end to end.
+ * Failure posture (contract Term 13 — fail loudly):
+ *  - production with no RESEND_API_KEY → hard error state pointing the
+ *    visitor at the direct email addresses; never a silent fake success
+ *  - development with no key → logs THAT a submission occurred (never the
+ *    message body — potential-client communications may be privileged) and
+ *    returns a state that says delivery was skipped
+ *  - delivery failure → error message includes the direct emails
  */
 export async function submitContact(
   _prev: ContactFormState,
@@ -34,12 +39,13 @@ export async function submitContact(
   if (!Number.isFinite(startedAt) || Date.now() - startedAt < 3000) {
     return {
       status: "error",
-      message: "Something went wrong. Please try again.",
+      message: `Something went wrong. Please try again, or write to ${DIRECT_EMAILS}.`,
     };
   }
 
   const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
+  const phone = String(formData.get("phone") ?? "").trim();
   const message = String(formData.get("message") ?? "").trim();
 
   if (!name || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -49,7 +55,12 @@ export async function submitContact(
         "Please provide your name, a valid email address, and a message.",
     };
   }
-  if (name.length > 200 || email.length > 200 || message.length > 5000) {
+  if (
+    name.length > 200 ||
+    email.length > 200 ||
+    phone.length > 50 ||
+    message.length > 5000
+  ) {
     return {
       status: "error",
       message: "Your message is too long. Please shorten it and try again.",
@@ -58,12 +69,23 @@ export async function submitContact(
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    console.log("[contact] RESEND_API_KEY not set — logging instead:", {
-      name,
-      email,
-      length: message.length,
-    });
-    return { status: "sent", message: "Thank you. Your message has been sent." };
+    if (process.env.NODE_ENV === "production") {
+      // Fail loudly: never pretend a message was delivered.
+      console.error(
+        "[contact] RESEND_API_KEY is not configured in production — submission NOT delivered."
+      );
+      return {
+        status: "error",
+        message: `The contact form is not yet configured. Please email ${DIRECT_EMAILS}, or call either office.`,
+      };
+    }
+    // Dev: no body logged; the UI states that nothing was delivered.
+    console.log("[contact] dev submission received (not delivered — no RESEND_API_KEY)");
+    return {
+      status: "sent-dev",
+      message:
+        "Development mode: the form works, but no email was sent (RESEND_API_KEY is not set).",
+    };
   }
 
   const response = await fetch("https://api.resend.com/emails", {
@@ -73,20 +95,28 @@ export async function submitContact(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: `Website contact form <${process.env.CONTACT_FROM ?? "onboarding@resend.dev"}>`,
-      to: [site.contactRecipient],
+      from: `Website inquiry <${process.env.CONTACT_FROM ?? "onboarding@resend.dev"}>`,
+      to: [...site.contactRecipients],
       reply_to: email,
-      subject: `Website inquiry from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
+      subject: `${site.name} website inquiry from ${name}`,
+      text: [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        phone ? `Phone: ${phone}` : null,
+        "",
+        message,
+      ]
+        .filter((line) => line !== null)
+        .join("\n"),
     }),
   });
 
   if (!response.ok) {
-    console.error("[contact] delivery failed:", response.status);
+    // Status code only — never the submission contents.
+    console.error(`[contact] delivery failed with HTTP ${response.status}`);
     return {
       status: "error",
-      message:
-        "We could not send your message. Please email the firm directly.",
+      message: `We could not send your message. Please email ${DIRECT_EMAILS}, or call either office.`,
     };
   }
 

@@ -9,16 +9,21 @@ export function legalServiceJsonLd() {
     legalName: site.legalName,
     description: site.description,
     url: site.url,
-    telephone: site.phone,
-    email: site.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: site.address.street,
-      addressLocality: site.address.city,
-      addressRegion: site.address.state,
-      postalCode: site.address.zip,
+      streetAddress: site.mailingAddress.line1,
+      addressLocality: site.mailingAddress.city,
+      addressRegion: site.mailingAddress.state,
+      postalCode: site.mailingAddress.zip,
       addressCountry: "US",
     },
+    contactPoint: site.offices.map((office) => ({
+      "@type": "ContactPoint",
+      contactType: "office",
+      areaServed: "US-AR",
+      telephone: office.phone,
+      name: `${office.city} office`,
+    })),
     areaServed: "US",
   };
 }
@@ -29,7 +34,6 @@ export function attorneyJsonLd(attorney: Attorney) {
     "@type": "Attorney",
     name: attorney.name,
     url: `${site.url}/attorneys/${attorney.slug}`,
-    image: `${site.url}${attorney.headshot.src}`,
     worksFor: {
       "@type": "LegalService",
       name: site.name,

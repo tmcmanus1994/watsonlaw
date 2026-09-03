@@ -27,18 +27,36 @@ export default async function NewsPostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <article className="mx-auto max-w-[var(--container)] px-5 py-16">
-      <p className="text-xs uppercase tracking-widest text-ink-faint">
+    <article className="mx-auto max-w-[var(--container)] px-5 py-[var(--space-section-sm)] md:py-[var(--space-section)]">
+      <p className="label text-accent">
         <time dateTime={post.date}>{formatDate(post.date)}</time>
       </p>
-      <h1 className="mt-3 max-w-3xl text-3xl">{post.title}</h1>
+      <h1 className="mt-3 max-w-3xl">{post.title}</h1>
       {/* Post HTML comes from repo-controlled markdown (see lib/news.ts). */}
       <div
         className="prose mt-10"
         dangerouslySetInnerHTML={{ __html: post.html }}
       />
+
+      {post.attachments.length > 0 && (
+        <section aria-labelledby="attachments" className="mt-12 max-w-[var(--measure)]">
+          <h2 id="attachments" className="label border-b border-rule pb-2 text-accent">
+            Attachments
+          </h2>
+          <ul className="mt-3 grid gap-2">
+            {post.attachments.map((attachment) => (
+              <li key={attachment.href}>
+                <a href={attachment.href} className="link text-[length:var(--text-small)]">
+                  {attachment.label} (PDF)
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <p className="mt-12">
-        <Link href="/news" className="text-accent">
+        <Link href="/news" className="link text-[length:var(--text-small)]">
           ← All news
         </Link>
       </p>

@@ -5,24 +5,25 @@ import { site } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Contact ${site.name} in ${site.address.city}, ${site.address.state}.`,
+  description: `Contact ${site.name} — offices in ${site.offices
+    .map((o) => o.city)
+    .join(" and ")}, Arkansas.`,
 };
 
 export default function ContactPage() {
   return (
     <>
-      <PageIntro title="Contact" />
-      <div className="mx-auto grid max-w-[var(--container)] gap-12 px-5 py-16 md:grid-cols-[1fr_minmax(0,20rem)]">
+      <PageIntro kicker={site.name} title="Contact" />
+      <div className="mx-auto grid max-w-[var(--container)] gap-12 px-5 py-[var(--space-section-sm)] md:grid-cols-[1fr_minmax(0,20rem)] md:py-[var(--space-section)]">
         <div>
           {/*
             TODO: client-supplied intake language.
-            The paragraph below is a placeholder slot for whatever intake or
-            engagement wording the firm requires (e.g. "contacting the firm
-            does not create an attorney-client relationship"). Do not draft
-            it — it comes from the client.
+            Slot for whatever engagement wording the firm requires (e.g. the
+            no-attorney-client-relationship note). Brett and Noah own all
+            compliance language — do not draft it.
           */}
           <p
-            className="mb-8 max-w-[var(--measure)] text-sm text-ink-muted"
+            className="mb-8 max-w-[var(--measure)] text-[length:var(--text-small)] text-gray"
             data-slot="client-intake-language"
           >
             [Client-supplied intake language appears here.]
@@ -30,18 +31,32 @@ export default function ContactPage() {
           <ContactForm />
         </div>
 
-        <aside className="text-sm text-ink-muted">
-          <h2 className="font-heading text-lg text-ink">The office</h2>
-          <address className="mt-3 not-italic">
-            {site.address.street}
-            <br />
-            {site.address.city}, {site.address.state} {site.address.zip}
-          </address>
-          <p className="mt-3">
-            {site.phone}
-            <br />
-            {site.email}
-          </p>
+        <aside aria-label="Offices" className="grid content-start gap-8">
+          {site.offices.map((office) => (
+            <div key={office.city}>
+              <h2 className="label border-b border-rule pb-2 text-accent">
+                {office.city}
+              </h2>
+              <p className="mt-3 text-[length:var(--text-small)]">
+                {office.attorney}
+                <br />
+                <a href={`tel:+1${office.phone.replace(/\D/g, "")}`} className="link">
+                  {office.phone}
+                </a>
+              </p>
+            </div>
+          ))}
+          <div>
+            <h2 className="label border-b border-rule pb-2 text-accent">
+              Mailing Address
+            </h2>
+            <address className="mt-3 text-[length:var(--text-small)] not-italic">
+              {site.mailingAddress.line1}
+              <br />
+              {site.mailingAddress.city}, {site.mailingAddress.state}{" "}
+              {site.mailingAddress.zip}
+            </address>
+          </div>
         </aside>
       </div>
     </>

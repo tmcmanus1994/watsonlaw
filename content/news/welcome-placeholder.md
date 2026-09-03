@@ -1,12 +1,14 @@
 ---
 title: "[Placeholder] Sample news post"
-date: "2026-08-19"
-excerpt: "[Placeholder excerpt] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
+date: "2026-09-02"
+excerpt: "[Placeholder excerpt] A sample post demonstrating everything the News section supports — delete before launch."
+draft: false
+attachments: []
 ---
 
-[Placeholder post — demonstrates the markdown features the News section supports. Real posts are authored by the attorneys once the CMS decision is approved.]
+[Placeholder post — demonstrates the features the News editor supports. Real posts are one-paragraph case-win summaries and monthly appellate summaries, written by the attorneys at /keystatic.]
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.[^1] Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 ## A second-level heading
 
@@ -14,12 +16,6 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 
 > A block quote, the kind a commentary post would use to quote an opinion or a filing. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
 
-### A third-level heading
+A link to [an external filing](https://www.example.com) renders like this, and PDF attachments added in the editor are listed at the end of the post.
 
-Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit:
-
-- Lorem ipsum dolor sit amet
-- Consectetur adipiscing elit
-- Sed do eiusmod tempor incididunt
-
-A link to [an external filing](https://www.example.com) renders like this. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti.
+[^1]: A footnote, single line, written as `[^1]` in the text with its matching definition at the bottom of the post.

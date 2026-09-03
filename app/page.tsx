@@ -1,115 +1,63 @@
-import Image from "next/image";
-import Link from "next/link";
-import { site } from "@/config/site";
-import { practiceAreas } from "@/content/practice-areas";
+import { HeroMedia } from "@/components/HeroMedia";
+import { PracticeIndex } from "@/components/PracticeIndex";
+import { CourtBand } from "@/components/CourtBand";
 import { attorneys } from "@/content/attorneys";
-import { getAllPosts } from "@/lib/news";
-import { formatDate } from "@/lib/format";
+import { home } from "@/content/home";
+import { site } from "@/config/site";
 
 export default function HomePage() {
-  const posts = getAllPosts().slice(0, 2);
-
   return (
     <>
-      <section className="border-b border-line bg-paper-shade">
-        <div className="mx-auto max-w-[var(--container)] px-5 py-24">
-          <p className="text-sm uppercase tracking-widest text-ink-faint">
-            {site.address.city}, {site.address.state}
+      {/* 1 · Full-bleed photographic hero, bottom-weighted scrim to ink. */}
+      <section className="relative flex min-h-[540px] flex-col justify-end h-[76vh]">
+        <HeroMedia still={home.hero.still} videoSrc={home.hero.videoSrc} />
+        {/* top scrim keeps the paper wordmark/nav legible over the image */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[var(--color-scrim)]/75 via-[var(--color-scrim)]/65 to-transparent"
+        />
+        {/* bottom-weighted scrim carrying the headline block */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-[70%] bg-gradient-to-t from-[var(--color-scrim)]/85 via-[var(--color-scrim)]/60 to-transparent"
+        />
+        <div className="relative mx-auto w-full max-w-[var(--container)] px-5 pb-14">
+          <p className="label text-paper">{site.tagline}</p>
+          <h1 className="mt-3 max-w-3xl text-paper">{home.hero.heading}</h1>
+          <p className="mt-4 max-w-[var(--measure)] text-paper">
+            {home.hero.sub}
           </p>
-          <h1 className="mt-3 max-w-3xl text-3xl md:text-4xl">
-            {site.tagline}
-          </h1>
-          <p className="mt-5 max-w-[var(--measure)] text-lg text-ink-muted">
-            {site.description} [Placeholder positioning copy — replaced when
-            the client intake returns.]
-          </p>
-          <div className="mt-8">
-            <Link
-              href="/contact"
-              className="inline-block bg-accent px-6 py-3 text-sm text-accent-ink no-underline"
-            >
-              Contact the firm
-            </Link>
-          </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-[var(--container)] px-5 py-20">
-        <h2 className="text-2xl">Our Practice</h2>
-        <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {practiceAreas.map((area) => (
-            <li key={area.slug} className="border border-line p-6">
-              <h3 className="text-lg">
-                <Link
-                  href={`/practice/${area.slug}`}
-                  className="text-ink no-underline hover:underline"
-                >
-                  {area.title}
-                </Link>
-              </h3>
-              <p className="mt-2 text-sm text-ink-muted">{area.summary}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {/* 2 · Practice index — I & II full-width, III–V compact. */}
+      <PracticeIndex />
 
-      <section className="border-t border-line bg-paper-shade">
-        <div className="mx-auto max-w-[var(--container)] px-5 py-20">
-          <h2 className="text-2xl">Attorneys</h2>
-          <ul className="mt-8 grid gap-8 sm:grid-cols-2">
-            {attorneys.map((attorney) => (
-              <li key={attorney.slug} className="flex items-start gap-5">
-                <Image
-                  src={attorney.headshot.src}
-                  alt={attorney.headshot.alt}
-                  width={attorney.headshot.width}
-                  height={attorney.headshot.height}
-                  className="w-24 shrink-0 border border-line"
-                  sizes="6rem"
-                />
-                <div>
-                  <h3 className="text-lg">
-                    <Link
-                      href={`/attorneys/${attorney.slug}`}
-                      className="text-ink no-underline hover:underline"
-                    >
-                      {attorney.name}
-                    </Link>
-                  </h3>
-                  <p className="mt-1 text-sm text-ink-muted">{attorney.title}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      {/* 3 · Second courthouse band with caption label. */}
+      <CourtBand />
 
-      <section className="mx-auto max-w-[var(--container)] px-5 py-20">
-        <div className="flex items-baseline justify-between gap-4">
-          <h2 className="text-2xl">News</h2>
-          <Link href="/news" className="text-sm text-accent">
-            All news
-          </Link>
-        </div>
-        <ul className="mt-8 grid gap-6 md:grid-cols-2">
-          {posts.map((post) => (
-            <li key={post.slug} className="border border-line p-6">
-              <p className="text-xs uppercase tracking-widest text-ink-faint">
-                {formatDate(post.date)}
+      {/* 4 · Credentials two-up (approved deck copy, verbatim). */}
+      <section
+        aria-label="Credentials"
+        className="mx-auto max-w-[var(--container)] px-5 py-[var(--space-section)]"
+      >
+        <ul className="grid gap-10 md:grid-cols-2">
+          {attorneys.map((attorney) => (
+            <li key={attorney.slug}>
+              <p className="font-serif text-h3 text-ink">
+                — {surname(attorney.name)}
               </p>
-              <h3 className="mt-2 text-lg">
-                <Link
-                  href={`/news/${post.slug}`}
-                  className="text-ink no-underline hover:underline"
-                >
-                  {post.title}
-                </Link>
-              </h3>
-              <p className="mt-2 text-sm text-ink-muted">{post.excerpt}</p>
+              <p className="mt-2 max-w-[var(--measure)] text-[length:var(--text-small)] text-gray">
+                {attorney.homeCredential}
+              </p>
             </li>
           ))}
         </ul>
       </section>
     </>
   );
+}
+
+function surname(fullName: string) {
+  return fullName.split(" ").at(-1) ?? fullName;
 }

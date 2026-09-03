@@ -1,64 +1,76 @@
 /**
- * The five practice areas. Real blurbs (~75–125 words) are being written by
- * the attorneys and land ~Aug 24 — swapping them in is an edit to this file
- * only. All copy below is placeholder filler sized to the real word counts.
+ * The five practice areas, in the approved order with Roman numerals.
+ * Blurbs are the client's own words from the intake (Part 3), verbatim —
+ * do not alter beyond punctuation/consistency without client approval.
+ * Index descriptions for I and II are from the approved design deck.
  */
 
 export type PracticeArea = {
   slug: string;
+  numeral: string;
   title: string;
-  /** One-line summary used on cards and metadata descriptions. */
+  /** Short description shown on the practice index (deck copy where given). */
+  indexDescription?: string;
+  /** One-line summary for metadata (first sentence of the client's blurb). */
   summary: string;
-  /** ~75–125 words, shown at the top of the practice page. */
-  blurb: string;
-  /** Longer placeholder body, rendered as paragraphs. */
+  /** The client's full blurb, verbatim, rendered as paragraphs. */
   body: string[];
 };
-
-const PLACEHOLDER_NOTE = "[Placeholder copy — attorney-drafted text replaces this.]";
-
-const LOREM_SHORT =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.";
-
-const LOREM_LONG =
-  LOREM_SHORT +
-  " Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.";
 
 export const practiceAreas: PracticeArea[] = [
   {
     slug: "appeals",
+    numeral: "I",
     title: "Appeals",
-    summary: "[Placeholder] State and federal appellate representation.",
-    blurb: `${PLACEHOLDER_NOTE} ${LOREM_SHORT}`,
-    body: [LOREM_LONG, LOREM_SHORT, LOREM_LONG],
-  },
-  {
-    slug: "constitutional-litigation",
-    title: "Constitutional Litigation",
-    summary: "[Placeholder] Litigation of constitutional questions at every level.",
-    blurb: `${PLACEHOLDER_NOTE} ${LOREM_SHORT}`,
-    body: [LOREM_LONG, LOREM_SHORT, LOREM_LONG],
-  },
-  {
-    slug: "amicus-briefing",
-    title: "Amicus Briefing & Strategy",
-    summary: "[Placeholder] Amicus curiae briefs and coordinated amicus strategy.",
-    blurb: `${PLACEHOLDER_NOTE} ${LOREM_SHORT}`,
-    body: [LOREM_LONG, LOREM_SHORT, LOREM_LONG],
-  },
-  {
-    slug: "election-law",
-    title: "Election Law",
-    summary: "[Placeholder] Election-related disputes, compliance, and litigation.",
-    blurb: `${PLACEHOLDER_NOTE} ${LOREM_SHORT}`,
-    body: [LOREM_LONG, LOREM_SHORT, LOREM_LONG],
+    indexDescription:
+      "Briefing and oral argument in state and federal appellate courts, from notice of appeal through rehearing and certiorari.",
+    summary:
+      "We litigate appeals before all levels of Arkansas and federal courts.",
+    body: [
+      "We litigate appeals before all levels of Arkansas and federal courts: the Arkansas Supreme Court and Court of Appeals; the United States Courts of Appeals; and the Supreme Court of the United States. We have handled more than 400 appeals, encompassing Arkansas and federal constitutional law, complex statutory schemes, election law, voting rights, business disputes, property conflicts, administrative appeals, and more. We bring a wealth of knowledge and experience: we know how appellate courts think, understand appellate procedure, prepare effective briefs, and present persuasive oral arguments.",
+    ],
   },
   {
     slug: "litigation-strategy",
+    numeral: "II",
     title: "Litigation Strategy",
-    summary: "[Placeholder] Case framing and strategy consulting for trial teams.",
-    blurb: `${PLACEHOLDER_NOTE} ${LOREM_SHORT}`,
-    body: [LOREM_LONG, LOREM_SHORT, LOREM_LONG],
+    indexDescription:
+      "Counsel to trial teams on preserving error and positioning the case for review — before the appeal exists.",
+    summary:
+      "We help clients and their trial attorneys develop forward-looking strategies from before a complaint is filed through trial.",
+    body: [
+      "We help clients and their trial attorneys develop forward-looking strategies from before a complaint is filed through trial. In high-stakes and novel disputes, we draft, edit, and argue dispositive trial motions, like motions to dismiss and motions for summary judgment; ensure issues are preserved for appellate review; and build trial-court records, which often shape the outcome of future appeals. For the important decisions that are made long before trial, we think ahead to best secure our clients’ interests throughout litigation.",
+    ],
+  },
+  {
+    slug: "constitutional-litigation",
+    numeral: "III",
+    title: "Constitutional Litigation",
+    summary:
+      "We bring extensive experience in both Arkansas and U.S. constitutional issues.",
+    body: [
+      "We bring extensive experience in both Arkansas and U.S. constitutional issues. We have defended and challenged legislative and executive actions, so we have comprehensive knowledge of how to best advocate for our clients’ interests. And we have a unique understanding of the Arkansas Constitution, an often untapped area of constitutional protections.",
+    ],
+  },
+  {
+    slug: "amicus-briefing",
+    numeral: "IV",
+    title: "Amicus Briefing",
+    summary:
+      "We understand how to craft an amicus brief that’s most likely to win the court’s attention.",
+    body: [
+      "When litigation can affect nonparties, a nonparty—an amicus curiae (“friend of the court”)—can bring its unique perspective to aid the court’s decision. We understand how to craft an amicus brief that’s most likely to win the court’s attention. We don’t just echo the parties’ arguments; we fill in the gaps for the court, presenting our clients’ unique contexts and subject-matter expertise. We also assist clients in building and coordinating coalitions of amici, ensuring the aligned nonparties speak with one voice.",
+    ],
+  },
+  {
+    slug: "election-law",
+    numeral: "V",
+    title: "Election Law",
+    summary:
+      "Our experience in election law is broad: ballot initiatives, campaign finance, candidate eligibility, and more.",
+    body: [
+      "Our experience in election law is broad: ballot initiatives, Ethics Commission representation, state and federal campaign finance, permissible nonprofit activities, candidate eligibility, and more. When the stakes are high—and they always are—we guide our clients through these complex areas of law to accomplish their goals.",
+    ],
   },
 ];
 
