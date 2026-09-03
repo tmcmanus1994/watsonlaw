@@ -1,73 +1,120 @@
+"use client";
+
 import Link from "next/link";
-import { practiceAreas } from "@/content/practice-areas";
+import { useEffect, useRef, useState } from "react";
+import { indexDescriptionFor, practiceAreas } from "@/content/practice-areas";
 
 /**
- * The practice index from the deck: label row, areas I and II full-width
- * with their descriptions, III–V as a compact three-across row. Numerals
- * are oxblood; titles serif; everything separated by hairlines.
+ * The practice index as a ledger: five equal full-width rows, I–V,
+ * hairline-separated. Rest is a clean table of contents; hovering or
+ * focusing a row draws an oxblood rule along its top edge, unfolds the
+ * description beneath it, and lets the other rows recede from ink to gray.
+ *
+ * Motion is CSS only (see the "Practice ledger" block in globals.css) —
+ * the sole JS is the IntersectionObserver below, which plays the one-time
+ * entrance. Everything degrades: no JS, no hover, or reduced motion each
+ * render the full list, expanded and instant.
  */
+
+/**
+ * True once any instance has mounted — i.e. JS is running, so a later mount
+ * is a client-side navigation whose content has not been painted yet and
+ * can start from the pre-entrance state directly. The first (hydrated)
+ * instance must not: its HTML is already on screen, so hiding it after the
+ * fact would flash. ENTRANCE_SCRIPT handles that case before first paint.
+ */
+let jsReady = false;
+
+const SECTION_ID = "practice-index";
+
+/** Runs during HTML parse, before the first paint. */
+const ENTRANCE_SCRIPT = `(function(){var s=document.getElementById(${JSON.stringify(
+  SECTION_ID
+)});var m=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(s&&!m)s.dataset.entrance="pending";})();`;
+
 export function PracticeIndex({
   headingTag: HeadingTag = "h2",
 }: {
   /** "h1" when the index is the page itself (/practice); "h2" on the home. */
   headingTag?: "h1" | "h2";
 }) {
-  const featured = practiceAreas.slice(0, 2);
-  const compact = practiceAreas.slice(2);
+  const sectionRef = useRef<HTMLElement>(null);
+  // Client-side navigations can render the pre-entrance state immediately.
+  const [preEntrance] = useState(
+    () =>
+      jsReady &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+
+  useEffect(() => {
+    jsReady = true;
+    const section = sectionRef.current;
+    // Absent when the pre-entrance state was never applied (reduced motion,
+    // or the inline script did not run) — the list is already visible.
+    if (!section || section.dataset.entrance !== "pending") return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      section.dataset.entrance = "in";
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          observer.unobserve(entry.target);
+          // Let the pending state paint once so the change transitions.
+          requestAnimationFrame(() => {
+            section.dataset.entrance = "in";
+          });
+        }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
+      ref={sectionRef}
+      id={SECTION_ID}
       aria-labelledby="practice-index-heading"
-      className="mx-auto max-w-[var(--container)] px-5 py-[var(--space-section)]"
+      data-entrance={preEntrance ? "pending" : undefined}
+      className="ledger mx-auto max-w-[var(--container)] px-5 py-[var(--space-section)]"
     >
-      <div className="flex items-baseline justify-between border-b border-rule pb-3">
+      <div className="ledger-head flex items-baseline justify-between">
         <HeadingTag id="practice-index-heading" className="label text-accent">
           Our Practice
         </HeadingTag>
         <p className="label text-gray">Five Areas</p>
       </div>
 
-      <ul>
-        {featured.map((area) => (
-          <li key={area.slug} className="border-b border-rule">
-            <Link
-              href={`/practice/${area.slug}`}
-              className="group grid gap-2 py-8 no-underline md:grid-cols-[3rem_1fr_minmax(0,24rem)] md:gap-6"
-            >
-              <span className="font-serif text-accent" aria-hidden="true">
+      <ul className="ledger-rows">
+        {practiceAreas.map((area, index) => (
+          <li
+            key={area.slug}
+            className="ledger-row"
+            style={{ "--row-index": index } as React.CSSProperties}
+          >
+            <Link href={`/practice/${area.slug}`} className="ledger-link">
+              <span className="ledger-numeral" aria-hidden="true">
                 {area.numeral.toLowerCase()}.
               </span>
-              <span className="font-serif text-h3 text-ink underline decoration-transparent decoration-2 underline-offset-4 group-hover:decoration-accent">
-                {area.title}
-              </span>
-              <span className="text-[length:var(--text-small)] text-gray">
-                {area.indexDescription}
+              <span className="ledger-title">{area.title}</span>
+              <span className="ledger-desc">
+                <span className="ledger-desc-clip">
+                  <span className="ledger-desc-text">
+                    {indexDescriptionFor(area)}
+                  </span>
+                </span>
               </span>
             </Link>
           </li>
         ))}
       </ul>
 
-      <ul className="grid sm:grid-cols-3">
-        {compact.map((area) => (
-          <li key={area.slug} className="border-b border-rule sm:border-b-0">
-            <Link
-              href={`/practice/${area.slug}`}
-              className="group flex gap-3 py-6 no-underline sm:pr-6"
-            >
-              <span
-                className="font-serif text-[length:var(--text-small)] text-accent"
-                aria-hidden="true"
-              >
-                {area.numeral.toLowerCase()}.
-              </span>
-              <span className="font-serif text-ink underline decoration-transparent decoration-2 underline-offset-4 group-hover:decoration-accent">
-                {area.title}
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <script dangerouslySetInnerHTML={{ __html: ENTRANCE_SCRIPT }} />
     </section>
   );
 }

@@ -77,3 +77,21 @@ export const practiceAreas: PracticeArea[] = [
 export function getPracticeArea(slug: string): PracticeArea | undefined {
   return practiceAreas.find((p) => p.slug === slug);
 }
+
+/**
+ * Short description for the practice index. Areas I and II have deck copy
+ * (`indexDescription`); III–V fall back to the FIRST SENTENCE of the
+ * client's own blurb, taken verbatim — never rewritten or summarized.
+ *
+ * Deriving it means the index can't drift when the client edits a blurb.
+ * The splitter stops at the first sentence-ending period followed by a new
+ * capitalized sentence, so mid-sentence abbreviations ("U.S.", "Ark.") do
+ * not split. If a legal citation ever does trip it, the fix is to set an
+ * explicit `indexDescription` on that area rather than to touch the blurb.
+ */
+export function indexDescriptionFor(area: PracticeArea): string {
+  if (area.indexDescription) return area.indexDescription;
+  const blurb = area.body[0] ?? "";
+  const match = blurb.match(/^[\s\S]*?[.!?](?=\s+["“(]?[A-Z])/);
+  return (match ? match[0] : blurb).trim();
+}

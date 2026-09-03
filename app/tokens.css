@@ -44,6 +44,15 @@
   --leading-tight: 1.15;
   --leading-normal: 1.65;
 
+  /* ---- Motion — the site's ONLY permitted motion vocabulary ----
+   * Rules draw themselves, ink recedes and returns, content unfolds along
+   * rules. Only transform / opacity / color / grid-template-rows may
+   * animate; nothing scales, bounces, floats, or parallaxes.
+   */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 200ms;
+  --dur-slow: 350ms;
+
   /* ---- Space & shape ---- */
   --space-section: 5rem;
   --space-section-sm: 3rem;

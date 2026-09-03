@@ -138,6 +138,150 @@ h3 {
   margin-block: 2em;
 }
 
+/* ── Practice ledger ──────────────────────────────────────────────────
+ * The one section that earns motion. Vocabulary, in the brand's own
+ * materials: rules draw themselves, ink recedes and returns, content
+ * unfolds along rules. Only transform, opacity, color and
+ * grid-template-rows animate — nothing scales, bounces, or floats.
+ *
+ * Mobile-first default = the fully open, static list. The interaction is
+ * layered on only inside @media (hover: hover), so touch devices get
+ * plain links with every description visible.
+ */
+.ledger-head {
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+.ledger-head::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--color-rule);
+  transform-origin: left;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.ledger-rows {
+  margin: 0;
+}
+
+.ledger-row {
+  position: relative;
+  border-bottom: var(--hairline);
+  transition: opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+  /* Entrance stagger; the head's rule draws first, hence the 120ms offset. */
+  transition-delay: calc(120ms + var(--row-index, 0) * 80ms);
+}
+
+/* The oxblood rule that draws itself along the row's top edge, over the
+   hairline already there. */
+.ledger-row::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: -1px;
+  height: 1px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.ledger-link {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  align-items: baseline;
+  padding-block: 1.5rem;
+  text-decoration: none;
+}
+
+.ledger-numeral {
+  font-family: var(--font-serif);
+  color: var(--color-accent);
+}
+
+.ledger-title {
+  font-family: var(--font-serif);
+  font-size: var(--text-h3);
+  line-height: var(--leading-tight);
+  color: var(--color-ink);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.ledger-desc {
+  grid-column: 2;
+  display: grid;
+  grid-template-rows: 1fr;
+  max-width: 34rem;
+  transition: grid-template-rows var(--dur-slow) var(--ease-out);
+}
+/* Clipping wrapper: content stays in the accessibility tree at every size —
+   never display:none, never visibility:hidden. */
+.ledger-desc-clip {
+  overflow: hidden;
+  min-height: 0;
+}
+.ledger-desc-text {
+  display: block;
+  padding-top: 0.5rem;
+  font-size: var(--text-small);
+  color: var(--color-gray);
+}
+
+@media (hover: hover) {
+  /* At rest the descriptions are folded away. */
+  .ledger-desc {
+    grid-template-rows: 0fr;
+  }
+  .ledger-row:hover .ledger-desc,
+  .ledger-row:has(a:focus-visible) .ledger-desc {
+    grid-template-rows: 1fr;
+  }
+  .ledger-row:hover::before,
+  .ledger-row:has(a:focus-visible)::before {
+    transform: scaleX(1);
+  }
+  /* Recede: while one row is under the pointer or focus, the others drop
+     from ink to gray (5.69:1 on paper — still AA). Browsers without :has()
+     simply skip this; every other part of the interaction still works. */
+  .ledger:is(:has(.ledger-row:hover), :has(.ledger-row a:focus-visible))
+    .ledger-row:not(:hover):not(:has(a:focus-visible))
+    .ledger-title {
+    color: var(--color-gray);
+  }
+}
+
+/* Entrance — applied before first paint, released once scrolled into view. */
+.ledger[data-entrance="pending"] .ledger-row {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.ledger[data-entrance="pending"] .ledger-head::after {
+  transform: scaleX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No entrance, no transitions, everything open and instant. */
+  .ledger[data-entrance] .ledger-row,
+  .ledger[data-entrance] .ledger-head::after {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .ledger .ledger-desc,
+  .ledger .ledger-row:hover .ledger-desc {
+    grid-template-rows: 1fr;
+    transition: none;
+  }
+  .ledger .ledger-row::before,
+  .ledger .ledger-title {
+    transition: none;
+  }
+}
+
 /* Reduced motion: nothing autoplays, nothing animates. */
 @media (prefers-reduced-motion: reduce) {
   *,
