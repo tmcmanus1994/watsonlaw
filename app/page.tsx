@@ -14,12 +14,12 @@ export default function HomePage() {
         {/* top scrim keeps the paper wordmark/nav legible over the image */}
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[var(--color-scrim)]/75 via-[var(--color-scrim)]/65 to-transparent"
+          className="scrim-top absolute inset-x-0 top-0 h-64"
         />
         {/* bottom-weighted scrim carrying the headline block */}
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 bottom-0 h-[70%] bg-gradient-to-t from-[var(--color-scrim)]/85 via-[var(--color-scrim)]/60 to-transparent"
+          className="scrim-bottom absolute inset-x-0 bottom-0 h-[70%]"
         />
         <div className="relative mx-auto w-full max-w-[var(--container)] px-5 pb-14">
           <p className="label text-paper">{site.tagline}</p>

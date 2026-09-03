@@ -16,19 +16,29 @@ export const home = {
      * lands, drop it in /public/media and set the path here.
      */
     videoSrc: null as string | null,
-    /** Poster / static still. Currently a marked, graded placeholder. */
+    /** Poster / static still — Trav's pre-graded still (Sept 3). */
     still: {
-      src: "/images/hero/hero-placeholder.jpg",
-      alt: "", // decorative until real courthouse footage lands — then describe it
-      width: 1920,
-      height: 1080,
+      src: "/images/hero/hero-still.avif",
+      alt: "", // decorative: background imagery behind the headline
+      width: 3870,
+      height: 2580,
     },
   },
 
   courtBand: {
+    /**
+     * ⚠️ Caption is the approved deck copy. The current still is stand-in
+     * photography (per the deck: stand-ins until the September shoot) — when
+     * the real Arnold Courthouse still lands, swap the file; if a stand-in
+     * ships at launch, confirm with the client that the caption stays.
+     */
     caption: "Richard Sheppard Arnold United States Courthouse · Little Rock",
-    /** Pre-graded still from Trav — null renders the marked placeholder block. */
-    image: null as {
+    image: {
+      src: "/images/courts/courthouse-band.avif",
+      alt: "Marble columns and coffered ceiling of a courthouse portico",
+      width: 3871,
+      height: 2580,
+    } as {
       src: string;
       alt: string;
       width: number;

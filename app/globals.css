@@ -38,6 +38,33 @@ h3 {
   text-transform: uppercase;
 }
 
+/*
+ * Photo scrims — eased multi-stop gradients so no band edge shows on
+ * smooth skies. Contrast floors (verified in QA): the header zone (top 40%
+ * of .scrim-top) holds alpha ≥ 0.72, the hero text zone (bottom ~30% of
+ * .scrim-bottom) holds alpha ≥ 0.74 — both AA even over pure white imagery.
+ */
+.scrim-top {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-scrim) 78%, transparent) 0%,
+    color-mix(in srgb, var(--color-scrim) 72%, transparent) 40%,
+    color-mix(in srgb, var(--color-scrim) 48%, transparent) 65%,
+    color-mix(in srgb, var(--color-scrim) 20%, transparent) 85%,
+    transparent 100%
+  );
+}
+.scrim-bottom {
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-scrim) 85%, transparent) 0%,
+    color-mix(in srgb, var(--color-scrim) 74%, transparent) 30%,
+    color-mix(in srgb, var(--color-scrim) 50%, transparent) 60%,
+    color-mix(in srgb, var(--color-scrim) 22%, transparent) 85%,
+    transparent 100%
+  );
+}
+
 /* One visible, consistent focus treatment everywhere. */
 :focus-visible {
   outline: var(--focus-ring);

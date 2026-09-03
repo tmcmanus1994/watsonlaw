@@ -39,7 +39,7 @@ export function HeroMedia({
         alt={still.alt}
         fill
         priority
-        quality={60}
+        quality={55}
         sizes="100vw"
         className="object-cover"
       />
