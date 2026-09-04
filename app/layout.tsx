@@ -12,13 +12,15 @@ import "./globals.css";
  * app/tokens.css (--font-serif / --font-label). Self-hosting also means no
  * request to Google from visitors' browsers. */
 const sourceSerif = localFont({
-  // Italic face intentionally not loaded — nothing on the site sets italic
-  // serif today, and the preload competes with the hero LCP image. If real
-  // italics are needed later, add fonts/source-serif-4-latin-wght-italic.woff2
-  // back here (kept in the repo).
+  // The two-axis cut (wght + opsz 8–60), i.e. the same font Google Fonts
+  // and the Figma file use. The optical-size axis is what makes small text
+  // render with sturdier strokes and headings stay refined; the wght-only
+  // cut cannot do that and read noticeably thinner at body sizes.
+  // Subset to Latin + the accents and punctuation this site can render (see
+  // README: Fonts). No italic face is shipped — nothing sets italic serif.
   src: [
     {
-      path: "./fonts/source-serif-4-latin-wght-normal.woff2",
+      path: "./fonts/source-serif-4-latin-opsz-normal.woff2",
       weight: "200 900",
       style: "normal",
     },

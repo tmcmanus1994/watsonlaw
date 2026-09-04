@@ -27,10 +27,17 @@ let jsReady = false;
 
 const SECTION_ID = "practice-index";
 
-/** Runs during HTML parse, before the first paint. */
+/**
+ * Runs during HTML parse, before the first paint.
+ *
+ * The entrance is armed only for hover-capable pointers. On touch there is
+ * no hover interaction to introduce, and hiding the rows until hydration
+ * completes would delay the largest text paint on exactly the devices with
+ * the least CPU to spare — so touch gets the finished list immediately.
+ */
 const ENTRANCE_SCRIPT = `(function(){var s=document.getElementById(${JSON.stringify(
   SECTION_ID
-)});var m=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(s&&!m)s.dataset.entrance="pending";})();`;
+)});if(!s||!window.matchMedia)return;if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;if(!window.matchMedia("(hover: hover)").matches)return;s.dataset.entrance="pending";})();`;
 
 export function PracticeIndex({
   headingTag: HeadingTag = "h2",
@@ -43,7 +50,8 @@ export function PracticeIndex({
   const [preEntrance] = useState(
     () =>
       jsReady &&
-      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+      window.matchMedia("(hover: hover)").matches
   );
 
   useEffect(() => {

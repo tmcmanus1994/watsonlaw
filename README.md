@@ -23,7 +23,7 @@ npm run lint
 | --- | --- |
 | Firm name, offices, phones, mailing address, recipients, jurisdictions | `config/site.ts` |
 | Design tokens — every color, font, size, spacing value | `app/tokens.css` |
-| Font files (Source Serif 4, Libre Franklin — self-hosted, OFL) | `app/fonts/` |
+| Font files (Source Serif 4, Libre Franklin — self-hosted, OFL) | `app/fonts/` (see Fonts) |
 | Homepage hero + courthouse band media slots | `content/home.ts` |
 | Practice areas (client's verbatim blurbs) | `content/practice-areas.ts` |
 | Attorney profiles (Brett is `draft: true` pending his sheet) | `content/attorneys.ts` |
@@ -47,6 +47,33 @@ keep them in sync with `app/tokens.css`.
   link states, and the monogram rule — never a background or fill.
 - Print stylesheet drops oxblood to ink (`app/tokens.css`).
 - Practice-area numerals are **uppercase** Roman (`I.`–`V.`), serif, oxblood.
+
+### Fonts
+
+Both families are self-hosted from `app/fonts/` (OFL-1.1, the same files
+Google Fonts serves), so visitors make no request to Google.
+
+**Source Serif 4 ships as the two-axis cut — `wght` *and* `opsz` (8–60).**
+This matters: with `font-optical-sizing: auto` (the browser default) the
+optical-size axis thickens strokes at small sizes and refines them at
+display sizes, which is how the type looks in Figma and the brand guide.
+The `wght`-only cut cannot do that and reads noticeably thin at body sizes
+— do not swap it back to save bytes.
+
+It is subset to Latin + accented letters + the punctuation this site uses
+(286 glyphs, 108 KB). To regenerate after changing coverage:
+
+```py
+# pip install fonttools brotli ; source file from @fontsource-variable/source-serif-4
+from fontTools.ttLib import TTFont; from fontTools import subset
+f = TTFont("source-serif-4-latin-opsz-normal.woff2")
+o = subset.Options(); o.layout_features = ["*"]; o.name_IDs = ["*"]; o.notdef_outline = True
+s = subset.Subsetter(options=o); s.populate(unicodes=[...]); s.subset(f)
+f.flavor = "woff2"; f.save("app/fonts/source-serif-4-latin-opsz-normal.woff2")
+```
+
+Characters outside the subset fall back to Georgia per-glyph rather than
+tofu. No italic face is shipped — nothing on the site sets italic serif.
 
 ### Which family goes where
 

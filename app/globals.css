@@ -21,6 +21,7 @@ h4 {
 
 h1 {
   font-size: var(--text-h1);
+  line-height: var(--leading-h1);
 }
 h2 {
   font-size: var(--text-h2);
@@ -33,7 +34,9 @@ h3 {
 .label {
   font-family: var(--font-label);
   font-size: var(--text-label);
-  font-weight: 600;
+  /* Regular, per every label in the mockups and the Figma file — the "600"
+     appears only in the guide's abstract type-specimen row. */
+  font-weight: 400;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
 }
@@ -280,13 +283,17 @@ h3 {
   }
 }
 
-/* Entrance — applied before first paint, released once scrolled into view. */
-.ledger[data-entrance="pending"] .ledger-row {
-  opacity: 0;
-  transform: translateY(8px);
-}
-.ledger[data-entrance="pending"] .ledger-head::after {
-  transform: scaleX(0);
+/* Entrance — applied before first paint, released once scrolled into view.
+   Hover-capable pointers only: on touch the list paints immediately (see
+   ENTRANCE_SCRIPT), so content is never withheld on the slowest devices. */
+@media (hover: hover) {
+  .ledger[data-entrance="pending"] .ledger-row {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .ledger[data-entrance="pending"] .ledger-head::after {
+    transform: scaleX(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
