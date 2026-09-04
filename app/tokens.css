@@ -57,8 +57,8 @@
   /* Weight dial. Source Serif 4 is variable, so these are free to tune —
      lower them a notch (e.g. 370) for an airier page without touching a
      single component. */
-  --weight-body: 400;
-  --weight-display: 400;
+  --weight-body: 375;
+  --weight-display: 375;
   --leading-normal: 1.65;
 
   /* ---- Motion — the site's ONLY permitted motion vocabulary ----

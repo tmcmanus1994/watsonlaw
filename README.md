@@ -133,9 +133,26 @@ nothing shifts.
   `public/media/`; set `videoSrc` in `content/home.ts`. Static still shows
   on mobile and for reduced-motion visitors; the placeholder still is
   marked and lives at `public/images/hero/`.
-- **Lottie wordmark**: when the .dotlottie file lands, put it in
-  `public/media/` and set `brandLottieSrc` in `config/site.ts`. It plays
-  once and settles; static mark is always the fallback.
+- **Lottie wordmark**: `public/media/watson-logo.json`, configured at
+  `site.brandLottie`. Plays once on the **homepage header only** (the file
+  is paper-coloured, so it reads over the hero photograph and would be
+  invisible on interior pages) and settles on its final frame. The static
+  typographic mark renders first, defines the box, and remains the fallback
+  for no-JS, reduced motion and load failure — so there is no layout shift.
+
+  Two things to know before replacing the file:
+  1. The player's WASM is **self-hosted** at
+     `public/media/dotlottie-player.wasm`, set via `DotLottie.setWasmUrl()`.
+     By default the library fetches it from unpkg on every visit; this site
+     makes no uncontrolled third-party request (Terms 5 and 13). Re-copy it
+     from `node_modules/@lottiefiles/dotlottie-web/dist/` when that package
+     is upgraded, or the version will drift.
+  2. `site.brandLottie.artwork` records where the mark sits **inside** the
+     composition (x 297, y 341, 1387×343 within 1920×1080). The mark is
+     fitted by that box, not the canvas, because the export leaves the
+     artwork off-centre in a 16:9 comp. **Re-measure after any re-export**,
+     or export the comp cropped tight to the mark and set the box to the
+     full canvas.
 
 ## News / Keystatic
 

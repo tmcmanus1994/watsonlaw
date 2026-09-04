@@ -15,11 +15,12 @@ import { site, entitySuffix, wordmarkLines } from "@/config/site";
  *             reverses, not the site header.
  *  - "inline" a single quiet line, for the footer.
  *
- * Lottie: when `site.brandLottieSrc` is set and the visitor allows motion,
- * the mark hydrates a one-shot Lottie in the same fixed box (played once,
- * settling on the final frame). The player is imported dynamically only
- * here, never in the critical path; the static mark always renders first
- * and remains the fallback, so the swap causes zero layout shift.
+ * Lottie (`withLottie`): plays once and settles on its final frame. The
+ * player is imported dynamically only here, never in the critical path.
+ * The static mark always renders first and defines the box, so there is no
+ * layout shift and no JS, reduced-motion or load-failure path without a
+ * mark. The animation is fitted by the artwork's bounds inside the
+ * composition (site.brandLottie.artwork), not by the canvas — see config.
  */
 export function BrandMark({
   variant = "inline",
@@ -27,36 +28,45 @@ export function BrandMark({
   className = "",
 }: {
   variant?: "mark" | "lockup" | "inline";
-  /** Only the header instance should opt in. */
+  /** Only the header instance on the homepage opts in. */
   withLottie?: boolean;
   className?: string;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [lottieReady, setLottieReady] = useState(false);
-  const src = site.brandLottieSrc;
-  const useLottie = withLottie && variant !== "inline" && !!src;
+  const lottie = site.brandLottie;
+  const useLottie = withLottie && variant !== "inline" && !!lottie;
 
   useEffect(() => {
-    if (!useLottie || !src || !canvasRef.current) return;
+    if (!useLottie || !lottie || !canvasRef.current) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let disposed = false;
     let player: { destroy: () => void } | undefined;
-    import("@lottiefiles/dotlottie-web").then(({ DotLottie }) => {
-      if (disposed || !canvasRef.current) return;
-      player = new DotLottie({
-        canvas: canvasRef.current,
-        src,
-        autoplay: true,
-        loop: false,
+    import("@lottiefiles/dotlottie-web")
+      .then(({ DotLottie }) => {
+        if (disposed || !canvasRef.current) return;
+        // Self-host the player's WASM. By default it is fetched from unpkg
+        // at runtime — an uncontrolled third-party request on every visit,
+        // which this site does not make (contract Terms 5 and 13).
+        DotLottie.setWasmUrl("/media/dotlottie-player.wasm");
+        player = new DotLottie({
+          canvas: canvasRef.current,
+          src: lottie.src,
+          autoplay: true,
+          loop: false, // plays once, settles on the final frame
+          backgroundColor: "transparent",
+        });
+        setLottieReady(true);
+      })
+      .catch(() => {
+        /* keep the static mark */
       });
-      setLottieReady(true);
-    });
     return () => {
       disposed = true;
       player?.destroy();
     };
-  }, [useLottie, src]);
+  }, [useLottie, lottie]);
 
   if (variant === "inline") {
     return (
@@ -77,6 +87,24 @@ export function BrandMark({
   // standalone lockup.
   const lines = variant === "lockup" ? wordmarkLines() : [site.name];
 
+  /*
+   * Fit the composition so its ARTWORK — not its canvas — lands on the
+   * static mark's box. All three values are percentages, so the mark scales
+   * with the box at every breakpoint:
+   *   width      canvas wider than the box by the artwork's inset
+   *   left       pull back by the artwork's own left offset
+   *   translateY put the artwork's vertical centre on the box's centre
+   */
+  const art = lottie?.artwork;
+  const fit = art
+    ? {
+        width: `${(art.canvasWidth / art.width) * 100}%`,
+        left: `${-(art.x / art.width) * 100}%`,
+        translateY: `${-((art.y + art.height / 2) / art.canvasHeight) * 100}%`,
+        aspectRatio: `${art.canvasWidth} / ${art.canvasHeight}`,
+      }
+    : null;
+
   return (
     <span className={`relative block ${className}`}>
       <span
@@ -87,7 +115,7 @@ export function BrandMark({
         <span
           className="whitespace-nowrap text-center font-serif uppercase leading-[1.35] tracking-[var(--tracking-wordmark)]"
           /* Tracking adds space after the final letter; nudge right so the
-             line reads optically centered between the rules. */
+             line reads optically centred between the rules. */
           style={{ paddingLeft: "var(--tracking-wordmark)" }}
         >
           {lines.map((line) => (
@@ -105,11 +133,17 @@ export function BrandMark({
           </span>
         )}
       </span>
-      {useLottie && (
+      {useLottie && fit && (
         <canvas
           ref={canvasRef}
-          className="absolute inset-0 h-full w-full"
           aria-hidden="true"
+          className="pointer-events-none absolute top-1/2"
+          style={{
+            width: fit.width,
+            left: fit.left,
+            aspectRatio: fit.aspectRatio,
+            transform: `translateY(${fit.translateY})`,
+          }}
         />
       )}
       {lottieReady && <span className="sr-only">{site.legalName}</span>}

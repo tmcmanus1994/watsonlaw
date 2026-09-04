@@ -48,11 +48,37 @@ export const site = {
   ],
 
   /**
-   * Optional .lottie file for the animated wordmark (Trav is producing it).
-   * When the file lands, put it in /public/media and set the path here —
-   * BrandMark hydrates it automatically; static mark ships until then.
+   * Animated wordmark. Plays once on the homepage header and settles on its
+   * final frame; the static typographic mark is always rendered first and
+   * remains the fallback (no JS, reduced motion, or load failure).
+   *
+   * `artwork` is where the mark actually sits inside the composition,
+   * measured from the file — the export is a 1920×1080 comp in which the
+   * mark occupies ~72% of the width and is not centred. BrandMark fits the
+   * mark by THIS box, not by the canvas, so it lands at the same size and
+   * position as the static one. Re-measure if the file is re-exported.
    */
-  brandLottieSrc: null as string | null,
+  brandLottie: {
+    src: "/media/watson-logo.json",
+    artwork: {
+      x: 297,
+      y: 341,
+      width: 1387,
+      height: 343,
+      canvasWidth: 1920,
+      canvasHeight: 1080,
+    },
+  } as {
+    src: string;
+    artwork: {
+      x: number;
+      y: number;
+      width: number;
+      height: number;
+      canvasWidth: number;
+      canvasHeight: number;
+    };
+  } | null,
 
   /** Add entries as the client provides them. */
   socials: [] as { label: string; href: string }[],

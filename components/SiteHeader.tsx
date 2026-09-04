@@ -27,9 +27,11 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex max-w-[var(--container)] items-center justify-between gap-6 px-5 py-4">
         <Link href="/" className="no-underline text-current">
+          {/* The animated mark is paper-coloured and reads over the hero
+              photograph, so it runs on the homepage only. */}
           <BrandMark
             variant="mark"
-            withLottie
+            withLottie={overHero}
             className="text-[0.72rem] md:text-[0.8rem]"
           />
           <span className="sr-only">Home</span>
