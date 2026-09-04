@@ -11,10 +11,19 @@ export function PageIntro({
   return (
     <div className="border-b border-rule">
       <div className="mx-auto max-w-[var(--container)] px-5 py-14">
-        {kicker && <p className="label label-kicker text-accent">{kicker}</p>}
-        <h1 className="mt-3">{title}</h1>
+        {kicker && (
+          <p className="reveal label label-kicker text-accent">{kicker}</p>
+        )}
+        <h1 className="reveal mt-3" style={{ "--reveal-i": 1 } as React.CSSProperties}>
+          {title}
+        </h1>
         {lede && (
-          <p className="support mt-4 max-w-[var(--measure)] text-gray">{lede}</p>
+          <p
+            className="reveal support mt-4 max-w-[var(--measure)] text-gray"
+            style={{ "--reveal-i": 2 } as React.CSSProperties}
+          >
+            {lede}
+          </p>
         )}
       </div>
     </div>

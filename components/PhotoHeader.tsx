@@ -39,8 +39,12 @@ export function PhotoHeader({
         className="scrim-bottom absolute inset-x-0 bottom-0 h-[75%]"
       />
       <div className="relative mx-auto w-full max-w-[var(--container)] px-5 pb-10">
-        {kicker && <p className="label label-kicker text-paper">{kicker}</p>}
-        <h1 className="mt-2 text-paper">{title}</h1>
+        {kicker && (
+          <p className="reveal label label-kicker text-paper">{kicker}</p>
+        )}
+        <h1 className="reveal mt-2 text-paper" style={{ "--reveal-i": 1 } as React.CSSProperties}>
+          {title}
+        </h1>
       </div>
     </div>
   );

@@ -5,10 +5,26 @@
  * Index descriptions for I and II are from the approved design deck.
  */
 
+export type AreaImage = {
+  src: string;
+  /** Descriptive alt for the practice page header; the index pane is decorative. */
+  alt: string;
+  width: number;
+  height: number;
+};
+
 export type PracticeArea = {
   slug: string;
   numeral: string;
   title: string;
+  /**
+   * ⚠️ STAND-IN. Detail crop of one of the two approved photographs, used in
+   * the practice-index hover pane and as this area's page header. The two
+   * sources are different temperatures (warm sandstone / cool marble), so
+   * the five do not yet read as one graded set — replace with the September
+   * shoot's pre-graded stills at the same 4:5 ratio and nothing shifts.
+   */
+  image?: AreaImage;
   /** Short description shown on the practice index (deck copy where given). */
   indexDescription?: string;
   /** One-line summary for metadata (first sentence of the client's blurb). */
@@ -20,6 +36,12 @@ export type PracticeArea = {
 export const practiceAreas: PracticeArea[] = [
   {
     slug: "appeals",
+    image: {
+      src: "/images/courts/detail-appeals.avif",
+      alt: "Dome and weathervane of the courthouse at dusk",
+      width: 1400,
+      height: 1750,
+    },
     numeral: "I",
     title: "Appeals",
     indexDescription:
@@ -32,6 +54,12 @@ export const practiceAreas: PracticeArea[] = [
   },
   {
     slug: "litigation-strategy",
+    image: {
+      src: "/images/courts/detail-litigation-strategy.avif",
+      alt: "Marble column capitals beneath a courthouse portico",
+      width: 1400,
+      height: 1750,
+    },
     numeral: "II",
     title: "Litigation Strategy",
     indexDescription:
@@ -44,6 +72,12 @@ export const practiceAreas: PracticeArea[] = [
   },
   {
     slug: "constitutional-litigation",
+    image: {
+      src: "/images/courts/detail-constitutional-litigation.avif",
+      alt: "Stone balustrade and cornice of the courthouse",
+      width: 1400,
+      height: 1750,
+    },
     numeral: "III",
     title: "Constitutional Litigation",
     summary:
@@ -54,6 +88,12 @@ export const practiceAreas: PracticeArea[] = [
   },
   {
     slug: "amicus-briefing",
+    image: {
+      src: "/images/courts/detail-amicus-briefing.avif",
+      alt: "Coffered marble ceiling of a courthouse portico",
+      width: 1400,
+      height: 1750,
+    },
     numeral: "IV",
     title: "Amicus Briefing",
     summary:
@@ -64,6 +104,12 @@ export const practiceAreas: PracticeArea[] = [
   },
   {
     slug: "election-law",
+    image: {
+      src: "/images/courts/detail-election-law.avif",
+      alt: "Fluted marble columns rising to their capitals",
+      width: 1400,
+      height: 1750,
+    },
     numeral: "V",
     title: "Election Law",
     summary:
@@ -95,3 +141,14 @@ export function indexDescriptionFor(area: PracticeArea): string {
   const match = blurb.match(/^[\s\S]*?[.!?](?=\s+["“(]?[A-Z])/);
   return (match ? match[0] : blurb).trim();
 }
+
+/**
+ * Wide header image for the practice index (/practice). Also a STAND-IN,
+ * framed differently from the homepage hero so the two do not repeat.
+ */
+export const practiceIndexImage: AreaImage = {
+  src: "/images/courts/practice-header.avif",
+  alt: "Cornice and balustrade of the courthouse at dusk",
+  width: 2400,
+  height: 1000,
+};

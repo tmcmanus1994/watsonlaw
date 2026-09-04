@@ -93,6 +93,35 @@ the firm's own long-form prose.
 Type scale, tracking, and both families live in `app/tokens.css`; no
 component sets a font name or size directly.
 
+## Motion
+
+Two mechanisms, both CSS-first. The rule learned the hard way: **never gate
+content on JS, and never put a reveal on the LCP element** — an
+observer-driven entrance once cost ~2.9s of LCP render delay on `/practice`.
+
+- **Load reveal** (`.reveal`, `.reveal-dissolve` + `--reveal-i` for stagger):
+  pure CSS animation, starts at parse, no JS. Applied to each page's opening
+  type — never to the photograph behind it.
+- **Ledger entrance** (`components/PracticeIndex.tsx`): the one JS-driven
+  piece, armed only for hover-capable pointers so touch devices get content
+  immediately.
+
+Both are declared inside `@media (prefers-reduced-motion: no-preference)`,
+so reduced motion and no-JS simply render the finished page.
+
+## Practice imagery
+
+Each area in `content/practice-areas.ts` carries an `image` used twice: as
+that area's page header, and in the `/practice` counterweight pane (the
+sticky image that dissolves between areas on hover/focus, wide hover-capable
+viewports only, driven by `:has()` — no JS).
+
+⚠️ **All six are STAND-IN crops** of the two approved photographs. The two
+sources are different temperatures (warm sandstone / cool marble), so they
+do not yet read as one graded set. Replace with the September shoot's
+pre-graded stills at the same 4:5 ratio (2400×1000 for the index header) and
+nothing shifts.
+
 ## Media pipeline (photos land late — zero layout shift)
 
 - **Headshots** (week of Sept 14): overwrite the PNGs in

@@ -53,6 +53,12 @@
   --tracking-suffix: 0.42em;
   --leading-tight: 1.15;
   --leading-h1: 1.1; /* Figma: 50px type on 55px */
+
+  /* Weight dial. Source Serif 4 is variable, so these are free to tune —
+     lower them a notch (e.g. 370) for an airier page without touching a
+     single component. */
+  --weight-body: 400;
+  --weight-display: 400;
   --leading-normal: 1.65;
 
   /* ---- Motion — the site's ONLY permitted motion vocabulary ----
@@ -63,6 +69,7 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 200ms;
   --dur-slow: 350ms;
+  --dur-reveal: 620ms;
 
   /* ---- Space & shape ---- */
   --space-section: 5rem;

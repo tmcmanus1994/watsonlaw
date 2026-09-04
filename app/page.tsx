@@ -22,9 +22,17 @@ export default function HomePage() {
           className="scrim-bottom absolute inset-x-0 bottom-0 h-[70%]"
         />
         <div className="relative mx-auto w-full max-w-[var(--container)] px-5 pb-14">
-          <p className="label label-kicker text-paper">{site.tagline}</p>
-          <h1 className="mt-3 max-w-3xl text-paper">{home.hero.heading}</h1>
-          <p className="support mt-4 max-w-[var(--measure)] text-base text-paper">
+          <p className="reveal label label-kicker text-paper">{site.tagline}</p>
+          <h1
+            className="reveal mt-3 max-w-3xl text-paper"
+            style={{ "--reveal-i": 1 } as React.CSSProperties}
+          >
+            {home.hero.heading}
+          </h1>
+          <p
+            className="reveal support mt-4 max-w-[var(--measure)] text-base text-paper"
+            style={{ "--reveal-i": 2 } as React.CSSProperties}
+          >
             {home.hero.sub}
           </p>
         </div>

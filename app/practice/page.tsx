@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { PhotoHeader } from "@/components/PhotoHeader";
 import { PracticeIndex } from "@/components/PracticeIndex";
 import { site } from "@/config/site";
-import { practiceAreas } from "@/content/practice-areas";
+import { practiceAreas, practiceIndexImage } from "@/content/practice-areas";
 
 export const metadata: Metadata = {
   title: "Our Practice",
@@ -10,7 +11,16 @@ export const metadata: Metadata = {
     .join(", ")}.`,
 };
 
-/** Mirrors the homepage practice index, as the page itself. */
+/** The ledger as the page itself, with the counterweight image pane. */
 export default function PracticePage() {
-  return <PracticeIndex headingTag="h1" />;
+  return (
+    <>
+      <PhotoHeader
+        kicker={site.name}
+        title="Our Practice"
+        image={practiceIndexImage}
+      />
+      <PracticeIndex headingTag="h1" variant="canvas" />
+    </>
+  );
 }

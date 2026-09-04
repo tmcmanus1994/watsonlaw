@@ -6,6 +6,7 @@ body {
   color: var(--color-ink);
   font-family: var(--font-serif);
   font-size: var(--text-body);
+  font-weight: var(--weight-body);
   line-height: var(--leading-normal);
 }
 
@@ -14,7 +15,7 @@ h2,
 h3,
 h4 {
   font-family: var(--font-serif);
-  font-weight: 400; /* headings are regular weight per the deck */
+  font-weight: var(--weight-display); /* regular weight per the deck */
   line-height: var(--leading-tight);
   text-wrap: balance;
 }
@@ -162,6 +163,115 @@ h3 {
   border: 0;
   border-top: var(--hairline);
   margin-block: 2em;
+}
+
+/* ── Load reveal ──────────────────────────────────────────────────────
+ * The page resolves as it loads rather than snapping into place: type
+ * rises a few pixels and fades up, staggered by --reveal-i.
+ *
+ * Deliberately CSS-only and animation-based, not JS-gated. It starts at
+ * parse time, so it never waits on hydration the way an observer would —
+ * that is what previously cost ~2.9s of LCP render delay on the ledger.
+ * Never put .reveal on an LCP image: animate the type over it, not it.
+ *
+ * Declaring it inside prefers-reduced-motion: no-preference means reduced
+ * motion gets no animation at all — and, since `both` fill only applies
+ * when an animation exists, the content is simply visible. Same for no-JS.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    animation: reveal-rise var(--dur-reveal) var(--ease-out) both;
+    animation-delay: calc(var(--reveal-i, 0) * 90ms);
+  }
+  .reveal-dissolve {
+    animation: reveal-dissolve var(--dur-reveal) var(--ease-out) both;
+    animation-delay: calc(var(--reveal-i, 0) * 90ms);
+  }
+}
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes reveal-dissolve {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ── Practice canvas — the counterweight pane ─────────────────────────
+ * On wide, hover-capable viewports the ledger sits beside a sticky image
+ * that dissolves to the engaged area's detail crop. Pure CSS via :has();
+ * browsers without it simply keep the first image. The pane is decorative
+ * (aria-hidden) — every image also heads its own practice page, where it
+ * carries real alt text.
+ */
+.practice-pane {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .practice-canvas {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 21rem);
+    gap: 3.5rem;
+    align-items: start;
+  }
+}
+
+@media (min-width: 1024px) and (hover: hover) {
+  .practice-pane {
+    display: block;
+    position: sticky;
+    top: 5.5rem;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border: var(--hairline);
+  }
+  .practice-pane-img {
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity var(--dur-slow) var(--ease-out);
+  }
+  /* Resting state: the first area. */
+  .practice-pane-img:first-child {
+    opacity: 1;
+  }
+  /* While a row is engaged, only that row's image shows. */
+  .practice-canvas:has(.ledger-row:hover) .practice-pane-img,
+  .practice-canvas:has(.ledger-row a:focus-visible) .practice-pane-img {
+    opacity: 0;
+  }
+  .practice-canvas:has(.ledger-row:nth-child(1):hover)
+    .practice-pane-img:nth-child(1),
+  .practice-canvas:has(.ledger-row:nth-child(1) a:focus-visible)
+    .practice-pane-img:nth-child(1),
+  .practice-canvas:has(.ledger-row:nth-child(2):hover)
+    .practice-pane-img:nth-child(2),
+  .practice-canvas:has(.ledger-row:nth-child(2) a:focus-visible)
+    .practice-pane-img:nth-child(2),
+  .practice-canvas:has(.ledger-row:nth-child(3):hover)
+    .practice-pane-img:nth-child(3),
+  .practice-canvas:has(.ledger-row:nth-child(3) a:focus-visible)
+    .practice-pane-img:nth-child(3),
+  .practice-canvas:has(.ledger-row:nth-child(4):hover)
+    .practice-pane-img:nth-child(4),
+  .practice-canvas:has(.ledger-row:nth-child(4) a:focus-visible)
+    .practice-pane-img:nth-child(4),
+  .practice-canvas:has(.ledger-row:nth-child(5):hover)
+    .practice-pane-img:nth-child(5),
+  .practice-canvas:has(.ledger-row:nth-child(5) a:focus-visible)
+    .practice-pane-img:nth-child(5) {
+    opacity: 1;
+  }
 }
 
 /* ── Practice ledger ──────────────────────────────────────────────────

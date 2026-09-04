@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { indexDescriptionFor, practiceAreas } from "@/content/practice-areas";
@@ -41,9 +42,17 @@ const ENTRANCE_SCRIPT = `(function(){var s=document.getElementById(${JSON.string
 
 export function PracticeIndex({
   headingTag: HeadingTag = "h2",
+  variant = "list",
 }: {
   /** "h1" when the index is the page itself (/practice); "h2" on the home. */
   headingTag?: "h1" | "h2";
+  /**
+   * "canvas" adds the counterweight pane on /practice: a sticky image beside
+   * the ledger that dissolves to the hovered or focused area's detail crop.
+   * Wide, hover-capable viewports only — it is decorative, and every area's
+   * image is also its page header, so nothing is lost without it.
+   */
+  variant?: "list" | "canvas";
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   // Client-side navigations can render the pre-entrance state immediately.
@@ -98,7 +107,8 @@ export function PracticeIndex({
         <p className="label label-kicker text-gray">Five Areas</p>
       </div>
 
-      <ul className="ledger-rows">
+      <div className={variant === "canvas" ? "practice-canvas" : undefined}>
+        <ul className="ledger-rows">
         {practiceAreas.map((area, index) => (
           <li
             key={area.slug}
@@ -120,7 +130,27 @@ export function PracticeIndex({
             </Link>
           </li>
         ))}
-      </ul>
+        </ul>
+
+        {variant === "canvas" && (
+          /* Decorative: the same images carry real alt text as the page
+             headers, so the pane is hidden from assistive tech. */
+          <div className="practice-pane" aria-hidden="true">
+            {practiceAreas.map((area) =>
+              area.image ? (
+                <Image
+                  key={area.slug}
+                  className="practice-pane-img"
+                  src={area.image.src}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 32vw, 0px"
+                />
+              ) : null
+            )}
+          </div>
+        )}
+      </div>
 
       <script dangerouslySetInnerHTML={{ __html: ENTRANCE_SCRIPT }} />
     </section>

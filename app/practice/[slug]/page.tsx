@@ -25,7 +25,11 @@ export default async function PracticeAreaPage({ params }: Props) {
 
   return (
     <>
-      <PhotoHeader kicker={`Our Practice · ${area.numeral}`} title={area.title} />
+      <PhotoHeader
+        kicker={`Our Practice · ${area.numeral}`}
+        title={area.title}
+        image={area.image}
+      />
       <div className="mx-auto grid max-w-[var(--container)] gap-12 px-5 py-[var(--space-section-sm)] md:grid-cols-[1fr_minmax(0,16rem)] md:py-[var(--space-section)]">
         {/* The client's blurb, verbatim (intake Part 3) — do not edit. */}
         <div className="prose">
