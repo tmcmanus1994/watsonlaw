@@ -32,7 +32,7 @@ export default function NewsPage() {
                     {post.title}
                   </span>
                   {post.excerpt && (
-                    <span className="mt-2 block max-w-[var(--measure)] text-[length:var(--text-small)] text-gray">
+                    <span className="support mt-2 block max-w-[var(--measure)] text-[length:var(--text-small)] text-gray">
                       {post.excerpt}
                     </span>
                   )}

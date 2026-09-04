@@ -29,7 +29,7 @@ export function CourtBand() {
         )}
       </div>
       <figcaption className="mx-auto max-w-[var(--container)] px-5 pt-3">
-        <span className="label text-gray">{caption}</span>
+        <span className="label label-caption text-gray">{caption}</span>
       </figcaption>
     </figure>
   );

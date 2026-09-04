@@ -84,10 +84,10 @@ export function PracticeIndex({
       className="ledger mx-auto max-w-[var(--container)] px-5 py-[var(--space-section)]"
     >
       <div className="ledger-head flex items-baseline justify-between">
-        <HeadingTag id="practice-index-heading" className="label text-accent">
+        <HeadingTag id="practice-index-heading" className="label label-kicker text-accent">
           Our Practice
         </HeadingTag>
-        <p className="label text-gray">Five Areas</p>
+        <p className="label label-kicker text-gray">Five Areas</p>
       </div>
 
       <ul className="ledger-rows">
@@ -99,7 +99,7 @@ export function PracticeIndex({
           >
             <Link href={`/practice/${area.slug}`} className="ledger-link">
               <span className="ledger-numeral" aria-hidden="true">
-                {area.numeral.toLowerCase()}.
+                {area.numeral}.
               </span>
               <span className="ledger-title">{area.title}</span>
               <span className="ledger-desc">

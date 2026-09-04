@@ -40,13 +40,13 @@ export default async function AttorneyPage({ params }: Props) {
             sizes="(min-width: 768px) 20rem, 100vw"
             priority
           />
-          <p className="label mt-3 text-gray">
+          <p className="label label-caption mt-3 text-gray">
             Photograph · shoot week of Sept 14
           </p>
         </div>
 
         <div>
-          <p className="label text-accent">{site.name}</p>
+          <p className="label label-kicker text-accent">{site.name}</p>
           <h1 className="mt-3">{attorney.name}</h1>
 
           {attorney.draft && (
@@ -74,10 +74,10 @@ export default async function AttorneyPage({ params }: Props) {
           <div className="mt-10 grid gap-8">
             {attorney.sections.map((section) => (
               <section key={section.heading} aria-label={section.heading}>
-                <h2 className="label border-b border-rule pb-2 text-accent">
+                <h2 className="label label-kicker border-b border-rule pb-2 text-accent">
                   {section.heading}
                 </h2>
-                <ul className="mt-3 grid gap-2 text-[length:var(--text-small)] text-ink">
+                <ul className="support mt-3 grid gap-2 text-[length:var(--text-small)] text-ink">
                   {section.items.map((item) => (
                     <li key={item}>{item}</li>
                   ))}

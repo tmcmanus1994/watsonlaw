@@ -33,7 +33,7 @@ export default function AttorneysPage() {
                 <h2 className="mt-5 font-serif text-h3 text-ink underline decoration-transparent decoration-2 underline-offset-4 group-hover:decoration-accent">
                   {attorney.name}
                 </h2>
-                <p className="mt-2 text-[length:var(--text-small)] text-gray">
+                <p className="support mt-2 text-[length:var(--text-small)] text-gray">
                   {attorney.homeCredential}
                 </p>
               </Link>

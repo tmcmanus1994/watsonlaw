@@ -11,10 +11,10 @@ export function PageIntro({
   return (
     <div className="border-b border-rule">
       <div className="mx-auto max-w-[var(--container)] px-5 py-14">
-        {kicker && <p className="label text-accent">{kicker}</p>}
+        {kicker && <p className="label label-kicker text-accent">{kicker}</p>}
         <h1 className="mt-3">{title}</h1>
         {lede && (
-          <p className="mt-4 max-w-[var(--measure)] text-gray">{lede}</p>
+          <p className="support mt-4 max-w-[var(--measure)] text-gray">{lede}</p>
         )}
       </div>
     </div>

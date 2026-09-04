@@ -46,8 +46,25 @@ keep them in sync with `app/tokens.css`.
 - Oxblood (`--color-accent`) is only ever hairlines, labels, numerals,
   link states, and the monogram rule — never a background or fill.
 - Print stylesheet drops oxblood to ink (`app/tokens.css`).
-- Headings are Source Serif 4 at regular weight; labels/nav are Libre
-  Franklin caps with wide tracking (`.label` in `app/globals.css`).
+- Practice-area numerals are **uppercase** Roman (`I.`–`V.`), serif, oxblood.
+
+### Which family goes where
+
+The guide uses two families with a specific division of labour. Getting
+this wrong is the most likely way the site drifts off-brand:
+
+| Role | Family | How |
+| --- | --- | --- |
+| Headings, the firm's own prose (practice blurbs, bios, news posts), numerals, wordmark | Source Serif 4 | default; `.prose`, `font-serif` |
+| Labels, kickers, nav, captions | Libre Franklin caps 600 | `.label` (+ `.label-nav` / `.label-kicker` / `.label-caption` for per-role tracking) |
+| Short supporting lines — index descriptions, hero sub, credential strips, excerpts, addresses | Libre Franklin | `.support` |
+
+"One family for everything with a voice: Source Serif 4." The `.support`
+class is the caption voice — use it for short secondary lines, never for
+the firm's own long-form prose.
+
+Type scale, tracking, and both families live in `app/tokens.css`; no
+component sets a font name or size directly.
 
 ## Media pipeline (photos land late — zero layout shift)
 

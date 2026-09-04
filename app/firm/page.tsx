@@ -35,7 +35,7 @@ export default function FirmPage() {
         </div>
 
         <section aria-labelledby="jurisdictions" className="mt-12 max-w-[var(--measure)]">
-          <h2 id="jurisdictions" className="label border-b border-rule pb-2 text-accent">
+          <h2 id="jurisdictions" className="label label-kicker border-b border-rule pb-2 text-accent">
             Jurisdictions
           </h2>
           <ul className="mt-4 grid gap-2">
@@ -48,7 +48,7 @@ export default function FirmPage() {
         </section>
 
         <section aria-labelledby="with-trial-counsel" className="mt-12 max-w-[var(--measure)]">
-          <h2 id="with-trial-counsel" className="label border-b border-rule pb-2 text-accent">
+          <h2 id="with-trial-counsel" className="label label-kicker border-b border-rule pb-2 text-accent">
             With Trial Counsel
           </h2>
           <div className="prose mt-4">

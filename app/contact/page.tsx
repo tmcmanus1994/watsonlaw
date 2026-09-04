@@ -23,7 +23,7 @@ export default function ContactPage() {
             compliance language — do not draft it.
           */}
           <p
-            className="mb-8 max-w-[var(--measure)] text-[length:var(--text-small)] text-gray"
+            className="support mb-8 max-w-[var(--measure)] text-[length:var(--text-small)] text-gray"
             data-slot="client-intake-language"
           >
             [Client-supplied intake language appears here.]
@@ -34,10 +34,10 @@ export default function ContactPage() {
         <aside aria-label="Offices" className="grid content-start gap-8">
           {site.offices.map((office) => (
             <div key={office.city}>
-              <h2 className="label border-b border-rule pb-2 text-accent">
+              <h2 className="label label-kicker border-b border-rule pb-2 text-accent">
                 {office.city}
               </h2>
-              <p className="mt-3 text-[length:var(--text-small)]">
+              <p className="support mt-3 text-[length:var(--text-small)]">
                 {office.attorney}
                 <br />
                 <a href={`tel:+1${office.phone.replace(/\D/g, "")}`} className="link">
@@ -47,10 +47,10 @@ export default function ContactPage() {
             </div>
           ))}
           <div>
-            <h2 className="label border-b border-rule pb-2 text-accent">
+            <h2 className="label label-kicker border-b border-rule pb-2 text-accent">
               Mailing Address
             </h2>
-            <address className="mt-3 text-[length:var(--text-small)] not-italic">
+            <address className="support mt-3 text-[length:var(--text-small)] not-italic">
               {site.mailingAddress.line1}
               <br />
               {site.mailingAddress.city}, {site.mailingAddress.state}{" "}

@@ -28,7 +28,7 @@ export default async function NewsPostPage({ params }: Props) {
 
   return (
     <article className="mx-auto max-w-[var(--container)] px-5 py-[var(--space-section-sm)] md:py-[var(--space-section)]">
-      <p className="label text-accent">
+      <p className="label label-kicker text-accent">
         <time dateTime={post.date}>{formatDate(post.date)}</time>
       </p>
       <h1 className="mt-3 max-w-3xl">{post.title}</h1>
@@ -40,7 +40,7 @@ export default async function NewsPostPage({ params }: Props) {
 
       {post.attachments.length > 0 && (
         <section aria-labelledby="attachments" className="mt-12 max-w-[var(--measure)]">
-          <h2 id="attachments" className="label border-b border-rule pb-2 text-accent">
+          <h2 id="attachments" className="label label-kicker border-b border-rule pb-2 text-accent">
             Attachments
           </h2>
           <ul className="mt-3 grid gap-2">

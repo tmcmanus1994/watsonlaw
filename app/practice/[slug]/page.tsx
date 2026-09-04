@@ -35,7 +35,7 @@ export default async function PracticeAreaPage({ params }: Props) {
         </div>
 
         <aside aria-labelledby="also-in-practice">
-          <h2 id="also-in-practice" className="label border-b border-rule pb-3 text-accent">
+          <h2 id="also-in-practice" className="label label-kicker border-b border-rule pb-3 text-accent">
             Also in Practice
           </h2>
           <ul>
@@ -49,7 +49,7 @@ export default async function PracticeAreaPage({ params }: Props) {
                     className="font-serif text-[length:var(--text-small)] text-accent"
                     aria-hidden="true"
                   >
-                    {other.numeral.toLowerCase()}.
+                    {other.numeral}.
                   </span>
                   <span className="font-serif text-[length:var(--text-small)] text-ink underline decoration-transparent decoration-2 underline-offset-4 group-hover:decoration-accent">
                     {other.title}

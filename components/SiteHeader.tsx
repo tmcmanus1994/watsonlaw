@@ -28,7 +28,7 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-[var(--container)] items-center justify-between gap-6 px-5 py-4">
         <Link href="/" className="no-underline text-current">
           <BrandMark
-            variant="stacked"
+            variant="mark"
             withLottie
             className="text-[0.72rem] md:text-[0.8rem]"
           />
@@ -56,7 +56,7 @@ export function SiteHeader() {
 
         <button
           type="button"
-          className="label md:hidden"
+          className="label label-nav md:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((v) => !v)}
@@ -111,7 +111,7 @@ function NavLink({
       onClick={onClick}
       aria-current={current ? "page" : undefined}
       className={
-        "label inline-block border-b-2 pb-0.5 no-underline text-current " +
+        "label label-nav inline-block border-b-2 pb-0.5 no-underline text-current " +
         (current
           ? "border-[var(--nav-underline)]"
           : "border-transparent hover:border-[var(--nav-underline)]")

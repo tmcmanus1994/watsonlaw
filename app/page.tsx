@@ -22,9 +22,9 @@ export default function HomePage() {
           className="scrim-bottom absolute inset-x-0 bottom-0 h-[70%]"
         />
         <div className="relative mx-auto w-full max-w-[var(--container)] px-5 pb-14">
-          <p className="label text-paper">{site.tagline}</p>
+          <p className="label label-kicker text-paper">{site.tagline}</p>
           <h1 className="mt-3 max-w-3xl text-paper">{home.hero.heading}</h1>
-          <p className="mt-4 max-w-[var(--measure)] text-paper">
+          <p className="support mt-4 max-w-[var(--measure)] text-paper">
             {home.hero.sub}
           </p>
         </div>
@@ -47,7 +47,7 @@ export default function HomePage() {
               <p className="font-serif text-h3 text-ink">
                 — {surname(attorney.name)}
               </p>
-              <p className="mt-2 max-w-[var(--measure)] text-[length:var(--text-small)] text-gray">
+              <p className="support mt-2 max-w-[var(--measure)] text-[length:var(--text-small)] text-gray">
                 {attorney.homeCredential}
               </p>
             </li>

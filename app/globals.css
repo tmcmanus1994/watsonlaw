@@ -38,6 +38,29 @@ h3 {
   text-transform: uppercase;
 }
 
+/* Role variants of the label, per the approved mockups. */
+.label-nav {
+  letter-spacing: var(--tracking-nav);
+}
+.label-kicker {
+  letter-spacing: var(--tracking-kicker);
+}
+.label-caption {
+  letter-spacing: var(--tracking-caption);
+}
+
+/*
+ * Supporting text — the short secondary lines the mockups set in Libre
+ * Franklin: practice-index descriptions, the hero sub-line, credential
+ * strips, captions and excerpts. Long-form prose (practice blurbs, bios,
+ * news posts) stays Source Serif 4 — "one family for everything with a
+ * voice"; this is the caption voice.
+ */
+.support {
+  font-family: var(--font-label);
+  line-height: 1.6;
+}
+
 /*
  * Photo scrims — eased multi-stop gradients so no band edge shows on
  * smooth skies. Contrast floors (verified in QA): the header zone (top 40%
@@ -158,7 +181,8 @@ h3 {
   inset-inline: 0;
   bottom: 0;
   height: 1px;
-  background: var(--color-rule);
+  /* The section label sits on an ink rule in the mockup, not a hairline. */
+  background: var(--color-ink);
   transform-origin: left;
   transition: transform var(--dur-slow) var(--ease-out);
 }
@@ -227,7 +251,9 @@ h3 {
 .ledger-desc-text {
   display: block;
   padding-top: 0.5rem;
+  font-family: var(--font-label);
   font-size: var(--text-small);
+  line-height: 1.6;
   color: var(--color-gray);
 }
 

@@ -7,7 +7,7 @@ export function SiteFooter() {
     <footer className="border-t border-rule bg-paper">
       <div className="mx-auto flex max-w-[var(--container)] flex-col gap-4 px-5 py-8 md:flex-row md:items-center md:justify-between">
         <BrandMark variant="inline" className="text-sm" />
-        <p className="text-[length:var(--text-small)] text-gray">
+        <p className="support text-[length:var(--text-small)] text-gray">
           {site.offices.map((office, i) => (
             <span key={office.city}>
               {i > 0 && <span aria-hidden="true"> · </span>}
@@ -28,12 +28,12 @@ export function SiteFooter() {
           contents of the <p> below.
         */}
         <p
-          className="text-[length:var(--text-label)] text-gray"
+          className="support text-[length:var(--text-label)] text-gray"
           data-slot="attorney-advertising-disclaimer"
         >
           {/* Attorney advertising disclaimer goes here (client-supplied). */}
         </p>
-        <p className="mt-2 text-[length:var(--text-label)] text-gray">
+        <p className="support mt-2 text-[length:var(--text-label)] text-gray">
           © {new Date().getFullYear()} {site.legalName}. All rights reserved.
         </p>
       </div>
