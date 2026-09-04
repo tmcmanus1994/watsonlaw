@@ -36,6 +36,14 @@ export function BrandMark({
   const [lottieReady, setLottieReady] = useState(false);
   const lottie = site.brandLottie;
   const useLottie = withLottie && variant !== "inline" && !!lottie;
+  /*
+   * Only hide the static mark while the animation is actually mounted.
+   * `lottieReady` is component state and survives a client-side navigation,
+   * so deriving this — rather than reading the flag alone — is what stops
+   * the mark from staying hidden on interior pages after leaving the home
+   * page, where the canvas is gone and nothing would be left to see.
+   */
+  const hideStatic = useLottie && lottieReady;
 
   useEffect(() => {
     if (!useLottie || !lottie || !canvasRef.current) return;
@@ -65,6 +73,7 @@ export function BrandMark({
     return () => {
       disposed = true;
       player?.destroy();
+      setLottieReady(false);
     };
   }, [useLottie, lottie]);
 
@@ -109,8 +118,8 @@ export function BrandMark({
     <span className={`relative block ${className}`}>
       <span
         className="flex flex-col items-center border-y border-current px-4 py-2"
-        aria-hidden={lottieReady || undefined}
-        style={lottieReady ? { visibility: "hidden" } : undefined}
+        aria-hidden={hideStatic || undefined}
+        style={hideStatic ? { visibility: "hidden" } : undefined}
       >
         <span
           className="whitespace-nowrap text-center font-serif uppercase leading-[1.35] tracking-[var(--tracking-wordmark)]"
@@ -146,7 +155,7 @@ export function BrandMark({
           }}
         />
       )}
-      {lottieReady && <span className="sr-only">{site.legalName}</span>}
+      {hideStatic && <span className="sr-only">{site.legalName}</span>}
     </span>
   );
 }
