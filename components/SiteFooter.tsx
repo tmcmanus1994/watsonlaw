@@ -1,8 +1,15 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { BrandMark } from "@/components/BrandMark";
 import { site } from "@/config/site";
 
 /** The quiet footer bar from the deck: wordmark left, offices right. */
 export function SiteFooter() {
+  const pathname = usePathname();
+  // The publishing tool gets no site chrome — see SiteHeader.
+  if (pathname.startsWith("/keystatic")) return null;
+
   return (
     <footer className="border-t border-rule bg-paper">
       <div className="mx-auto flex max-w-[var(--container)] flex-col gap-4 px-5 py-8 md:flex-row md:items-center md:justify-between">

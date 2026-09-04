@@ -17,6 +17,13 @@ export function SiteHeader() {
   const pathname = usePathname();
   const overHero = pathname === "/";
 
+  /*
+   * The publishing tool has its own navigation, and a marketing nav sitting
+   * above it is a trap: clicking "Home" mid-post would discard unsaved work.
+   * Keep the site chrome off /keystatic entirely.
+   */
+  if (pathname.startsWith("/keystatic")) return null;
+
   return (
     <header
       className={

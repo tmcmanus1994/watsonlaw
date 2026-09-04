@@ -156,11 +156,26 @@ nothing shifts.
 
 ## News / Keystatic
 
-Admin at `/keystatic` (excluded from robots + sitemap). Local mode in dev;
-production uses Keystatic Cloud auth — setup steps at the bottom of
-`docs/PUBLISHING.md`, editor guide at the top. Posts are plain markdown in
-`content/news/`; the site renders them statically via `lib/news.ts`
-(headings, quotes, links, `[^1]` footnotes, PDF attachments).
+Admin at `/keystatic` — excluded from robots + sitemap, and rendered
+without the site header and footer so a marketing nav can't sit above the
+editor and discard an unsaved post.
+
+Posts are plain markdown in `content/news/`; the site renders them
+statically via `lib/news.ts` (headings, bold/italic, lists, block quotes,
+links, `[^1]` footnotes, PDF attachments). `draft: true` keeps a post off
+the site.
+
+**Storage.** Local mode in dev; Keystatic Cloud in production. Local mode
+writes to the filesystem, which cannot work on a deployed host — so when
+`NEXT_PUBLIC_KEYSTATIC_PROJECT` is unset in production, `/keystatic`
+deliberately renders a "Not configured yet" notice instead of an editor
+that would accept a post and lose it. Setup steps are at the bottom of
+`docs/PUBLISHING.md`; the editor guide for the attorneys is at the top.
+
+⚠️ `content/news/` currently holds three **`sample-*.md` posts** so the
+section can be demoed before the client writes anything. They are marked as
+samples in their titles and opening line and describe no real matter —
+**delete them before launch**.
 
 ## Contact form
 

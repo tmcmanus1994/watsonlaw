@@ -2,9 +2,14 @@
  * Keystatic — the approved News stack (docs/(C) News Stack Decision.md).
  *
  * Storage: Cloud auth mode once NEXT_PUBLIC_KEYSTATIC_PROJECT is set (a
- * free Keystatic Cloud project, ≤3 users — Trav creates it and installs
- * the Keystatic GitHub App on the repo; editors sign in with email, never
- * GitHub). Without the env var it runs in local mode for development.
+ * free Keystatic Cloud project, ≤3 users — created once by the maintainer,
+ * with the Keystatic GitHub App installed on the repo; editors then sign in
+ * with email and never touch GitHub). See docs/PUBLISHING.md.
+ *
+ * Without the env var it runs in local mode, which writes to the local
+ * filesystem — correct for development, impossible on a deployed host. The
+ * /keystatic route refuses to render the editor in production when the
+ * project is unset rather than accepting posts it cannot save.
  *
  * Posts are plain markdown with YAML frontmatter in content/news/ — the
  * site reads them with its own file-based loader (lib/news.ts), so the
