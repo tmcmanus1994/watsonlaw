@@ -231,6 +231,23 @@ samples in their titles and opening line and describe no real matter —
 Spam protection is a honeypot plus a minimum-time check — no third-party
 service.
 
+## Branches
+
+- **`main`** — the production branch. Vercel's Production Branch setting
+  points here, and `<project>.vercel.app` (later the real domain) serves it.
+- **Working branches** — everything else. Each push builds a **preview**
+  deployment, which is what client review runs on.
+
+This split is not bookkeeping: **Vercel's on-page comments only appear on
+preview deployments.** While the project's Production Branch was the same
+branch the work was happening on, every push deployed straight to
+production, no preview ever existed, and there was nowhere for a reviewer to
+leave a comment. Keep the work off `main` and previews keep working.
+
+Keystatic Cloud commits to whichever branch it is configured for — check
+that it still matches after any branch change, or published posts will land
+somewhere the production site never builds from.
+
 ## Deploying / transfer
 
 1. Import the repo at vercel.com/new (Next.js auto-detects). Set
