@@ -21,7 +21,7 @@ npm run lint
 
 | What | Where |
 | --- | --- |
-| Firm name, offices, phones, mailing address, recipients, jurisdictions | `config/site.ts` |
+| Firm name, service area, phones, recipients, jurisdictions | `config/site.ts` |
 | Design tokens — every color, font, size, spacing value | `app/tokens.css` |
 | Font files (Source Serif 4, Libre Franklin — self-hosted, OFL) | `app/fonts/` (see Fonts) |
 | Homepage hero + courthouse band media slots | `content/home.ts` |
@@ -40,6 +40,18 @@ when registration lands (or changes), edit `name`/`legalName` there and
 everything follows. Exception noted in code: `app/icon.tsx` keeps literal
 palette hex values because the favicon renderer can't read CSS variables —
 keep them in sync with `app/tokens.css`.
+
+## How location is presented
+
+⚠️ The site names a **region and nothing else** — `site.serviceArea`
+("Central Arkansas"). There are deliberately no offices, no cities, and no
+street or mailing address anywhere on the pages or in the JSON-LD, because
+the attorneys are not putting a physical location behind the firm yet.
+
+Every location line on every page reads from that one string, so when Brett
+and Noah decide how they want location shown it is a one-value edit. The
+real mailing address is still in `config/site.ts`, unrendered, with a note
+on how to bring it back.
 
 ## Brand rules enforced in code
 

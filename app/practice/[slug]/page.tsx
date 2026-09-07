@@ -51,7 +51,7 @@ export default async function PracticeAreaPage({ params }: Props) {
             style={{ "--reveal-i": 3 } as React.CSSProperties}
           >
             <p className="support text-[length:var(--text-small)] text-gray">
-              {site.offices.map((o) => o.city).join(" · ")}, Arkansas
+              {site.serviceArea}
             </p>
             <Link href="/contact" className="cta mt-3">
               Discuss a matter <span className="cta-arrow" aria-hidden="true">→</span>

@@ -19,18 +19,39 @@ export const site = {
   /** Canonical production URL. Vercel preview URLs are injected via env. */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com",
 
-  offices: [
-    {
-      city: "North Little Rock",
-      attorney: "Noah P. Watson",
-      phone: "(501) 388-4514",
-    },
-    {
-      city: "Searcy",
-      attorney: "Brett D. Watson",
-      phone: "(501) 281-2468",
-    },
+  /**
+   * How the firm's location is presented — a region, not an address.
+   *
+   * Brett and Noah are not putting a street or home location behind the
+   * firm, so the site names an area only: no offices, no cities. This is
+   * the ONE value every location line on the site reads from, and it is
+   * deliberately vague.
+   *
+   * TODO: client decision. Brett and Noah will say how they want location
+   * presented. When they do, change this string (and, if they want a
+   * mailing address shown again, see the note on mailingAddress below).
+   */
+  serviceArea: "Central Arkansas",
+
+  /**
+   * Direct lines, by attorney. Previously these were labelled as two
+   * offices; they are simply the number each attorney answers.
+   */
+  contacts: [
+    { attorney: "Noah P. Watson", phone: "(501) 388-4514" },
+    { attorney: "Brett D. Watson", phone: "(501) 281-2468" },
   ],
+
+  /**
+   * Correspondence address. Retained here because it is real and the firm
+   * may need it, but deliberately NOT rendered anywhere on the site — it
+   * names a city, and the site presents a region only until the client
+   * decides otherwise. It is also kept out of the JSON-LD, so search
+   * results cannot show a locality the pages themselves do not.
+   *
+   * To bring it back: render it in the /contact aside and restore the
+   * PostalAddress block in lib/structured-data.ts.
+   */
   mailingAddress: {
     line1: "PO Box 707",
     city: "Searcy",

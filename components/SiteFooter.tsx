@@ -8,7 +8,7 @@ import { navItems } from "@/lib/nav";
 
 /**
  * The footer as a colophon: wordmark and the firm's one-line description
- * on the left, the offices and the site map on the right, each under a
+ * on the left, the direct lines and the site map on the right, each under a
  * caption label on a hairline. Quiet, but complete — a reader who reaches
  * the bottom of any page finds a phone number and every other page.
  */
@@ -29,26 +29,27 @@ export function SiteFooter() {
 
         <div>
           <p className="label label-caption border-b border-rule pb-2 text-gray">
-            Offices
+            Contact
           </p>
+          {/* A region, never a city or a street — see site.serviceArea. */}
           <ul className="mt-4 grid gap-4">
-            {site.offices.map((office) => (
-              <li key={office.city} className="support text-[length:var(--text-small)]">
-                <span className="text-ink">
-                  {office.city}, {site.mailingAddress.state}
-                </span>
+            {site.contacts.map((contact) => (
+              <li
+                key={contact.phone}
+                className="support text-[length:var(--text-small)]"
+              >
+                <span className="text-ink">{contact.attorney}</span>
                 <br />
                 <a
-                  href={`tel:+1${office.phone.replace(/\D/g, "")}`}
+                  href={`tel:+1${contact.phone.replace(/\D/g, "")}`}
                   className="link text-gray"
                 >
-                  {office.phone}
+                  {contact.phone}
                 </a>
               </li>
             ))}
             <li className="support text-[length:var(--text-small)] text-gray">
-              {site.mailingAddress.line1}, {site.mailingAddress.city},{" "}
-              {site.mailingAddress.state} {site.mailingAddress.zip}
+              {site.serviceArea}
             </li>
           </ul>
         </div>

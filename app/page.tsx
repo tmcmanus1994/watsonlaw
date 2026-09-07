@@ -4,6 +4,7 @@ import { PracticeIndex } from "@/components/PracticeIndex";
 import { CourtBand } from "@/components/CourtBand";
 import { attorneys } from "@/content/attorneys";
 import { home } from "@/content/home";
+import { practiceAreas } from "@/content/practice-areas";
 import { site } from "@/config/site";
 
 export default function HomePage() {
@@ -78,11 +79,11 @@ export default function HomePage() {
           </li>
           <li className="fact">
             <p className="fact-value">
-              <em>{numberWord(site.offices.length)}</em> offices
+              <em>{numberWord(practiceAreas.length)}</em> practice areas
             </p>
             <p className="fact-label support text-[length:var(--text-small)] text-gray">
-              {joinNatural(site.offices.map((o) => o.city))},{" "}
-              {site.mailingAddress.state === "AR" ? "Arkansas" : site.mailingAddress.state}.
+              {/* The ledger's own titles, verbatim (content/practice-areas.ts). */}
+              {joinNatural(practiceAreas.map((a) => a.title))}.
             </p>
           </li>
         </ul>
@@ -152,23 +153,26 @@ export default function HomePage() {
               Discuss a matter <span className="cta-arrow" aria-hidden="true">→</span>
             </Link>
           </div>
-          <ul className="rise grid content-end gap-6 md:justify-items-end md:text-right">
-            {site.offices.map((office) => (
-              <li key={office.city}>
-                <p className="label label-caption text-gray">{office.city}</p>
-                <p className="support mt-1.5 text-[length:var(--text-small)]">
-                  {office.attorney}
-                  <br />
-                  <a
-                    href={`tel:+1${office.phone.replace(/\D/g, "")}`}
-                    className="link"
-                  >
-                    {office.phone}
-                  </a>
-                </p>
-              </li>
-            ))}
-          </ul>
+          <div className="rise grid content-end gap-6 md:justify-items-end md:text-right">
+            {/* Location is a region, not an address — see site.serviceArea. */}
+            <p className="label label-caption text-gray">{site.serviceArea}</p>
+            <ul className="grid gap-4 md:justify-items-end">
+              {site.contacts.map((contact) => (
+                <li key={contact.phone}>
+                  <p className="support text-[length:var(--text-small)]">
+                    {contact.attorney}
+                    <br />
+                    <a
+                      href={`tel:+1${contact.phone.replace(/\D/g, "")}`}
+                      className="link"
+                    >
+                      {contact.phone}
+                    </a>
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
     </>
@@ -182,7 +186,7 @@ function joinNatural(items: readonly string[]): string {
   return `${items.slice(0, -1).join(", ")}, and ${items.at(-1)}`;
 }
 
-/** Small counts read as words in the ledger ("Two offices"). */
+/** Small counts read as words in the ledger ("Five practice areas"). */
 function numberWord(n: number): string {
   const words = ["Zero", "One", "Two", "Three", "Four", "Five", "Six"];
   return words[n] ?? String(n);
