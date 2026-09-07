@@ -12,7 +12,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...attorneys.map((a) => ({ url: `${site.url}/attorneys/${a.slug}` })),
     ...getAllPosts().map((post) => ({
       url: `${site.url}/news/${post.slug}`,
-      lastModified: post.date,
+      // Omitted rather than sent empty if a post somehow carries no date.
+      ...(post.date ? { lastModified: post.date } : {}),
     })),
   ];
 }

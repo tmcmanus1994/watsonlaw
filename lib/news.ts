@@ -29,6 +29,7 @@ export function getAllPosts(): NewsPost[] {
     .filter((f) => f.endsWith(".md"))
     .map((file) => loadPost(file.replace(/\.md$/, "")))
     .filter((post): post is NewsPost => post !== undefined)
+    // Dates are normalised to YYYY-MM-DD, so lexical order is date order.
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
@@ -59,11 +60,43 @@ function loadPost(slug: string): NewsPost | undefined {
   return {
     slug,
     title: String(data.title ?? slug),
-    date: String(data.date ?? ""),
+    date: toIsoDate(data.date),
     excerpt: String(data.excerpt ?? ""),
     html: renderMarkdown(content),
     attachments,
   };
+}
+
+/**
+ * Frontmatter dates arrive in two shapes and both have to end up as
+ * YYYY-MM-DD. Keystatic writes `date: 2026-09-07` unquoted, and YAML parses
+ * an unquoted date as a timestamp — so gray-matter hands us a Date object,
+ * not a string. Stringifying that gives "Mon Sep 07 2026 00:00:00 GMT+0000
+ * (Coordinated Universal Time)", which formatDate then renders as
+ * "Invalid Date" and which also sorts wrong against the ISO strings from
+ * hand-written posts.
+ *
+ * Normalising here rather than quoting the dates in the markdown is
+ * deliberate: Keystatic rewrites the frontmatter on every save, so any fix
+ * applied to the files would be undone the next time an attorney edits a
+ * post. The YAML timestamp is UTC midnight, so read it back with the UTC
+ * getters — local getters would shift the day west of Greenwich.
+ */
+function toIsoDate(value: unknown): string {
+  if (value instanceof Date) {
+    if (Number.isNaN(value.getTime())) return "";
+    return [
+      String(value.getUTCFullYear()).padStart(4, "0"),
+      String(value.getUTCMonth() + 1).padStart(2, "0"),
+      String(value.getUTCDate()).padStart(2, "0"),
+    ].join("-");
+  }
+  if (typeof value === "string") {
+    // Already ISO, or an ISO datetime we only want the date part of.
+    const match = /^(\d{4}-\d{2}-\d{2})/.exec(value.trim());
+    return match ? match[1] : "";
+  }
+  return "";
 }
 
 /**
