@@ -236,13 +236,15 @@ service.
 1. Import the repo at vercel.com/new (Next.js auto-detects). Set
    `NEXT_PUBLIC_SITE_URL`, `RESEND_API_KEY`, `CONTACT_FROM`,
    `NEXT_PUBLIC_KEYSTATIC_PROJECT`.
-2. For the client review round, share the **branch preview URL** (stable
-   across pushes), not the per-deployment URL. Vercel's on-page comments
-   are free on every plan but need a Vercel account, and Hobby allows only
-   **one external user per account** — so two attorney reviewers means
-   either one Vercel seat plus notes from the other, or a Pro plan, which
-   is a client-approved cost under Term 5. Preview builds are `noindex`
-   (see `app/robots.ts`), so protection can be turned off for review.
+2. Client review round — invite each reviewer to the Vercel team as a
+   **Viewer**, not a Member. Viewer seats are free on Pro and can comment
+   on previews; a Member seat is a billed developer seat, which would be a
+   client-approved cost under Term 5. Because reviewers are then team
+   members, leave **deployment protection on** — the preview stays private.
+   Share the **branch preview URL** (stable across pushes), not the
+   per-deployment URL, which goes stale on the next push. Non-production
+   builds are `noindex` regardless (`app/robots.ts`).
+   Reviewer-facing instructions: `docs/REVIEW.md`.
 3. Do **not** connect a domain until the name is registered.
 4. At launch, the repo and Vercel project transfer to the client — nothing
    in the code references a GitHub org or Vercel team, so transfer is
