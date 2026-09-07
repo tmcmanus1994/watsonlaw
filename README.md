@@ -234,8 +234,11 @@ service.
 ## Deploying / transfer
 
 1. Import the repo at vercel.com/new (Next.js auto-detects). Set
-   `NEXT_PUBLIC_SITE_URL`, `RESEND_API_KEY`, `CONTACT_FROM`,
-   `NEXT_PUBLIC_KEYSTATIC_PROJECT`.
+   `RESEND_API_KEY`, `CONTACT_FROM`, `NEXT_PUBLIC_KEYSTATIC_PROJECT`
+   (scope each to Preview as well as Production — see `docs/PUBLISHING.md`).
+   `NEXT_PUBLIC_SITE_URL` is optional: without it the site derives its URL
+   from Vercel's `NEXT_PUBLIC_VERCEL_BRANCH_URL`, so previews get correct
+   canonical/OG URLs on their own. Set it once the domain is registered.
 2. Client review round — invite each reviewer to the Vercel team as a
    **Viewer**, not a Member. Viewer seats are free on Pro and can comment
    on previews; a Member seat is a billed developer seat, which would be a

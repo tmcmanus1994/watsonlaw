@@ -51,6 +51,7 @@ convenience, not a requirement.
 | An empty line at the very bottom of every page | The attorney advertising disclaimer slot — your language goes there. |
 | An empty line above the contact form | Same, for whatever engagement wording you require. |
 | "Central Arkansas" wherever location appears | Deliberately vague pending your decision. See below. |
+| The contact form not sending | Not connected yet — we're waiting on where those messages should go. Fill it in and nothing happens. |
 | The web address | The domain isn't registered yet. |
 
 ---

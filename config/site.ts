@@ -8,6 +8,32 @@
  * subjects all read from here, so a name change stays a one-file edit.
  */
 
+/**
+ * The site's own address, in order of preference:
+ *
+ * 1. NEXT_PUBLIC_SITE_URL — set this once the real domain is registered.
+ * 2. The Vercel branch URL — stable across pushes to the same branch, so
+ *    preview builds get correct canonical and OG URLs without anyone
+ *    setting a variable per deployment. This is the review-round case.
+ * 3. The per-deployment Vercel URL — changes every push, but still better
+ *    than a placeholder.
+ * 4. example.com, so local builds are obviously not the real thing.
+ *
+ * Vercel exposes 2 and 3 automatically while "Automatically expose System
+ * Environment Variables" is on (the default). Both are bare hostnames, so
+ * the scheme is added here.
+ */
+function siteUrl(): string {
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+
+  const host =
+    process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL ||
+    process.env.NEXT_PUBLIC_VERCEL_URL;
+  if (host) return `https://${host}`;
+
+  return "https://example.com";
+}
+
 export const site = {
   name: "Watson & Watson",
   legalName: "Watson & Watson LLP",
@@ -16,8 +42,11 @@ export const site = {
   description:
     "An appellate and constitutional litigation firm in Arkansas, practicing before the Arkansas courts, the U.S. Courts of Appeals, and the Supreme Court of the United States.",
 
-  /** Canonical production URL. Vercel preview URLs are injected via env. */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com",
+  /**
+   * Canonical URL, used for metadataBase, canonical links, JSON-LD and the
+   * sitemap. Resolved by siteUrl() below.
+   */
+  url: siteUrl(),
 
   /**
    * How the firm's location is presented — a region, not an address.
