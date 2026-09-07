@@ -1,6 +1,9 @@
 # Reviewing the site
 
-For Brett and Noah. This is the preview of the firm's website. Everything
+For Brett and Noah. A client-ready rendering of this document — the version
+actually sent to them — is published at
+https://claude.ai/code/artifact/4f2aefc7-bfea-4414-bfd4-21e47f549407
+Keep the two in step if either changes. This is the preview of the firm's website. Everything
 here works — it is the real site, not a picture of one. Click through it,
 and leave a note anywhere something is wrong.
 
@@ -104,10 +107,60 @@ drop the draft label.
 
 ---
 
-## Writing news posts
+## Writing news posts — please actually do this one
 
-You can already publish. The editor and a step-by-step guide are in
-`docs/PUBLISHING.md` — Trav will walk you through it. Anything you post
-appears on the site within a couple of minutes.
+Not optional, and not something to leave until after launch: we need to know
+the editor works the way you want while there is still time to change it.
 
-Try it during the review if you like. Delete anything you don't want kept.
+1. Sign in and set up your account.
+2. Write a post — a real one or nonsense, it doesn't matter.
+3. Use a heading, a list, a link and a PDF attachment, so you've seen each of
+   those work.
+4. Publish, then look at it on the site. It appears in about two minutes.
+5. Delete anything you don't want kept.
+
+Then tell us whether it feels like something you'd use, whether anything is
+missing, and whether a published post looks right.
+
+You cannot break anything — every change is saved with a history.
+
+---
+
+## Where enquiries should go
+
+The contact form is built but deliberately not connected, because nobody has
+said where messages should land. As configured it would reach
+`watson@bdwpllc.com` and `noah.watson57@gmail.com`.
+
+- Both of you, or one inbox?
+- A single firm address instead, so it doesn't depend on either of you
+  personally?
+- A message from a potential client is a different kind of mail from ordinary
+  correspondence — worth deciding whether a personal address is where you
+  want it arriving.
+
+Dependency: sending *from* a firm address rather than a generic one requires
+the domain to be registered first.
+
+---
+
+## Still outstanding
+
+**Blocking — nobody else can write these**
+
+- The attorney advertising disclaimer (empty slot, foot of every page).
+- The engagement wording above the contact form (empty slot).
+- Brett's biography. The page is held back: we have two lines — the Special
+  Justice appointment and the Bar Association drafting committee. To match
+  Noah's page it needs an opening paragraph, bar admissions, education, and
+  any representative matters or memberships.
+- The firm's story, or a decision that The Firm page stays as short as it is.
+
+**Confirmations**
+
+- The five practice-area descriptions, printed verbatim.
+- Every credential, court, title and case name.
+- The courthouse caption on the homepage — it names the Richard Sheppard
+  Arnold United States Courthouse, and must change if the final photograph
+  is a different building.
+- Whether you want any social or directory profiles linked. None are set.
