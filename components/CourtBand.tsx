@@ -11,7 +11,7 @@ export function CourtBand() {
 
   return (
     <figure aria-label={caption}>
-      <div className="relative h-[280px] w-full md:h-[380px]">
+      <div className="relative h-[300px] w-full md:h-[440px]">
         {image ? (
           <Image
             src={image.src}

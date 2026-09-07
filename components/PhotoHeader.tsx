@@ -17,7 +17,7 @@ export function PhotoHeader({
   image?: { src: string; alt: string } | null;
 }) {
   return (
-    <div className="relative flex h-[300px] flex-col justify-end md:h-[360px]">
+    <div className="relative flex h-[340px] flex-col justify-end md:h-[440px]">
       {image ? (
         <Image
           src={image.src}

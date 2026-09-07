@@ -109,6 +109,35 @@ observer-driven entrance once cost ~2.9s of LCP render delay on `/practice`.
 Both are declared inside `@media (prefers-reduced-motion: no-preference)`,
 so reduced motion and no-JS simply render the finished page.
 
+### Added in the September polish pass
+
+See `docs/audit-2026-09.md` for the reasoning. All of it is CSS in
+`globals.css` plus three components; no new dependencies.
+
+- **Scroll-in reveal** (`.rise`): CSS scroll-driven animation
+  (`animation-timeline: view()`), wrapped in `@supports` and the
+  reduced-motion query. No observer, nothing gated — browsers without it
+  render the finished page. Never on the hero.
+- **Drawn nav underline** (`.nav-link`): the active/hover rule scales in from
+  the left and withdraws to the right. Colour still comes from
+  `--nav-underline`, set per header context.
+- **Hero details**: `.hero-rule` draws across the measure on load;
+  `.scroll-cue` is a paper rule that draws downward on a slow loop (desktop
+  only, decorative).
+- **Directional link** (`.cta`): the site's only call-to-action shape — caps
+  label, serif arrow, hairline that turns oxblood. Never a filled button.
+- **Proof strip** (`.facts`, homepage): three facts, every one derived from
+  content already on the site (`home.hero.sub`, `attorneys[].homeCredential`,
+  `site.offices`). Change the source and the strip follows.
+- **Ledger**: two-column editorial rows above 768px on the homepage (title
+  left, description right, `Read →` cue at the edge on hover); `/practice`
+  keeps the stacked row because the image pane is its counterweight.
+  Titles use `--text-ledger`.
+- **Practice pages**: `.prose-lede` sets the blurb's first paragraph a step
+  larger (as the mockup does) — the words are untouched; one `Discuss a
+  matter` link below the blurb.
+- **Interior header** is sticky (`.header-sticky`, solid paper).
+
 ## Practice imagery
 
 Each area in `content/practice-areas.ts` carries an `image` used twice: as

@@ -29,7 +29,7 @@ export function SiteHeader() {
       className={
         overHero
           ? "absolute inset-x-0 top-0 z-10 text-paper [--nav-underline:var(--color-paper)]"
-          : "border-b border-rule bg-paper text-ink [--nav-underline:var(--color-accent)]"
+          : "header-sticky border-b border-rule bg-paper text-ink [--nav-underline:var(--color-accent)]"
       }
     >
       <div className="mx-auto flex max-w-[var(--container)] items-center justify-between gap-6 px-5 py-4">
@@ -119,12 +119,7 @@ function NavLink({
       href={href}
       onClick={onClick}
       aria-current={current ? "page" : undefined}
-      className={
-        "label label-nav inline-block border-b-2 pb-0.5 no-underline text-current " +
-        (current
-          ? "border-[var(--nav-underline)]"
-          : "border-transparent hover:border-[var(--nav-underline)]")
-      }
+      className="nav-link label label-nav"
     >
       {children}
     </Link>

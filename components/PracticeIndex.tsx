@@ -127,6 +127,9 @@ export function PracticeIndex({
                   </span>
                 </span>
               </span>
+              <span className="ledger-cue" aria-hidden="true">
+                Read <span className="font-serif">→</span>
+              </span>
             </Link>
           </li>
         ))}

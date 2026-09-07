@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PhotoHeader } from "@/components/PhotoHeader";
+import { site } from "@/config/site";
 import { getPracticeArea, practiceAreas } from "@/content/practice-areas";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -31,11 +32,31 @@ export default async function PracticeAreaPage({ params }: Props) {
         image={area.image}
       />
       <div className="mx-auto grid max-w-[var(--container)] gap-12 px-5 py-[var(--space-section-sm)] md:grid-cols-[1fr_minmax(0,16rem)] md:py-[var(--space-section)]">
-        {/* The client's blurb, verbatim (intake Part 3) — do not edit. */}
-        <div className="prose">
-          {area.body.map((paragraph, i) => (
-            <p key={i}>{paragraph}</p>
-          ))}
+        <div>
+          {/* The client's blurb, verbatim (intake Part 3) — do not edit.
+              `prose-lede` only sets the opening paragraph a step larger, as
+              the approved practice-page mockup does. */}
+          <div
+            className="prose prose-lede reveal"
+            style={{ "--reveal-i": 2 } as React.CSSProperties}
+          >
+            {area.body.map((paragraph, i) => (
+              <p key={i}>{paragraph}</p>
+            ))}
+          </div>
+
+          {/* The page's one ask, kept out of the blurb itself. */}
+          <div
+            className="reveal mt-12 max-w-[var(--measure)] border-t border-rule pt-8"
+            style={{ "--reveal-i": 3 } as React.CSSProperties}
+          >
+            <p className="support text-[length:var(--text-small)] text-gray">
+              {site.offices.map((o) => o.city).join(" · ")}, Arkansas
+            </p>
+            <Link href="/contact" className="cta mt-3">
+              Discuss a matter <span className="cta-arrow" aria-hidden="true">→</span>
+            </Link>
+          </div>
         </div>
 
         <aside aria-labelledby="also-in-practice">

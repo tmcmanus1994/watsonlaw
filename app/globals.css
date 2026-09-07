@@ -115,10 +115,34 @@ h3 {
   color: var(--color-accent);
   text-decoration-color: var(--color-accent);
 }
+/* Quiet variant for lists of links (footer site map): the underline only
+   arrives on hover, in oxblood. */
+.link-quiet {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: color var(--dur-fast) var(--ease-out),
+    text-decoration-color var(--dur-fast) var(--ease-out);
+}
+.link-quiet:hover,
+.link-quiet:active {
+  color: var(--color-accent);
+  text-decoration-color: var(--color-accent);
+}
 
 /* Long-form article styling for markdown-rendered news posts. */
 .prose {
   max-width: var(--measure);
+}
+/*
+ * Lede: the practice-page mockup sets the opening paragraph of the blurb a
+ * step above body and the rest at body size. Presentation only — the
+ * client's words are untouched.
+ */
+.prose-lede > p:first-child {
+  font-size: var(--text-lede);
+  line-height: var(--leading-lede);
 }
 .prose p,
 .prose ul,
@@ -329,9 +353,9 @@ h3 {
 
 .ledger-link {
   display: grid;
-  grid-template-columns: 2.5rem 1fr;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
   align-items: baseline;
-  padding-block: 1.5rem;
+  padding-block: 1.75rem;
   text-decoration: none;
 }
 
@@ -342,7 +366,7 @@ h3 {
 
 .ledger-title {
   font-family: var(--font-serif);
-  font-size: var(--text-h3);
+  font-size: var(--text-ledger);
   line-height: var(--leading-tight);
   color: var(--color-ink);
   transition: color var(--dur-fast) var(--ease-out);
@@ -354,6 +378,66 @@ h3 {
   grid-template-rows: 1fr;
   max-width: 34rem;
   transition: grid-template-rows var(--dur-slow) var(--ease-out);
+}
+
+/* The cue: a small oxblood label at the row's right edge that arrives with
+   the description. Decorative — the whole row is the link. */
+.ledger-cue {
+  display: none;
+}
+
+/*
+ * Editorial two-column rows on wide viewports, as the approved homepage
+ * mockup sets them: numeral and title on the left, the description in its
+ * own column on the right, so the row uses the whole measure instead of
+ * leaving half the screen empty.
+ */
+@media (min-width: 768px) {
+  .ledger-link {
+    grid-template-columns: 3rem minmax(0, 1.1fr) minmax(0, 1fr) 4.5rem;
+    column-gap: 2rem;
+  }
+  .ledger-desc {
+    grid-column: 3;
+    max-width: none;
+  }
+  .ledger-desc-text {
+    padding-top: 0.35rem;
+  }
+  .ledger-cue {
+    display: block;
+    grid-column: 4;
+    justify-self: end;
+    font-family: var(--font-label);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-caption);
+    text-transform: uppercase;
+    color: var(--color-accent);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity var(--dur-slow) var(--ease-out),
+      transform var(--dur-slow) var(--ease-out);
+  }
+  .ledger-row:hover .ledger-cue,
+  .ledger-row:has(a:focus-visible) .ledger-cue {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* On /practice the sticky image pane is the counterweight, so the ledger
+   keeps the description beneath the title and only gains the cue. */
+@media (min-width: 768px) {
+  .practice-canvas .ledger-link {
+    grid-template-columns: 3rem minmax(0, 1fr) 4.5rem;
+  }
+  .practice-canvas .ledger-desc {
+    grid-column: 2;
+    max-width: 34rem;
+  }
+  .practice-canvas .ledger-cue {
+    grid-column: 3;
+  }
 }
 /* Clipping wrapper: content stays in the accessibility tree at every size —
    never display:none, never visibility:hidden. */
@@ -422,6 +506,241 @@ h3 {
   .ledger .ledger-row::before,
   .ledger .ledger-title {
     transition: none;
+  }
+}
+
+/* ── Navigation underline ─────────────────────────────────────────────
+ * The active page carries an underline (oxblood on paper, paper over
+ * photography). It draws itself in from the left rather than appearing —
+ * the same gesture as the ledger's rule. Colour comes from --nav-underline,
+ * set per header context. */
+.nav-link {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.2rem;
+  text-decoration: none;
+  color: currentColor;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--nav-underline, var(--color-accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.nav-link[aria-current="page"]::after,
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+/* Leaving a link: the rule withdraws to the right, so it never snaps. */
+.nav-link:not([aria-current="page"])::after {
+  transform-origin: right;
+}
+.nav-link:not([aria-current="page"]):hover::after,
+.nav-link:not([aria-current="page"]):focus-visible::after {
+  transform-origin: left;
+}
+
+/* ── Interior header ──────────────────────────────────────────────────
+ * Stays with the reader on interior pages (the /practice pane already
+ * assumes a 5.5rem header). Solid paper — no translucency. */
+.header-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+/* ── Hero details ─────────────────────────────────────────────────────
+ * A hairline above the kicker that draws itself across the measure as the
+ * type rises, and a "Scroll" cue at the foot of the hero — a rule that
+ * draws downward and fades, on a slow loop. Both paper over photography. */
+.hero-rule {
+  height: 1px;
+  background: color-mix(in srgb, var(--color-paper) 55%, transparent);
+  transform-origin: left;
+}
+.scroll-cue {
+  display: none;
+}
+@media (min-width: 768px) {
+  .scroll-cue {
+    position: absolute;
+    right: max(1.25rem, calc((100vw - var(--container)) / 2 + 1.25rem));
+    bottom: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-paper);
+  }
+  .scroll-cue-line {
+    width: 1px;
+    height: 3rem;
+    background: color-mix(in srgb, var(--color-paper) 70%, transparent);
+    transform-origin: top;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-rule {
+    animation: draw-x var(--dur-draw) var(--ease-out) both;
+  }
+  .scroll-cue-line {
+    animation: draw-down 2.6s var(--ease-out) 1.4s infinite;
+  }
+}
+@keyframes draw-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes draw-down {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  35% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  70% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
+
+/* ── Proof strip ──────────────────────────────────────────────────────
+ * Three facts beneath the hero, in the ledger's own language: numerals in
+ * oxblood serif, supporting lines in the caption voice, hairlines between.
+ * Every fact is already published elsewhere on the site. */
+.facts {
+  display: grid;
+  gap: 1.75rem;
+  border-bottom: var(--hairline);
+  padding-block: 2.25rem;
+}
+.fact {
+  min-width: 0;
+}
+.fact-value {
+  font-family: var(--font-serif);
+  font-size: var(--text-ledger);
+  line-height: 1.1;
+  color: var(--color-ink);
+  font-variant-numeric: lining-nums;
+}
+.fact-value em {
+  font-style: normal;
+  color: var(--color-accent);
+}
+.fact-label {
+  margin-top: 0.5rem;
+}
+@media (min-width: 768px) {
+  .facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+  }
+  .fact:not(:last-child) {
+    padding-right: 2.5rem;
+  }
+  .fact + .fact {
+    border-left: var(--hairline);
+    padding-left: 2.5rem;
+  }
+}
+
+/* ── Directional link ─────────────────────────────────────────────────
+ * The site's one call-to-action shape: a caps label with an arrow that
+ * steps forward on hover, above a hairline that turns oxblood. Never a
+ * filled button — oxblood is a line, not a block. */
+.cta {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding-block: 0.6rem;
+  text-decoration: none;
+  color: var(--color-ink);
+  font-family: var(--font-label);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-kicker);
+  text-transform: uppercase;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.cta::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--color-rule);
+}
+.cta::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-slow) var(--ease-out);
+  z-index: 1;
+}
+.cta-arrow {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: 1.1em;
+  line-height: 1;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.cta:hover,
+.cta:focus-visible {
+  color: var(--color-accent);
+}
+.cta:hover::before,
+.cta:focus-visible::before {
+  transform: scaleX(1);
+}
+.cta:hover .cta-arrow,
+.cta:focus-visible .cta-arrow {
+  transform: translateX(4px);
+}
+
+/* Section heads share the ledger's language: kicker on an ink rule. */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--color-ink);
+  padding-bottom: 0.75rem;
+}
+
+/* ── Scroll-in reveal ─────────────────────────────────────────────────
+ * Below-the-fold blocks settle into place as they enter the viewport.
+ * CSS scroll-driven animation only — no observer, no JS, nothing gated:
+ * browsers without animation-timeline simply render the finished page,
+ * and the LCP hero never carries it. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .rise {
+      animation: reveal-rise var(--dur-reveal) var(--ease-out) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 28%;
+    }
   }
 }
 
