@@ -11,16 +11,24 @@ The site goes live Friday 18 September.
 
 ## Getting in
 
-1. You'll get an email invitation from Vercel. Accept it and make an
-   account — it's free, and you can use any email address.
-2. Open the preview link. Keep that link; it always shows the newest
-   version, so there's no "which draft am I looking at."
-3. The site is not public and is not in Google. Only people invited to it
-   can open it.
+Trav will send you a link. Depending on which one you get, one of these
+applies:
+
+**If you were also sent an invitation from Vercel** — accept it and make an
+account. It's free, takes about a minute, and any email address works. This
+is the one worth doing, because it lets you leave notes directly on the page
+(see below).
+
+**If you only got a link** — just open it. Nothing to sign up for. You can
+read everything; you'll send your notes back by email instead.
+
+Either way: keep the link. It always shows the newest version, so there's no
+"which draft am I looking at." The site is not public and is not in Google.
 
 ## Leaving a comment
 
-A small toolbar sits at the bottom of the screen once you're logged in.
+This is the part that needs the Vercel account. A small toolbar sits at the
+bottom of the screen once you're logged in.
 
 1. Click the **speech-bubble icon** in it.
 2. Click the thing you want to talk about — a headline, a photo, a phone
