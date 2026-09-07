@@ -52,6 +52,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
   },
+  /*
+   * Preview deployments are shared with the client with protection off, so
+   * the URL is effectively public. Keep every non-production build out of
+   * the index — robots.txt alone would not stop a crawler that reaches a
+   * page by link. See app/robots.ts.
+   */
+  ...(process.env.VERCEL_ENV === "production"
+    ? {}
+    : { robots: { index: false, follow: false } }),
 };
 
 export default function RootLayout({
