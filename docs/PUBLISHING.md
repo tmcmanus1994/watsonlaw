@@ -28,6 +28,15 @@
 Tick the **Draft** box before saving. The post is stored but hidden from the
 website. Untick it and save again when you're ready.
 
+## "I published it and it isn't on the site"
+
+Almost always the **Draft** box. A drafted post saves and commits normally —
+it just never renders, so from the editor it looks published and from the
+website it looks missing. Open the post and check that box first.
+
+If Draft is unticked and it still hasn't appeared, give it three minutes: the
+site rebuilds after each save, and the post shows up when that finishes.
+
 ## Editing or removing a post
 
 Open **yoursite.com/keystatic**, click **News posts**, click the post, make
