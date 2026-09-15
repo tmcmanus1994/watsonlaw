@@ -3,10 +3,43 @@
 One row per piece of feedback from the September review round, so there is a
 single place that answers "what did they ask for, and what happened to it."
 
-Feedback arrives as Vercel comments on the preview deployment. Trav pastes
-them in; each becomes a row here and is triaged into one of three
-dispositions. Trav replies and resolves the Vercel thread — that cannot be
-done from the repo.
+## Getting the comments out of Vercel
+
+Do not copy them from the dashboard one at a time — it is how threads get
+missed. The Vercel CLI dumps the lot:
+
+```bash
+npm i -g vercel
+vercel login
+vercel link                      # once, in this repo
+vercel comments list --status all --all-branches --limit 100 --json > comments.json
+```
+
+Three flags matter, and every one of them is a default that will quietly
+hide comments from you:
+
+- `--status all` — the default is `unresolved` only.
+- `--all-branches` — the default is the current branch when it can infer one.
+- `--limit 100` — the default page is **20**. Round 1 had 21 threads.
+
+If there are more than 100, the output carries a cursor; pass it back with
+`-N <cursor>`.
+
+There is no REST API for comments — it is an open feature request — so the
+CLI is the only bulk route.
+
+## Replying and resolving
+
+Also from the terminal, which means the loop closes without opening the
+dashboard:
+
+```bash
+vercel comments inspect <thread>              # full conversation
+vercel comments resolve <thread> -m 'Fixed.'  # reply and resolve together
+```
+
+Reply in the attorneys' own threads as things land. A note that disappears
+without an answer is how a client stops leaving them.
 
 **Dispositions**
 
