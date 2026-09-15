@@ -27,7 +27,7 @@ export default async function PracticeAreaPage({ params }: Props) {
   return (
     <>
       <PhotoHeader
-        kicker={`Our Practice · ${area.numeral}`}
+        kicker="Our Practice"
         title={area.title}
         image={area.image}
       />
@@ -51,7 +51,7 @@ export default async function PracticeAreaPage({ params }: Props) {
             style={{ "--reveal-i": 3 } as React.CSSProperties}
           >
             <p className="support text-[length:var(--text-small)] text-gray">
-              {site.serviceArea}
+              {site.offices.map((o) => o.city).join(" · ")}, Arkansas
             </p>
             <Link href="/contact" className="cta mt-3">
               Discuss a matter <span className="cta-arrow" aria-hidden="true">→</span>
@@ -68,14 +68,11 @@ export default async function PracticeAreaPage({ params }: Props) {
               <li key={other.slug} className="border-b border-rule">
                 <Link
                   href={`/practice/${other.slug}`}
-                  className="group flex gap-3 py-3 no-underline"
+                  className="group block py-3 no-underline"
                 >
-                  <span
-                    className="font-serif text-[length:var(--text-small)] text-accent"
-                    aria-hidden="true"
-                  >
-                    {other.numeral}.
-                  </span>
+                  {/* The numeral that prefixed these is gone at the
+                      client's request — it also removes the oddity of a
+                      list whose numbers skipped the area you were on. */}
                   <span className="font-serif text-[length:var(--text-small)] text-ink underline decoration-transparent decoration-2 underline-offset-4 group-hover:decoration-accent">
                     {other.title}
                   </span>

@@ -10,22 +10,21 @@ export function legalServiceJsonLd() {
     description: site.description,
     url: site.url,
     /*
-     * No PostalAddress. The firm presents a region rather than an address
-     * (site.serviceArea), and emitting a locality here would let a search
-     * result show a city the pages themselves never name. Restore the
-     * PostalAddress block from config/site.ts if the client asks for the
-     * mailing address to be public.
+     * No PostalAddress. The pages name cities but no street or mailing
+     * address, and the JSON-LD should not claim more than they do. Restore
+     * it from config/site.ts if the client asks for the address to be
+     * public.
      */
-    contactPoint: site.contacts.map((contact) => ({
+    contactPoint: site.offices.map((office) => ({
       "@type": "ContactPoint",
-      contactType: "legal service",
+      contactType: "office",
       areaServed: "US-AR",
-      telephone: contact.phone,
-      name: contact.attorney,
+      telephone: office.phone,
+      name: `${office.city} office`,
     })),
     areaServed: {
-      "@type": "AdministrativeArea",
-      name: site.serviceArea,
+      "@type": "State",
+      name: "Arkansas",
     },
   };
 }

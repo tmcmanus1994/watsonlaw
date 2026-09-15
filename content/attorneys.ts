@@ -45,8 +45,10 @@ export const attorneys: Attorney[] = [
       width: 800,
       height: 1000,
     },
+    /* Client's wording, September review. The asterisks mark the
+       publication title for italics — see lib/emphasis.ts. */
     homeCredential:
-      "Former Special Justice, Arkansas Supreme Court. Chair, drafting committee, Arkansas Bar Association appellate handbook.",
+      "Appellate counsel in hundreds of cases. Chair, Drafting Committee, *Handling Appeals in Arkansas*.",
     intro: [],
     sections: [
       {

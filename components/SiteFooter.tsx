@@ -8,7 +8,7 @@ import { navItems } from "@/lib/nav";
 
 /**
  * The footer as a colophon: wordmark and the firm's one-line description
- * on the left, the direct lines and the site map on the right, each under a
+ * on the left, the offices and the site map on the right, each under a
  * caption label on a hairline. Quiet, but complete — a reader who reaches
  * the bottom of any page finds a phone number and every other page.
  */
@@ -21,36 +21,37 @@ export function SiteFooter() {
     <footer className="border-t border-rule bg-paper">
       <div className="mx-auto grid max-w-[var(--container)] gap-10 px-5 py-12 md:grid-cols-[1.4fr_1fr_1fr] md:gap-12 md:py-16">
         <div>
+          {/* The firm's one-line description sat under the wordmark until
+              the client removed it — same reason as the hero kicker. */}
           <BrandMark variant="inline" className="text-sm" />
-          <p className="support mt-4 max-w-xs text-[length:var(--text-small)] text-gray">
-            {site.tagline}
-          </p>
         </div>
 
         <div>
           <p className="label label-caption border-b border-rule pb-2 text-gray">
-            Contact
+            Offices
           </p>
-          {/* A region, never a city or a street — see site.serviceArea. */}
+          {/* City, attorney, number. No street address — the client has not
+              asked for one to be shown. */}
           <ul className="mt-4 grid gap-4">
-            {site.contacts.map((contact) => (
+            {site.offices.map((office) => (
               <li
-                key={contact.phone}
+                key={office.city}
                 className="support text-[length:var(--text-small)]"
               >
-                <span className="text-ink">{contact.attorney}</span>
+                <span className="text-ink">
+                  {office.city}, {site.mailingAddress.state}
+                </span>
+                <br />
+                {office.attorney}
                 <br />
                 <a
-                  href={`tel:+1${contact.phone.replace(/\D/g, "")}`}
+                  href={`tel:+1${office.phone.replace(/\D/g, "")}`}
                   className="link text-gray"
                 >
-                  {contact.phone}
+                  {office.phone}
                 </a>
               </li>
             ))}
-            <li className="support text-[length:var(--text-small)] text-gray">
-              {site.serviceArea}
-            </li>
           </ul>
         </div>
 

@@ -36,10 +36,14 @@ export function SiteHeader() {
         <Link href="/" className="no-underline text-current">
           {/* The animated mark is paper-coloured and reads over the hero
               photograph, so it runs on the homepage only. */}
+          {/* Sized up from 0.72/0.8rem at the client's request — the mark
+              was getting lost against the hero photograph. Everything in
+              BrandMark is em-relative, so the animated version scales with
+              it and the two still occupy the same box. */}
           <BrandMark
             variant="mark"
             withLottie={overHero}
-            className="text-[0.72rem] md:text-[0.8rem]"
+            className="text-[0.88rem] md:text-[1.02rem]"
           />
           <span className="sr-only">Home</span>
         </Link>

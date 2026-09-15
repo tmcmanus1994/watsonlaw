@@ -5,7 +5,9 @@ import { site } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Contact ${site.name} — ${site.serviceArea}.`,
+  description: `Contact ${site.name} — offices in ${site.offices
+    .map((o) => o.city)
+    .join(" and ")}, Arkansas.`,
 };
 
 export default function ContactPage() {
@@ -29,36 +31,29 @@ export default function ContactPage() {
           <ContactForm />
         </div>
 
-        <aside aria-label="Direct lines" className="grid content-start gap-8">
+        <aside aria-label="Offices" className="grid content-start gap-8">
           {/*
-            No office list and no mailing address: the firm presents a region
-            only (site.serviceArea) until Brett and Noah decide how they want
-            location shown. The address still lives in config/site.ts.
+            Two offices, each with the attorney who answers it. Still no
+            street or mailing address: the client asked for the cities back
+            but has not said whether an address should appear.
           */}
-          <div>
-            <h2 className="label label-kicker border-b border-rule pb-2 text-accent">
-              By Telephone
-            </h2>
-            <ul className="mt-3 grid gap-4">
-              {site.contacts.map((contact) => (
-                <li key={contact.phone} className="support text-[length:var(--text-small)]">
-                  {contact.attorney}
-                  <br />
-                  <a href={`tel:+1${contact.phone.replace(/\D/g, "")}`} className="link">
-                    {contact.phone}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h2 className="label label-kicker border-b border-rule pb-2 text-accent">
-              Location
-            </h2>
-            <p className="support mt-3 text-[length:var(--text-small)]">
-              {site.serviceArea}
-            </p>
-          </div>
+          {site.offices.map((office) => (
+            <div key={office.city}>
+              <h2 className="label label-kicker border-b border-rule pb-2 text-accent">
+                {office.city}
+              </h2>
+              <p className="support mt-3 text-[length:var(--text-small)]">
+                {office.attorney}
+                <br />
+                <a
+                  href={`tel:+1${office.phone.replace(/\D/g, "")}`}
+                  className="link"
+                >
+                  {office.phone}
+                </a>
+              </p>
+            </div>
+          ))}
         </aside>
       </div>
     </>

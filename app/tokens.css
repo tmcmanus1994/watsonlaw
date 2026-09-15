@@ -32,22 +32,31 @@
   --font-label: var(--font-libre-franklin), -apple-system, "segoe ui", arial,
     sans-serif;
 
-  /* Approved scale */
-  --text-body: 1.0625rem;
-  /* Display is 50px in the approved mockups and the Figma file; it scales
-     down on narrow viewports so the line never overflows. */
-  --text-h1: clamp(2.25rem, 2.5vw + 1.6rem, 3.125rem);
-  --text-h2: 2rem;
-  --text-h3: 1.375rem;
-  --text-label: 0.75rem; /* caps, 600, wide tracking */
-  --text-small: 0.9375rem;
+  /* Scale.
+   *
+   * ⚠️ Deliberately ~12% LARGER than the approved mockups and the Figma
+   * file, which set display at 50px and body at 17px. Brett read the site
+   * at those values and found it small, and made the point that his
+   * eyesight is a fair proxy for the general counsel the firm is trying to
+   * reach — so readability won over fidelity to the deck. Ratios between
+   * the steps are unchanged, so the hierarchy is the one that was approved.
+   *
+   * To go back to the Figma values, the old scale was: body 1.0625rem,
+   * h1 clamp(2.25rem, 2.5vw + 1.6rem, 3.125rem), h2 2rem, h3 1.375rem,
+   * label 0.75rem, small 0.9375rem. */
+  --text-body: 1.1875rem;
+  --text-h1: clamp(2.5rem, 2.6vw + 1.7rem, 3.5rem);
+  --text-h2: 2.125rem;
+  --text-h3: 1.5rem;
+  --text-label: 0.8125rem; /* caps, 600, wide tracking */
+  --text-small: 1.0625rem;
   /* Ledger titles — the practice index reads as a table of contents, and
      the approved homepage mockup sets its first entries at display scale.
      Fluid between h3 on narrow screens and h2 on wide ones. */
-  --text-ledger: clamp(1.375rem, 0.9vw + 1rem, 1.875rem);
+  --text-ledger: clamp(1.5rem, 1vw + 1.05rem, 2.125rem);
   /* Lede — the opening paragraph of a practice blurb, set a step above
      body as the practice-page mockup does. */
-  --text-lede: clamp(1.1875rem, 0.4vw + 1rem, 1.375rem);
+  --text-lede: clamp(1.3125rem, 0.45vw + 1.1rem, 1.5rem);
   --leading-lede: 1.5;
 
   /* Tracking is per role in the approved mockups — one value does not fit
@@ -85,7 +94,7 @@
    * Whitespace is the quietest signal of confidence the page has. */
   --space-section: clamp(5rem, 4vw + 3rem, 7.5rem);
   --space-section-sm: clamp(3rem, 2vw + 2rem, 4.5rem);
-  --measure: 42rem; /* max width for running text */
+  --measure: 46rem; /* max width for running text — tracks --text-body */
   --container: 72rem; /* max width for the page shell */
   --hairline: 1px solid var(--color-rule);
   --focus-ring: 2px solid var(--color-accent);

@@ -37,8 +37,13 @@ function siteUrl(): string {
 export const site = {
   name: "Watson & Watson",
   legalName: "Watson & Watson LLP",
-  /** Kicker line used in the hero and metadata. */
-  tagline: "Appellate & Constitutional Litigation · Arkansas",
+  /*
+   * No tagline. The hero and footer both carried "Appellate &
+   * Constitutional Litigation · Arkansas" until the client asked for it
+   * removed — they do not want to be read as limited to one region or one
+   * practice area. `description` below is metadata only and still names
+   * both, which is where search engines look.
+   */
   description:
     "An appellate and constitutional litigation firm in Arkansas, practicing before the Arkansas courts, the U.S. Courts of Appeals, and the Supreme Court of the United States.",
 
@@ -49,34 +54,32 @@ export const site = {
   url: siteUrl(),
 
   /**
-   * How the firm's location is presented — a region, not an address.
+   * Two offices, each with the attorney who answers it. The client settled
+   * this in the September review: they want North Little Rock and Searcy
+   * named, the way multi-office Arkansas firms present themselves, rather
+   * than the single vague region the site carried while the question was
+   * open.
    *
-   * Brett and Noah are not putting a street or home location behind the
-   * firm, so the site names an area only: no offices, no cities. This is
-   * the ONE value every location line on the site reads from, and it is
-   * deliberately vague.
-   *
-   * TODO: client decision. Brett and Noah will say how they want location
-   * presented. When they do, change this string (and, if they want a
-   * mailing address shown again, see the note on mailingAddress below).
+   * Still no street address — only a city, a name and a number.
    */
-  serviceArea: "Central Arkansas",
-
-  /**
-   * Direct lines, by attorney. Previously these were labelled as two
-   * offices; they are simply the number each attorney answers.
-   */
-  contacts: [
-    { attorney: "Noah P. Watson", phone: "(501) 388-4514" },
-    { attorney: "Brett D. Watson", phone: "(501) 281-2468" },
+  offices: [
+    {
+      city: "North Little Rock",
+      attorney: "Noah P. Watson",
+      phone: "(501) 388-4514",
+    },
+    {
+      city: "Searcy",
+      attorney: "Brett D. Watson",
+      phone: "(501) 281-2468",
+    },
   ],
 
   /**
-   * Correspondence address. Retained here because it is real and the firm
-   * may need it, but deliberately NOT rendered anywhere on the site — it
-   * names a city, and the site presents a region only until the client
-   * decides otherwise. It is also kept out of the JSON-LD, so search
-   * results cannot show a locality the pages themselves do not.
+   * Correspondence address. Real, and still NOT rendered anywhere: the
+   * client asked for cities and offices back but said nothing about a
+   * mailing address, so it stays out until they do. Also kept out of the
+   * JSON-LD.
    *
    * To bring it back: render it in the /contact aside and restore the
    * PostalAddress block in lib/structured-data.ts.
