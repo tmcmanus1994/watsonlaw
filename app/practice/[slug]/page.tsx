@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PhotoHeader } from "@/components/PhotoHeader";
-import { site } from "@/config/site";
 import { getPracticeArea, practiceAreas } from "@/content/practice-areas";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -50,9 +49,9 @@ export default async function PracticeAreaPage({ params }: Props) {
             className="reveal mt-12 max-w-[var(--measure)] border-t border-rule pt-8"
             style={{ "--reveal-i": 3 } as React.CSSProperties}
           >
-            <p className="support text-[length:var(--text-small)] text-gray">
-              {site.offices.map((o) => o.city).join(" · ")}, Arkansas
-            </p>
+            {/* The office cities were listed here under every blurb. The
+                client had the line dropped from all five pages — the footer
+                carries them on every page already. */}
             <Link href="/contact" className="cta mt-3">
               Discuss a matter <span className="cta-arrow" aria-hidden="true">→</span>
             </Link>

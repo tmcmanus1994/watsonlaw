@@ -9,28 +9,34 @@ export const metadata: Metadata = {
 };
 
 /*
- * ⚠️ CONTENT GAP — flagged for Trav to resolve with Noah.
- * The intake's "why did you start this firm" came back empty, so this page
- * carries clearly-marked draft copy assembled ONLY from intake facts (the
- * client's own thirty-second takeaway, the firm-wide appeals figure, the
- * jurisdictions list, and the client's litigation-strategy wording). No
- * invented history, values, or mission language.
+ * The firm story is the client's own, supplied in the September review and
+ * printed verbatim. It closed the content gap this page carried from the
+ * start: the intake's "why did you start this firm" came back empty, so the
+ * page previously showed clearly-marked draft copy assembled only from
+ * intake facts.
  */
 export default function FirmPage() {
   return (
     <>
       <PageIntro kicker={site.name} title="The Firm" />
       <div className="mx-auto max-w-[var(--container)] px-5 py-[var(--space-section-sm)] md:py-[var(--space-section)]">
-        <p className="label inline-block border border-rule px-3 py-2 text-gray">
-          Draft · firm story pending — assembled from intake facts only
-        </p>
-
-        <div className="prose mt-8">
+        {/* The client's own firm story, written for the September review and
+            printed verbatim. It replaced the draft assembled from intake
+            facts, so the "Draft" label that sat above it is gone. */}
+        <div className="prose">
           <p>
-            {site.name} is an appellate and constitutional litigation firm in
-            Arkansas — a firm that handles appeals and provides strategic
-            guidance throughout all litigation. The firm has handled more than
-            four hundred appeals.
+            Many complex cases turn on a handful of critical moments: a motion
+            that clarifies the dispositive arguments, an appellate brief that
+            anticipates the court’s questions, or oral advocacy that
+            highlights the decisive issues. In those critical moments, it’s
+            the quality of the advocacy that matters, not the number of
+            attorneys assigned to the case.
+          </p>
+          <p>
+            We provide superior advocacy in the critical moments and from
+            litigation’s start to its finish. Every matter we take gets our
+            direct attention. That’s how we meet our clients’ goals, even in
+            the most complex litigation.
           </p>
         </div>
 
@@ -60,11 +66,9 @@ export default function FirmPage() {
               shape the outcome of future appeals.
             </p>
             <p>
-              Read more under{" "}
-              <Link href="/practice/litigation-strategy">
-                Litigation Strategy
-              </Link>
-              , or meet <Link href="/attorneys">the attorneys</Link>.
+              Learn more about{" "}
+              <Link href="/practice">our practice</Link>, and{" "}
+              <Link href="/attorneys">meet us</Link>.
             </p>
           </div>
         </section>

@@ -55,7 +55,7 @@ export const practiceAreas: PracticeArea[] = [
     summary:
       "We litigate appeals before all levels of Arkansas and federal courts.",
     body: [
-      "We litigate appeals before all levels of Arkansas and federal courts: the Arkansas Supreme Court and Court of Appeals; the United States Courts of Appeals; and the Supreme Court of the United States. We have handled more than 400 appeals, encompassing Arkansas and federal constitutional law, complex statutory schemes, election law, voting rights, business disputes, property conflicts, administrative appeals, and more. We bring a wealth of knowledge and experience: we know how appellate courts think, understand appellate procedure, prepare effective briefs, and present persuasive oral arguments.",
+      "We litigate appeals before all levels of Arkansas and federal courts: the Arkansas Supreme Court and Court of Appeals, the Supreme Court of the United States, and the United States Courts of Appeals. We’ve handled more than 450 appeals, encompassing Arkansas and federal constitutional law, complex statutory schemes, election law, voting rights, business disputes, property conflicts, administrative appeals, and more. We bring a wealth of knowledge and experience; we know how appellate courts think, understand appellate procedure, prepare effective briefs, and present persuasive oral arguments.",
     ],
   },
   {
@@ -89,7 +89,7 @@ export const practiceAreas: PracticeArea[] = [
     summary:
       "We bring extensive experience in both Arkansas and U.S. constitutional issues.",
     body: [
-      "We bring extensive experience in both Arkansas and U.S. constitutional issues. We have defended and challenged legislative and executive actions, so we have comprehensive knowledge of how to best advocate for our clients’ interests. And we have a unique understanding of the Arkansas Constitution, an often untapped area of constitutional protections.",
+      "We bring extensive experience in both Arkansas and U.S. constitutional issues. We have defended and challenged legislative and executive actions, so we have comprehensive knowledge of how to best advocate for our clients’ interests. And we have a unique understanding of the Arkansas Constitution, an often untapped area of constitutional protections. We have researched and written on the history of the Arkansas Constitution.",
     ],
   },
   {
@@ -123,7 +123,7 @@ export const practiceAreas: PracticeArea[] = [
     summary:
       "Our experience in election law is broad: ballot initiatives, campaign finance, candidate eligibility, and more.",
     body: [
-      "Our experience in election law is broad: ballot initiatives, Ethics Commission representation, state and federal campaign finance, permissible nonprofit activities, candidate eligibility, and more. When the stakes are high—and they always are—we guide our clients through these complex areas of law to accomplish their goals.",
+      "Our experience in election law is broad: ballot initiatives, Ethics Commission proceedings, state and federal campaign finance, permissible nonprofit activities, candidate eligibility, and more. When the stakes are high—and they always are—we guide our clients through these complex areas of law to accomplish their goals.",
     ],
   },
 ];

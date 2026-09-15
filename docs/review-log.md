@@ -57,8 +57,9 @@ paraphrasing loses the thing they were reacting to.
 
 ## Round 1 — 15 September
 
-Twenty-one notes, all on the homepage. Everything actionable is done; three
-items need answers rather than code.
+Gathered by copying from the dashboard, which returned only the homepage
+threads — 23 of the 36 that existed. Round 2 is the remainder, pulled with
+the CLI. Use the CLI.
 
 | # | Page | What they asked for | Disposition | Note |
 | --- | --- | --- | --- | --- |
@@ -88,3 +89,41 @@ on a serif reads as a mistake. Source Serif 4 italic is now subset to
 exactly the roman's coverage and registered. This was going to surface
 anyway: legal writing italicises case names, and markdown in a news post can
 emit `<em>` at any time.
+
+---
+
+## Round 2 — 15 September
+
+The thirteen threads the dashboard copy missed, on `/contact`, `/news`,
+`/attorneys/noah-watson`, `/practice/*` and `/firm`. Two of them closed
+items that had been blocking launch.
+
+| # | Page | What they asked for | Disposition | Note |
+| --- | --- | --- | --- | --- |
+| 20 | /firm | The firm story, two paragraphs, written out in full | `fixed` | Verbatim. The "Draft · firm story pending" label is gone and the content gap this page carried from the start is closed |
+| 21 | /firm | Keep the closing line as "Learn more about our practice, and meet us.", linking those phrases to Our Practice and Attorneys | `fixed` | |
+| 22 | /contact | The intake wording, written out in full, naming watson@watsonlawllp.com | `fixed` | Verbatim, address as a mailto. Note it does **not** include no-attorney-client-relationship language — still theirs if they want it |
+| 23 | /contact | "We're also going to have a general contact email, which will be watson@watsonlawllp.com" | `fixed` (partly `theirs`) | Added as `site.contactEmail` and printed. **It cannot receive mail** — the domain isn't registered, and the address is now public on /contact |
+| 24 | /contact | Offices split NLR / Searcy here too | `fixed` | Already covered by round 1 |
+| 25 | /attorneys/noah-watson | Replace the opening paragraph | `fixed` | Verbatim |
+| 26 | /attorneys/noah-watson | Reorder: Clerkship, Education, Government Service, Professional Memberships, Publications, Admissions | `fixed` | Kept the existing "Bar & Court Admissions" heading rather than renaming to "Admissions" — they listed section names loosely, not a rename |
+| 27 | /attorneys/noah-watson | Remove the Notable Cases section | `fixed` | Four matters removed. Nothing on the site now publishes case results outside News |
+| 28 | /attorneys/noah-watson | Remove the personal quotes | `fixed` | Noah's `approach` quote removed; Brett never had one. Field and rendering kept in case they want one back |
+| 29 | /attorneys/noah-watson | "Henry Woods Inn of Court" → "Judge Henry Woods American Inn of Court" | `fixed` | |
+| 30 | /attorneys/noah-watson | Add "Eighth Circuit Bar Association" | `fixed` | Grouped with the other bar associations |
+| 31 | /practice/appeals | Updated full description | `fixed` | Verbatim. Raises 400 → 450 appeals, matching the homepage figure |
+| 32 | /practice/constitutional-litigation | Append "We have researched and written on the history of the Arkansas Constitution." | `fixed` | Verbatim |
+| 33 | /practice/election-law | Updated full description | `fixed` | One substantive change: "Ethics Commission representation" → "proceedings" |
+| 34 | /practice/* | Drop the office-cities line under each blurb | `fixed` | Removed from all five; the footer carries them on every page |
+| 35 | /practice | Same as the homepage re numerals, "Five Areas", short descriptions | `fixed` | Covered by round 1 |
+| 36 | /news | "I tried to publish a sample, but it never populated" | `theirs` | The Draft box was ticked, which hides a post by design. Needs a reply, not a change — `docs/PUBLISHING.md` now explains it |
+
+**Open question on /firm.** Their comment said to replace "the text on this
+page (except for the other comment below)" with the firm story. Taken
+literally that also removes the Jurisdictions list and the With Trial
+Counsel section, neither of which they commented on. Those are left in
+place — deleting client content on an ambiguous instruction is harder to
+notice than not deleting it. Confirm with them.
+
+**Still not supplied:** the attorney advertising disclaimer. It is the last
+empty slot and the only remaining launch blocker in the copy.

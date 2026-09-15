@@ -91,7 +91,24 @@ export const site = {
     zip: "72145-0707",
   },
 
-  /** Contact form submissions deliver to BOTH addresses. */
+  /**
+   * The address shown to visitors.
+   *
+   * ⚠️ NOT LIVE YET. The client named this as the firm's general contact
+   * address in the September review, but it is on the expected domain,
+   * which is not registered — so mail sent to it goes nowhere until that
+   * happens. It is already printed on /contact in the client's own intake
+   * wording, so registering the domain is now a launch dependency, not a
+   * nice-to-have.
+   */
+  contactEmail: "watson@watsonlawllp.com",
+
+  /**
+   * Where the contact form actually delivers. Still the two working
+   * addresses — the client has not said to route the form to
+   * `contactEmail`, and it could not receive anything yet if they had.
+   * Revisit once the domain resolves.
+   */
   contactRecipients: ["watson@bdwpllc.com", "noah.watson57@gmail.com"],
 
   jurisdictions: [

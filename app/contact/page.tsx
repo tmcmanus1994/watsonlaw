@@ -17,16 +17,22 @@ export default function ContactPage() {
       <div className="mx-auto grid max-w-[var(--container)] gap-12 px-5 py-[var(--space-section-sm)] md:grid-cols-[1fr_minmax(0,20rem)] md:py-[var(--space-section)]">
         <div>
           {/*
-            TODO: client-supplied intake language.
-            Slot for whatever engagement wording the firm requires (e.g. the
-            no-attorney-client-relationship note). Brett and Noah own all
-            compliance language — do not draft it.
+            The client's own intake wording, supplied in the September
+            review and printed verbatim — this slot was a placeholder until
+            then. Note it does NOT include the no-attorney-client-
+            relationship language; if they want that, it is theirs to write.
           */}
           <p
             className="support mb-8 max-w-[var(--measure)] text-[length:var(--text-small)] text-gray"
             data-slot="client-intake-language"
           >
-            [Client-supplied intake language appears here.]
+            If you have any questions or comments, please contact us through
+            this form, email us at{" "}
+            <a href={`mailto:${site.contactEmail}`} className="link">
+              {site.contactEmail}
+            </a>
+            , or give us a call at the numbers below. We look forward to
+            hearing from you.
           </p>
           <ContactForm />
         </div>

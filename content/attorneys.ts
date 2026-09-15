@@ -30,7 +30,11 @@ export type Attorney = {
   intro: string[];
   /** Credential sections rendered as labeled lists. */
   sections: { heading: string; items: string[] }[];
-  /** First-person line on approach, verbatim from intake. */
+  /**
+   * First-person line on approach. Both attorneys' quotes were removed at
+   * the client's request in the September review; the field and its
+   * rendering stay in case they want one back.
+   */
   approach?: string;
 };
 
@@ -72,21 +76,26 @@ export const attorneys: Attorney[] = [
     homeCredential:
       "Former Deputy Solicitor General of Arkansas. Law clerk, U.S. Court of Appeals for the Eighth Circuit.",
     intro: [
-      "Noah P. Watson practices appellate and constitutional litigation. Before entering private practice, he served in the Arkansas Attorney General’s Office as Deputy Solicitor General, as Deputy Attorney General for the Opinions and Freedom of Information Act Division, and as Senior Assistant Attorney General in the Special Litigation Section.",
+      "Noah P. Watson served as the Deputy Solicitor General of Arkansas, and in various other positions at the Arkansas Attorney General’s office, where his practice involved high-profile appeals, complex constitutional and election litigation, and multistate amicus briefing. He has argued multiple cases before the Eighth Circuit, the Arkansas Supreme Court, and the Arkansas Court of Appeals, as well as before federal and Arkansas trial courts.",
       "He clerked for the Honorable Lavenski R. Smith of the United States Court of Appeals for the Eighth Circuit. He is a graduate of Washington University in St. Louis School of Law and Harding University.",
     ],
+    /*
+     * Order set by the client in the September review: clerkship, education,
+     * government service, memberships, publications, admissions. A "Notable
+     * Cases" section listing four matters was removed at their request.
+     */
     sections: [
+      {
+        heading: "Clerkship",
+        items: [
+          "The Honorable Lavenski R. Smith, United States Court of Appeals for the Eighth Circuit",
+        ],
+      },
       {
         heading: "Education",
         items: [
           "Washington University in St. Louis School of Law",
           "Harding University",
-        ],
-      },
-      {
-        heading: "Clerkship",
-        items: [
-          "The Honorable Lavenski R. Smith, United States Court of Appeals for the Eighth Circuit",
         ],
       },
       {
@@ -98,21 +107,12 @@ export const attorneys: Attorney[] = [
         ],
       },
       {
-        heading: "Bar & Court Admissions",
+        heading: "Professional Memberships",
         items: [
-          "State of Arkansas",
-          "Supreme Court of the United States",
-          "U.S. Courts of Appeals for the Eighth, Tenth, and D.C. Circuits",
-          "U.S. District Courts for the Eastern District of Arkansas, Western District of Arkansas, and Northern District of Oklahoma",
-        ],
-      },
-      {
-        heading: "Notable Cases",
-        items: [
-          "Arkansas United v. Thurston, No. 25-890 (2026)",
-          "Fayetteville Public Library v. Crawford County, No. 25-1146 (8th Cir. 2026)",
-          "Hanna v. Jester, No. 26-543 (Ark. 2026)",
-          "Jackson v. Ark. Dep’t of Educ., 60CV-23-3267 (Pulaski Cnty. Cir. Ct. 2023)",
+          "Arkansas Bar Association",
+          "Pulaski County Bar Association",
+          "Eighth Circuit Bar Association",
+          "Judge Henry Woods American Inn of Court",
         ],
       },
       {
@@ -122,16 +122,15 @@ export const attorneys: Attorney[] = [
         ],
       },
       {
-        heading: "Professional Memberships",
+        heading: "Bar & Court Admissions",
         items: [
-          "Arkansas Bar Association",
-          "Pulaski County Bar Association",
-          "Henry Woods Inn of Court",
+          "State of Arkansas",
+          "Supreme Court of the United States",
+          "U.S. Courts of Appeals for the Eighth, Tenth, and D.C. Circuits",
+          "U.S. District Courts for the Eastern District of Arkansas, Western District of Arkansas, and Northern District of Oklahoma",
         ],
       },
     ],
-    approach:
-      "I perform careful research of the law and clear, precise analysis in briefing. That’s because the best briefs are not only the one that’s right on the law but also easy for the reader to understand.",
   },
 ];
 
