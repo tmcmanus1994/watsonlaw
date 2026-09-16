@@ -1,17 +1,23 @@
 /**
- * Attorney profiles, from the client intake (Part 4).
+ * Attorney profiles.
  *
- * Brett's entry is `draft: true` — his confirmed credential sheet hasn't
- * arrived. His page renders a clean credentials-only state; nothing beyond
- * the two confirmed credentials may be published for him. (The 400+ appeals
- * figure is FIRM-WIDE — never attribute it to either attorney personally.)
+ * Both entries are now the attorneys' own words. Noah's were revised in the
+ * September review; Brett's credential sheet arrived on 16 September and is
+ * loaded verbatim, so his page is no longer held back as a draft.
  *
- * Noah's intro is assembled strictly from intake facts — no invented
- * history or characterization. Flag any wording change for client review.
+ * Publication titles and case names carry `*...*` markers, rendered as real
+ * italics by lib/emphasis.tsx — legal convention, and the site ships an
+ * italic face for exactly this.
  *
- * Headshots shoot the week of Sept 14: replace the placeholder PNGs in
- * /public/images/attorneys at the same 4:5 ratio (800×1000); dimensions are
- * locked here so the swap cannot shift layout.
+ * Neither attorney has an approach quote: the client removed Noah's, and
+ * Brett declined to write one.
+ *
+ * The 450+ appeals figure on the homepage is FIRM-WIDE — never attribute it
+ * to either attorney personally.
+ *
+ * Headshots: replace the placeholder PNGs in /public/images/attorneys at
+ * the same 4:5 ratio (800×1000); dimensions are locked here so the swap
+ * cannot shift layout.
  */
 
 export type Attorney = {
@@ -42,24 +48,93 @@ export const attorneys: Attorney[] = [
   {
     slug: "brett-watson",
     name: "Brett D. Watson",
-    draft: true,
     headshot: {
       src: "/images/attorneys/brett-watson.png",
       alt: "Portrait of Brett D. Watson (photograph forthcoming)",
       width: 800,
       height: 1000,
     },
-    /* Client's wording, September review. The asterisks mark the
-       publication title for italics — see lib/emphasis.ts. */
+    /* Client-approved homepage line (September review). NOTE: it reads
+       "Chair", while Brett's own credential sheet says "Co-Chair" — see the
+       Publications section below, where his wording is used. */
     homeCredential:
-      "Appellate counsel in hundreds of cases. Chair, Drafting Committee, *Handling Appeals in Arkansas*.",
-    intro: [],
+      "Appellate counsel in hundreds of cases. Co-Chair, Drafting Committee, *Handling Appeals in Arkansas*.",
+    /* Brett's own words from his credential sheet, verbatim. He declined to
+       supply an approach quote or a personal note, so this page carries
+       neither — same as Noah's, whose quote the client removed. */
+    intro: [
+      "Brett has handled hundreds of appeals in state and federal courts. He has counseled clients on litigation strategy in high-stakes cases at both the trial and appellate levels. He has authored amicus briefs, and he has represented and advised clients on many election-related issues, including ballot initiatives, Ethics Commission matters, state and federal campaign finance, nonprofit activities, and candidate eligibility.",
+    ],
+    /*
+     * Sequenced to match Noah's page, which the client ordered explicitly,
+     * using Brett's own groupings from his sheet. His "Notable cases"
+     * heading is deliberately absent — he wrote "We are not doing this
+     * section," and Noah had the equivalent removed from his own page.
+     *
+     * The Federalist Society membership on his sheet is omitted at the
+     * client's instruction.
+     */
     sections: [
       {
-        heading: "Appointments & Service",
+        heading: "Clerkship",
         items: [
-          "Former Special Justice, Arkansas Supreme Court",
-          "Chair, drafting committee, Arkansas Bar Association appellate handbook",
+          "The Honorable Susan Webber Wright, United States District Court for the Eastern District of Arkansas (2002–2003)",
+        ],
+      },
+      {
+        heading: "Education",
+        items: [
+          "University of Arkansas at Little Rock William H. Bowen School of Law (2002)",
+          "Harding University (1991)",
+        ],
+      },
+      {
+        heading: "Experience",
+        items: [
+          "Brett D. Watson, Attorney at Law, PLLC (2011–2026)",
+          "Anderson, Murphy & Hopkins, LLP (2003–2006, 2006–2010)",
+          "Williams & Anderson PLC (2006)",
+          "Former Special Justice to the Arkansas Supreme Court",
+          "Former adjunct law professor at the University of Arkansas at Little Rock William H. Bowen School of Law on Insurance Law and Law and Economics",
+        ],
+      },
+      {
+        heading: "Professional Memberships",
+        items: [
+          "Arkansas Supreme Court Civil Practice Committee (Member)",
+          "Arkansas Judicial Discipline and Disability Commission (Commissioner)",
+          "Arkansas Bar Association Board of Trustees (Trustee)",
+          "Arkansas Bar Association (Member)",
+          "The Arkansas Lawyer Editorial Board (Member)",
+        ],
+      },
+      {
+        heading: "Publications & Presentations",
+        items: [
+          "Co-Chair, Drafting Committee, *Handling Appeals in Arkansas* (since 2014)",
+          "Presented numerous CLEs throughout Arkansas on appellate practice and legal writing",
+          "Moderated panels at the Arkansas Bar Association annual convention with Arkansas Supreme Court Justices and Arkansas Court of Appeals judges",
+          "Brett D. Watson and Frank Arey, *Check Your Text. No, Not Your Phone, Your Arkansas Constitution*, 61 Arkansas Lawyer, No. 2, Spring 2026, at 26",
+          "Brett D. Watson, *The English Common Law: Still Weighty after All These Years*, 58 Arkansas Lawyer, No. 3, Summer 2023, at 24",
+          "Brett D. Watson, *More than Words: Tailoring Your Appellate Brief to Today’s Judicial Reader*, 57 Arkansas Lawyer, No. 4, Fall 2022, at 14",
+          "Brett D. Watson, *How to Ask a Judge to Recuse from a Case: What to Do and What Not to Do*, 57 Arkansas Lawyer, No. 3, Summer 2022, at 20",
+          "Brett D. Watson and Tory Hodges Lewis, *Arkansas Precedent on the Law of Precedents: Where Have We Been and Where Are We Now?*, 57 Arkansas Lawyer, No. 1, Winter 2022, at 10",
+        ],
+      },
+      {
+        heading: "Recognition",
+        items: [
+          "Arkansas Bar Association Golden Gavel Award (2022)",
+          "Arkansas Bar Association Maurice Cathey Award (2022)",
+        ],
+      },
+      {
+        heading: "Bar & Court Admissions",
+        items: [
+          "Supreme Court of the United States",
+          "United States Court of Appeals for the Eighth Circuit",
+          "All Arkansas state and federal courts",
+          "United States District Courts for the Eastern District of Texas and the Northern District of Texas",
         ],
       },
     ],

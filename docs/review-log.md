@@ -127,3 +127,39 @@ notice than not deleting it. Confirm with them.
 
 **Still not supplied:** the attorney advertising disclaimer. It is the last
 empty slot and the only remaining launch blocker in the copy.
+
+---
+
+## Round 3 — 16 September (Noah's email + Brett's credential sheet)
+
+| # | What | Disposition | Note |
+| --- | --- | --- | --- |
+| 37 | "No advertising disclaimer needed" | `fixed` | The empty footer slot is removed. This was the last blocking copy item. Their call under the Arkansas rules — do not add one back unasked |
+| 38 | Brett's full credential sheet | `fixed` | Loaded verbatim: opening paragraph, clerkship, education, experience, memberships, eight publications and presentations, two awards, admissions. Sequenced to match Noah's page using Brett's own groupings. `draft` removed — his page publishes |
+| 39 | "Leave the Federalist Society off Brett's memberships" | `fixed` | Omitted |
+| 40 | Brett: "We are not doing this section" (notable cases) | `fixed` | No such section. Consistent with Noah's removal |
+| 41 | Brett declined an approach quote and a personal note | `fixed` | Neither rendered. Matches Noah, whose quote the client removed |
+| 42 | Contact form should go to watson@watsonlawllp.com | **`theirs` — deliberately not done yet** | That domain is not registered, so routing the form there now would bounce or silently drop every enquiry. Recorded as the launch target in `config/site.ts`; one-line switch at domain cutover |
+| 43 | Central Arkansas → NLR + Searcy offices | `fixed` | Covered in round 1 |
+| 44 | Draft sample never populated | `theirs` | The Draft checkbox. Reply and resolve the thread |
+
+**Title discrepancy — needs one answer.** The homepage credential the client
+approved in round 1 says "Chair, Drafting Committee"; Brett's own sheet says
+"**Co-Chair**, Drafting Committee, *Handling Appeals in Arkansas* (since
+2014)". Both places now read "Co-Chair", because his own sheet is the
+authority on his own title and under-claiming is the safer error. Confirm
+with Brett.
+
+**His bio opens "Brett has handled…"** while Noah's opens "Noah P. Watson
+served as…". Brett's wording, verbatim — but the two pages now address their
+subjects differently. Worth one question rather than an edit.
+
+**Noah thinks Brett is still working on his bio.** The sheet Trav supplied
+reads as finished and is live. If more arrives it is additive; say the word
+to hold the page instead.
+
+**The firm name is not settled.** The Secretary of State has not accepted
+"Watson & Watson LLP"; the fallback is "Watson & Watson, Attorneys at Law,
+LLP", with a decision expected Monday. See the warning at the top of
+`config/site.ts` — the fallback lengthens the wordmark's suffix from 3
+characters to 23 and needs a look at the lockup before it is switched.

@@ -1,11 +1,23 @@
 /**
  * Single source of truth for firm identity and contact details.
  *
- * ⚠️ The name "Watson & Watson LLP" is the expected filing but is NOT yet
- * registered with the Arkansas Secretary of State, and the expected domain
- * (watsonlawllp.com) is NOT bought. Nothing outside this file may hardcode
- * the name — nav, footer, wordmark, monogram, metadata, JSON-LD, and email
- * subjects all read from here, so a name change stays a one-file edit.
+ * ⚠️ THE NAME IS STILL NOT SETTLED. As of 16 September the Secretary of
+ * State has not accepted "Watson & Watson LLP" — they lost the filing, then
+ * rejected the name on one employee's reading of the statute, and their
+ * legal team is reviewing it. The client's fallback is
+ * "Watson & Watson, Attorneys at Law, LLP".
+ *
+ * That fallback matters to the wordmark, not just to this file. The lockup
+ * sets `entitySuffix()` beneath the name in wide tracking, and the suffix
+ * goes from "LLP" (3 characters) to ", Attorneys at Law, LLP" (23) — see
+ * the note in components/BrandMark.tsx before switching.
+ *
+ * The expected domain (watsonlawllp.com) is also NOT bought, and the
+ * contact form and the published contact address both now depend on it.
+ *
+ * Nothing outside this file may hardcode the name — nav, footer, wordmark,
+ * monogram, metadata, JSON-LD and email subjects all read from here, so a
+ * name change stays a one-file edit.
  */
 
 /**
@@ -104,10 +116,18 @@ export const site = {
   contactEmail: "watson@watsonlawllp.com",
 
   /**
-   * Where the contact form actually delivers. Still the two working
-   * addresses — the client has not said to route the form to
-   * `contactEmail`, and it could not receive anything yet if they had.
-   * Revisit once the domain resolves.
+   * Where the contact form actually delivers.
+   *
+   * ⚠️ The client asked on 16 September for the form to go to
+   * `contactEmail` (watson@watsonlawllp.com). It is NOT routed there yet,
+   * deliberately: that address is on a domain nobody has registered, so
+   * every enquiry would bounce or vanish. Losing a potential client's first
+   * message is worse than a delay.
+   *
+   * AT LAUNCH, once the domain resolves and receives mail: replace this
+   * array with `[contactEmail]` — or add it alongside these two if they
+   * want a copy each. One-line change; it is the last step of the domain
+   * cutover along with CONTACT_FROM.
    */
   contactRecipients: ["watson@bdwpllc.com", "noah.watson57@gmail.com"],
 

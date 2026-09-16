@@ -6,6 +6,7 @@ import { site } from "@/config/site";
 import { attorneys, getAttorney } from "@/content/attorneys";
 import { attorneyJsonLd } from "@/lib/structured-data";
 import { withoutEmphasis } from "@/lib/emphasis";
+import { withEmphasis } from "@/lib/emphasis";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -82,7 +83,7 @@ export default async function AttorneyPage({ params }: Props) {
                 </h2>
                 <ul className="support mt-3 grid gap-2 text-[length:var(--text-small)] text-ink">
                   {section.items.map((item) => (
-                    <li key={item}>{item}</li>
+                    <li key={item}>{withEmphasis(item)}</li>
                   ))}
                 </ul>
               </section>
