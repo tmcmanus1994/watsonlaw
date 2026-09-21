@@ -1,0 +1,6 @@
+Holds content/news/ in git so it survives having no posts.
+
+Keystatic writes posts here, and git does not track empty directories — so
+without this file, deleting the last post removes the directory and the
+next build fails trying to read it. lib/news.ts guards that case too; this
+keeps it from arising.

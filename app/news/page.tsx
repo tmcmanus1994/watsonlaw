@@ -17,6 +17,14 @@ export default function NewsPage() {
     <>
       <PageIntro kicker={site.name} title="News" />
       <div className="mx-auto max-w-[var(--container)] px-5 py-[var(--space-section-sm)]">
+        {/* A heading over an empty list reads as a broken page. Until the
+            first post is published, say so plainly — and promise nothing
+            about what will appear, which is the firm's to decide. */}
+        {posts.length === 0 && (
+          <p className="support max-w-[var(--measure)] text-[length:var(--text-small)] text-gray">
+            Nothing published yet.
+          </p>
+        )}
         <ul>
           {posts.map((post) => (
             <li key={post.slug} className="border-b border-rule">
