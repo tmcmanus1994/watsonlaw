@@ -116,29 +116,21 @@ export const site = {
   contactEmail: "watson@watsonlawllp.com",
 
   /**
-   * Where the contact form delivers.
+   * Where the contact form delivers — both attorneys, on the firm domain.
    *
-   * ⚠️ NEITHER OF THESE CAN RECEIVE MAIL YET. Brett's address moved to
-   * brett@watsonlawllp.com on the client's instruction, and Noah's
-   * counterpart plus the general `contactEmail` are on the same domain —
-   * which nobody has registered. Until it resolves, a live form would send
-   * every enquiry into nothing.
+   * The form sends to both addresses at once and sets reply-to as the
+   * enquirer, so either of them can answer directly and the other sees it
+   * was asked. Adding or removing a recipient is an edit to this array and
+   * nothing else.
    *
-   * That is a deliberate trade: the previous entries (watson@bdwpllc.com
-   * and noah.watson57@gmail.com) did work, but shipping a form that quietly
-   * routes potential-client mail to an old address is its own failure. The
-   * form cannot go live before the domain either way — Resend needs a
-   * verified sending domain — so both depend on the same step.
-   *
-   * ⚠️ AT LAUNCH, before announcing the site: register the domain, set
-   * RESEND_API_KEY and CONTACT_FROM, then send a real message through the
-   * form and confirm it arrives. Do not assume it.
-   *
-   * Open question for the client: Noah asked for the form to go to the
-   * general address (`contactEmail`). It currently goes to the two of them
-   * individually. Confirm which they want — or all three.
+   * ⚠️ These are only as good as the mailboxes behind them. The domain
+   * resolves now, but a registered domain does not mean an address exists:
+   * mail to an unprovisioned box bounces, and Resend reports the send as
+   * accepted, so the form will look fine while enquiries go nowhere. Send a
+   * real message through the live form and confirm it lands in both inboxes
+   * before telling anyone the site is open for business.
    */
-  contactRecipients: ["brett@watsonlawllp.com", "noah.watson57@gmail.com"],
+  contactRecipients: ["brett@watsonlawllp.com", "noah@watsonlawllp.com"],
 
   jurisdictions: [
     "Arkansas courts",
