@@ -1,5 +1,9 @@
 # Publishing to the News section
 
+**The editor lives at [watsonlawllp.com/articles](https://watsonlawllp.com/articles).**
+That address is a shortcut to the publishing tool — easier to remember than
+the tool's own name. Bookmark it.
+
 *A guide for Brett and Noah. No technical setup needed — just a web browser.*
 
 ## Posting a news item
@@ -39,7 +43,7 @@ site rebuilds after each save, and the post shows up when that finishes.
 
 ## Editing or removing a post
 
-Open **yoursite.com/keystatic**, click **News posts**, click the post, make
+Open **watsonlawllp.com/articles**, click **News posts**, click the post, make
 your change (or use **Delete entry**), and save. Live in about two minutes.
 
 ## What the section is for
