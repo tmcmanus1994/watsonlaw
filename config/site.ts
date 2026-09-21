@@ -116,20 +116,29 @@ export const site = {
   contactEmail: "watson@watsonlawllp.com",
 
   /**
-   * Where the contact form actually delivers.
+   * Where the contact form delivers.
    *
-   * ⚠️ The client asked on 16 September for the form to go to
-   * `contactEmail` (watson@watsonlawllp.com). It is NOT routed there yet,
-   * deliberately: that address is on a domain nobody has registered, so
-   * every enquiry would bounce or vanish. Losing a potential client's first
-   * message is worse than a delay.
+   * ⚠️ NEITHER OF THESE CAN RECEIVE MAIL YET. Brett's address moved to
+   * brett@watsonlawllp.com on the client's instruction, and Noah's
+   * counterpart plus the general `contactEmail` are on the same domain —
+   * which nobody has registered. Until it resolves, a live form would send
+   * every enquiry into nothing.
    *
-   * AT LAUNCH, once the domain resolves and receives mail: replace this
-   * array with `[contactEmail]` — or add it alongside these two if they
-   * want a copy each. One-line change; it is the last step of the domain
-   * cutover along with CONTACT_FROM.
+   * That is a deliberate trade: the previous entries (watson@bdwpllc.com
+   * and noah.watson57@gmail.com) did work, but shipping a form that quietly
+   * routes potential-client mail to an old address is its own failure. The
+   * form cannot go live before the domain either way — Resend needs a
+   * verified sending domain — so both depend on the same step.
+   *
+   * ⚠️ AT LAUNCH, before announcing the site: register the domain, set
+   * RESEND_API_KEY and CONTACT_FROM, then send a real message through the
+   * form and confirm it arrives. Do not assume it.
+   *
+   * Open question for the client: Noah asked for the form to go to the
+   * general address (`contactEmail`). It currently goes to the two of them
+   * individually. Confirm which they want — or all three.
    */
-  contactRecipients: ["watson@bdwpllc.com", "noah.watson57@gmail.com"],
+  contactRecipients: ["brett@watsonlawllp.com", "noah.watson57@gmail.com"],
 
   jurisdictions: [
     "Arkansas courts",

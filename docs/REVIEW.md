@@ -7,8 +7,7 @@ Keep the two in step if either changes. This is the preview of the firm's websit
 here works — it is the real site, not a picture of one. Click through it,
 and leave a note anywhere something is wrong.
 
-**We need your approval, or your list of changes, by Thursday 11 September.**
-The site goes live Friday 18 September.
+Your first round of notes is in. This page now describes what is left.
 
 ---
 
@@ -54,16 +53,15 @@ convenience, not a requirement.
 
 | What you'll see | Status |
 | --- | --- |
-| Grey blocks reading "Placeholder · court photography pending" | The September shoot. Real stills drop into the same spaces. |
-| Headshots that aren't you | Same shoot, week of 14 September. |
-| The Firm page marked "Draft · firm story pending" | Waiting on how you want the firm described. See below. |
-| Brett's biography missing from the attorney list | Waiting on Brett's credential sheet. |
+| Grey blocks reading "Placeholder · court photography pending" | Court photography still to come. Real stills drop into the same spaces. |
 | News posts titled "Sample post — …" | Written to demonstrate the publishing tool. Deleted before launch. They describe no real matter. |
-| An empty line at the very bottom of every page | The attorney advertising disclaimer slot — your language goes there. |
-| An empty line above the contact form | Same, for whatever engagement wording you require. |
-| "Central Arkansas" wherever location appears | Deliberately vague pending your decision. See below. |
-| The contact form not sending | Not connected yet — we're waiting on where those messages should go. Fill it in and nothing happens. |
+| The contact form not sending | It cannot until the domain is registered — both the address it sends *from* and the addresses it sends *to* live on it. |
 | The web address | The domain isn't registered yet. |
+
+Closed since the first round: your headshots are in, Brett's biography is
+live, the firm story is on The Firm page, the contact wording is on
+/contact, the offices read North Little Rock and Searcy, and there is no
+advertising disclaimer.
 
 ---
 
@@ -128,33 +126,30 @@ You cannot break anything — every change is saved with a history.
 
 ## Where enquiries should go
 
-The contact form is built but deliberately not connected, because nobody has
-said where messages should land. As configured it would reach
-`watson@bdwpllc.com` and `noah.watson57@gmail.com`.
+The form is built and currently addressed to `brett@watsonlawllp.com` and
+`noah.watson57@gmail.com`.
 
-- Both of you, or one inbox?
-- A single firm address instead, so it doesn't depend on either of you
-  personally?
-- A message from a potential client is a different kind of mail from ordinary
-  correspondence — worth deciding whether a personal address is where you
-  want it arriving.
+**One thing still to settle:** Noah asked for the form to go to the general
+address, `watson@watsonlawllp.com`. It currently goes to the two of you
+individually. Tell us which you want — the general address, the two
+individual ones, or all three.
 
-Dependency: sending *from* a firm address rather than a generic one requires
-the domain to be registered first.
+**Nothing can be tested until the domain exists.** Both the address the form
+sends *from* and most of the addresses it sends *to* are on
+watsonlawllp.com. Before the site is announced we will register it, connect
+the form, send a real message through it, and confirm it arrives.
 
 ---
 
 ## Still outstanding
 
-**Blocking — nobody else can write these**
+**Waiting on you**
 
-- The attorney advertising disclaimer (empty slot, foot of every page).
-- The engagement wording above the contact form (empty slot).
-- Brett's biography. The page is held back: we have two lines — the Special
-  Justice appointment and the Bar Association drafting committee. To match
-  Noah's page it needs an opening paragraph, bar admissions, education, and
-  any representative matters or memberships.
-- The firm's story, or a decision that The Firm page stays as short as it is.
+- The domain. Nothing about email works without it, and the site currently
+  prints an address that cannot receive mail.
+- Which inbox the contact form should reach (see above).
+- The court photography — whether the buildings currently shown are ones you
+  are happy to have on the site.
 
 **Confirmations**
 
