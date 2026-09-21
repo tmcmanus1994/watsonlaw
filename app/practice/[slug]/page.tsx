@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PhotoHeader } from "@/components/PhotoHeader";
-import { site } from "@/config/site";
 import { getPracticeArea, practiceAreas } from "@/content/practice-areas";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -27,7 +26,7 @@ export default async function PracticeAreaPage({ params }: Props) {
   return (
     <>
       <PhotoHeader
-        kicker={`Our Practice · ${area.numeral}`}
+        kicker="Our Practice"
         title={area.title}
         image={area.image}
       />
@@ -50,9 +49,9 @@ export default async function PracticeAreaPage({ params }: Props) {
             className="reveal mt-12 max-w-[var(--measure)] border-t border-rule pt-8"
             style={{ "--reveal-i": 3 } as React.CSSProperties}
           >
-            <p className="support text-[length:var(--text-small)] text-gray">
-              {site.serviceArea}
-            </p>
+            {/* The office cities were listed here under every blurb. The
+                client had the line dropped from all five pages — the footer
+                carries them on every page already. */}
             <Link href="/contact" className="cta mt-3">
               Discuss a matter <span className="cta-arrow" aria-hidden="true">→</span>
             </Link>
@@ -68,14 +67,11 @@ export default async function PracticeAreaPage({ params }: Props) {
               <li key={other.slug} className="border-b border-rule">
                 <Link
                   href={`/practice/${other.slug}`}
-                  className="group flex gap-3 py-3 no-underline"
+                  className="group block py-3 no-underline"
                 >
-                  <span
-                    className="font-serif text-[length:var(--text-small)] text-accent"
-                    aria-hidden="true"
-                  >
-                    {other.numeral}.
-                  </span>
+                  {/* The numeral that prefixed these is gone at the
+                      client's request — it also removes the oddity of a
+                      list whose numbers skipped the area you were on. */}
                   <span className="font-serif text-[length:var(--text-small)] text-ink underline decoration-transparent decoration-2 underline-offset-4 group-hover:decoration-accent">
                     {other.title}
                   </span>

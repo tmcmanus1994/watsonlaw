@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { indexDescriptionFor, practiceAreas } from "@/content/practice-areas";
 
 /**
- * The practice index as a ledger: five equal full-width rows, I–V,
+ * The practice index as a ledger: five equal full-width rows,
  * hairline-separated. Rest is a clean table of contents; hovering or
  * focusing a row draws an oxblood rule along its top edge, unfolds the
  * description beneath it, and lets the other rows recede from ink to gray.
@@ -104,7 +104,9 @@ export function PracticeIndex({
         <HeadingTag id="practice-index-heading" className="label label-kicker text-accent">
           Our Practice
         </HeadingTag>
-        <p className="label label-kicker text-gray">Five Areas</p>
+        {/* A "Five Areas" counter sat opposite this heading. The client had
+            it removed: the proof strip states the count directly above and
+            the rows themselves make it obvious. */}
       </div>
 
       <div className={variant === "canvas" ? "practice-canvas" : undefined}>
@@ -116,9 +118,6 @@ export function PracticeIndex({
             style={{ "--row-index": index } as React.CSSProperties}
           >
             <Link href={`/practice/${area.slug}`} className="ledger-link">
-              <span className="ledger-numeral" aria-hidden="true">
-                {area.numeral}.
-              </span>
               <span className="ledger-title">{area.title}</span>
               <span className="ledger-desc">
                 <span className="ledger-desc-clip">

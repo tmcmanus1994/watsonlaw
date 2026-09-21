@@ -5,6 +5,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { site } from "@/config/site";
 import { attorneys, getAttorney } from "@/content/attorneys";
 import { attorneyJsonLd } from "@/lib/structured-data";
+import { withoutEmphasis } from "@/lib/emphasis";
+import { withEmphasis } from "@/lib/emphasis";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -19,7 +21,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!attorney) return {};
   return {
     title: attorney.name,
-    description: `${attorney.name}, ${site.name} — ${attorney.homeCredential}`,
+    description: `${attorney.name}, ${site.name} — ${withoutEmphasis(
+      attorney.homeCredential
+    )}`,
   };
 }
 
@@ -79,7 +83,7 @@ export default async function AttorneyPage({ params }: Props) {
                 </h2>
                 <ul className="support mt-3 grid gap-2 text-[length:var(--text-small)] text-ink">
                   {section.items.map((item) => (
-                    <li key={item}>{item}</li>
+                    <li key={item}>{withEmphasis(item)}</li>
                   ))}
                 </ul>
               </section>

@@ -24,6 +24,16 @@ const NEWS_DIR = path.join(process.cwd(), "content", "news");
 const ATTACHMENT_PUBLIC_PATH = "/files/news/";
 
 export function getAllPosts(): NewsPost[] {
+  /*
+   * No directory is a legitimate state, not an error: git does not track
+   * empty directories, so deleting the last post removes content/news/
+   * entirely. readdirSync would throw and take the whole build down — an
+   * attorney tidying up their own posts should never be able to do that.
+   * A .gitkeep holds the directory, and this guards the case where it is
+   * missing anyway.
+   */
+  if (!fs.existsSync(NEWS_DIR)) return [];
+
   return fs
     .readdirSync(NEWS_DIR)
     .filter((f) => f.endsWith(".md"))

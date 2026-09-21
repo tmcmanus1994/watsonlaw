@@ -165,9 +165,11 @@ nothing shifts.
 
 ## Media pipeline (photos land late — zero layout shift)
 
-- **Headshots** (week of Sept 14): overwrite the PNGs in
-  `public/images/attorneys/` at 800×1000 (4:5). Dimensions are locked in
-  `content/attorneys.ts`.
+- **Headshots**: delivered 21 September and in place at their native
+  720×928 (not the 4:5 the placeholders assumed). A replacement should
+  match that, or update `width`/`height` in `content/attorneys.ts` to the
+  real dimensions — they are declared so the browser reserves the right box
+  and nothing shifts.
 - **Court stills**: drop pre-graded files in `public/images/courts/` and
   set the paths in `content/home.ts` (band) — no CSS re-grading on top.
 - **Hero footage**: 6–10s muted H.264 loop, compressed hard, into

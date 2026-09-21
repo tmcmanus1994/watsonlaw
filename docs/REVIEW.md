@@ -1,26 +1,36 @@
 # Reviewing the site
 
-For Brett and Noah. This is the preview of the firm's website. Everything
+For Brett and Noah. A client-ready rendering of this document — the version
+actually sent to them — is published at
+https://claude.ai/code/artifact/4f2aefc7-bfea-4414-bfd4-21e47f549407
+Keep the two in step if either changes. This is the preview of the firm's website. Everything
 here works — it is the real site, not a picture of one. Click through it,
 and leave a note anywhere something is wrong.
 
-**We need your approval, or your list of changes, by Thursday 11 September.**
-The site goes live Friday 18 September.
+Your first round of notes is in. This page now describes what is left.
 
 ---
 
 ## Getting in
 
-1. You'll get an email invitation from Vercel. Accept it and make an
-   account — it's free, and you can use any email address.
-2. Open the preview link. Keep that link; it always shows the newest
-   version, so there's no "which draft am I looking at."
-3. The site is not public and is not in Google. Only people invited to it
-   can open it.
+Trav will send you a link. Depending on which one you get, one of these
+applies:
+
+**If you were also sent an invitation from Vercel** — accept it and make an
+account. It's free, takes about a minute, and any email address works. This
+is the one worth doing, because it lets you leave notes directly on the page
+(see below).
+
+**If you only got a link** — just open it. Nothing to sign up for. You can
+read everything; you'll send your notes back by email instead.
+
+Either way: keep the link. It always shows the newest version, so there's no
+"which draft am I looking at." The site is not public and is not in Google.
 
 ## Leaving a comment
 
-A small toolbar sits at the bottom of the screen once you're logged in.
+This is the part that needs the Vercel account. A small toolbar sits at the
+bottom of the screen once you're logged in.
 
 1. Click the **speech-bubble icon** in it.
 2. Click the thing you want to talk about — a headline, a photo, a phone
@@ -43,16 +53,15 @@ convenience, not a requirement.
 
 | What you'll see | Status |
 | --- | --- |
-| Grey blocks reading "Placeholder · court photography pending" | The September shoot. Real stills drop into the same spaces. |
-| Headshots that aren't you | Same shoot, week of 14 September. |
-| The Firm page marked "Draft · firm story pending" | Waiting on how you want the firm described. See below. |
-| Brett's biography missing from the attorney list | Waiting on Brett's credential sheet. |
+| Grey blocks reading "Placeholder · court photography pending" | Court photography still to come. Real stills drop into the same spaces. |
 | News posts titled "Sample post — …" | Written to demonstrate the publishing tool. Deleted before launch. They describe no real matter. |
-| An empty line at the very bottom of every page | The attorney advertising disclaimer slot — your language goes there. |
-| An empty line above the contact form | Same, for whatever engagement wording you require. |
-| "Central Arkansas" wherever location appears | Deliberately vague pending your decision. See below. |
-| The contact form not sending | Not connected yet — we're waiting on where those messages should go. Fill it in and nothing happens. |
+| The contact form not sending | It cannot until the domain is registered — both the address it sends *from* and the addresses it sends *to* live on it. |
 | The web address | The domain isn't registered yet. |
+
+Closed since the first round: your headshots are in, Brett's biography is
+live, the firm story is on The Firm page, the contact wording is on
+/contact, the offices read North Little Rock and Searcy, and there is no
+advertising disclaimer.
 
 ---
 
@@ -96,10 +105,57 @@ drop the draft label.
 
 ---
 
-## Writing news posts
+## Writing news posts — please actually do this one
 
-You can already publish. The editor and a step-by-step guide are in
-`docs/PUBLISHING.md` — Trav will walk you through it. Anything you post
-appears on the site within a couple of minutes.
+Not optional, and not something to leave until after launch: we need to know
+the editor works the way you want while there is still time to change it.
 
-Try it during the review if you like. Delete anything you don't want kept.
+1. Sign in and set up your account.
+2. Write a post — a real one or nonsense, it doesn't matter.
+3. Use a heading, a list, a link and a PDF attachment, so you've seen each of
+   those work.
+4. Publish, then look at it on the site. It appears in about two minutes.
+5. Delete anything you don't want kept.
+
+Then tell us whether it feels like something you'd use, whether anything is
+missing, and whether a published post looks right.
+
+You cannot break anything — every change is saved with a history.
+
+---
+
+## Where enquiries should go
+
+The form is built and currently addressed to `brett@watsonlawllp.com` and
+`noah.watson57@gmail.com`.
+
+**One thing still to settle:** Noah asked for the form to go to the general
+address, `watson@watsonlawllp.com`. It currently goes to the two of you
+individually. Tell us which you want — the general address, the two
+individual ones, or all three.
+
+**Nothing can be tested until the domain exists.** Both the address the form
+sends *from* and most of the addresses it sends *to* are on
+watsonlawllp.com. Before the site is announced we will register it, connect
+the form, send a real message through it, and confirm it arrives.
+
+---
+
+## Still outstanding
+
+**Waiting on you**
+
+- The domain. Nothing about email works without it, and the site currently
+  prints an address that cannot receive mail.
+- Which inbox the contact form should reach (see above).
+- The court photography — whether the buildings currently shown are ones you
+  are happy to have on the site.
+
+**Confirmations**
+
+- The five practice-area descriptions, printed verbatim.
+- Every credential, court, title and case name.
+- The courthouse caption on the homepage — it names the Richard Sheppard
+  Arnold United States Courthouse, and must change if the final photograph
+  is a different building.
+- Whether you want any social or directory profiles linked. None are set.

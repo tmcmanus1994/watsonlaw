@@ -28,6 +28,15 @@
 Tick the **Draft** box before saving. The post is stored but hidden from the
 website. Untick it and save again when you're ready.
 
+## "I published it and it isn't on the site"
+
+Almost always the **Draft** box. A drafted post saves and commits normally —
+it just never renders, so from the editor it looks published and from the
+website it looks missing. Open the post and check that box first.
+
+If Draft is unticked and it still hasn't appeared, give it three minutes: the
+site rebuilds after each save, and the post shows up when that finishes.
+
 ## Editing or removing a post
 
 Open **yoursite.com/keystatic**, click **News posts**, click the post, make
@@ -61,16 +70,32 @@ then silently lost. The route refuses rather than lose someone's writing.
 
 To turn it on:
 
-1. Sign in at **keystatic.cloud** and create a project (free tier: **3
-   users**, enough for Brett, Noah and one support seat).
+1. Sign in at **keystatic.cloud**. The project is
+   **`watsonlawfirm/watson-articles`** (free tier: **3 users**, enough for
+   Brett, Noah and one support seat).
+
+   A note for whoever maintains this later: the project can be deleted and
+   remade without losing anything. Keystatic Cloud is the sign-in layer
+   only — every post is markdown in `content/news/` in this repository. What
+   a rebuild does cost is the user invitations, which have to be sent again,
+   and the `NEXT_PUBLIC_KEYSTATIC_PROJECT` value, which must match the new
+   project key exactly.
 2. From the project, **install the Keystatic GitHub App** on this repository
    and grant it write access. This is the only GitHub step, and it is yours —
    the attorneys never see it.
-3. Copy the project identifier, which looks like `team-name/project-name`.
-4. In Vercel → Project → Settings → Environment Variables, add:
+
+   Also set the **Project URLs** to every origin the editor is opened from,
+   with no trailing slash — sign-in is matched against the exact origin:
 
    ```
-   NEXT_PUBLIC_KEYSTATIC_PROJECT = team-name/project-name
+   https://watsonlawllp.com
+   https://www.watsonlawllp.com
+   ```
+3. Copy the project identifier — currently `watsonlawfirm/watson-articles`.
+4. In Vercel → Project → Settings → Environment Variables, set:
+
+   ```
+   NEXT_PUBLIC_KEYSTATIC_PROJECT = watsonlawfirm/watson-articles
    ```
 
    Set it for Production **and** Preview, then redeploy. It is a

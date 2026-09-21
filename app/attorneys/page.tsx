@@ -4,6 +4,7 @@ import Link from "next/link";
 import { PageIntro } from "@/components/PageIntro";
 import { site } from "@/config/site";
 import { attorneys } from "@/content/attorneys";
+import { withEmphasis } from "@/lib/emphasis";
 
 export const metadata: Metadata = {
   title: "Attorneys",
@@ -34,7 +35,7 @@ export default function AttorneysPage() {
                   {attorney.name}
                 </h2>
                 <p className="support mt-2 text-[length:var(--text-small)] text-gray">
-                  {attorney.homeCredential}
+                  {withEmphasis(attorney.homeCredential)}
                 </p>
               </Link>
             </li>

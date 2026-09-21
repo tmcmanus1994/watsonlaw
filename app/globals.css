@@ -353,15 +353,10 @@ h3 {
 
 .ledger-link {
   display: grid;
-  grid-template-columns: 2.5rem minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: baseline;
   padding-block: 1.75rem;
   text-decoration: none;
-}
-
-.ledger-numeral {
-  font-family: var(--font-serif);
-  color: var(--color-accent);
 }
 
 .ledger-title {
@@ -373,7 +368,7 @@ h3 {
 }
 
 .ledger-desc {
-  grid-column: 2;
+  grid-column: 1;
   display: grid;
   grid-template-rows: 1fr;
   max-width: 34rem;
@@ -394,11 +389,11 @@ h3 {
  */
 @media (min-width: 768px) {
   .ledger-link {
-    grid-template-columns: 3rem minmax(0, 1.1fr) minmax(0, 1fr) 4.5rem;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) 4.5rem;
     column-gap: 2rem;
   }
   .ledger-desc {
-    grid-column: 3;
+    grid-column: 2;
     max-width: none;
   }
   .ledger-desc-text {
@@ -406,7 +401,7 @@ h3 {
   }
   .ledger-cue {
     display: block;
-    grid-column: 4;
+    grid-column: 3;
     justify-self: end;
     font-family: var(--font-label);
     font-size: var(--text-label);
@@ -429,14 +424,14 @@ h3 {
    keeps the description beneath the title and only gains the cue. */
 @media (min-width: 768px) {
   .practice-canvas .ledger-link {
-    grid-template-columns: 3rem minmax(0, 1fr) 4.5rem;
+    grid-template-columns: minmax(0, 1fr) 4.5rem;
   }
   .practice-canvas .ledger-desc {
-    grid-column: 2;
+    grid-column: 1;
     max-width: 34rem;
   }
   .practice-canvas .ledger-cue {
-    grid-column: 3;
+    grid-column: 2;
   }
 }
 /* Clipping wrapper: content stays in the accessibility tree at every size —
@@ -621,9 +616,8 @@ h3 {
 }
 
 /* ── Proof strip ──────────────────────────────────────────────────────
- * Three facts beneath the hero, in the ledger's own language: numerals in
- * oxblood serif, supporting lines in the caption voice, hairlines between.
- * Every fact is already published elsewhere on the site. */
+ * Three facts beneath the hero: the figure in oxblood serif, the
+ * supporting line in the caption voice, hairlines between. */
 .facts {
   display: grid;
   gap: 1.75rem;

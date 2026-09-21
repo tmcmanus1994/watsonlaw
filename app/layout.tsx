@@ -17,12 +17,22 @@ const sourceSerif = localFont({
   // render with sturdier strokes and headings stay refined; the wght-only
   // cut cannot do that and read noticeably thinner at body sizes.
   // Subset to Latin + the accents and punctuation this site can render (see
-  // README: Fonts). No italic face is shipped — nothing sets italic serif.
+  // README: Fonts); the italic is subset to exactly the same coverage.
+  //
+  // The italic face matters more than it looks: legal writing italicises
+  // case names and publication titles, and markdown in a news post can
+  // emit <em> at any time. Without a real italic the browser synthesises a
+  // slant, which on a serif reads as a mistake.
   src: [
     {
       path: "./fonts/source-serif-4-latin-opsz-normal.woff2",
       weight: "200 900",
       style: "normal",
+    },
+    {
+      path: "./fonts/source-serif-4-latin-opsz-italic.woff2",
+      weight: "200 900",
+      style: "italic",
     },
   ],
   variable: "--font-source-serif",
@@ -43,7 +53,10 @@ const libreFranklin = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.tagline}`,
+    // The tagline used to follow the name here. It named a region and a
+    // practice area, which the client asked to drop site-wide; `description`
+    // below still carries both for search.
+    default: site.name,
     template: `%s — ${site.name}`,
   },
   description: site.description,

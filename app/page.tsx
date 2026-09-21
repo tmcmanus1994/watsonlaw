@@ -3,9 +3,9 @@ import { HeroMedia } from "@/components/HeroMedia";
 import { PracticeIndex } from "@/components/PracticeIndex";
 import { CourtBand } from "@/components/CourtBand";
 import { attorneys } from "@/content/attorneys";
+import { withEmphasis } from "@/lib/emphasis";
 import { home } from "@/content/home";
 import { practiceAreas } from "@/content/practice-areas";
-import { site } from "@/config/site";
 
 export default function HomePage() {
   return (
@@ -27,18 +27,13 @@ export default function HomePage() {
         />
         <div className="relative mx-auto w-full max-w-[var(--container)] px-5 pb-16 md:pb-20">
           <div aria-hidden="true" className="hero-rule mb-6 max-w-3xl" />
-          <p className="reveal label label-kicker text-balance text-paper">
-            {site.tagline}
-          </p>
-          <h1
-            className="reveal mt-3 max-w-3xl text-paper"
-            style={{ "--reveal-i": 1 } as React.CSSProperties}
-          >
-            {home.hero.heading}
-          </h1>
+          {/* The kicker that sat here named a region and a practice area;
+              the client had it removed rather than be read as limited to
+              either. The headline now leads the page. */}
+          <h1 className="reveal max-w-3xl text-paper">{home.hero.heading}</h1>
           <p
             className="reveal support mt-4 max-w-[var(--measure)] text-base text-paper"
-            style={{ "--reveal-i": 2 } as React.CSSProperties}
+            style={{ "--reveal-i": 1 } as React.CSSProperties}
           >
             {home.hero.sub}
           </p>
@@ -49,8 +44,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2 · Proof strip — the firm's facts, each already published on the
-          site (hero sub-line, Jurisdictions, Contact), set as a ledger. */}
+      {/* 2 · Proof strip — three facts set as a ledger. The first two are
+          the client's own wording; the third is derived from the practice
+          areas, so it cannot disagree with the ledger below. */}
       <section
         aria-label="At a glance"
         className="mx-auto max-w-[var(--container)] px-5"
@@ -58,23 +54,19 @@ export default function HomePage() {
         <ul className="facts rise">
           <li className="fact">
             <p className="fact-value">
-              <em>400+</em> appeals
+              <em>{home.facts.appeals.value}</em> {home.facts.appeals.unit}
             </p>
             <p className="fact-label support text-[length:var(--text-small)] text-gray">
-              {/* The hero sub-line, verbatim (approved deck copy). */}
-              {home.hero.sub.replace(/^More than four hundred appeals before /, "Before ")}
+              {home.facts.appeals.label}
             </p>
           </li>
           <li className="fact">
             <p className="fact-value">
-              <em>{numberWord(attorneys.length)}</em> attorneys
+              <em>{home.facts.experience.value}</em>{" "}
+              {home.facts.experience.unit}
             </p>
             <p className="fact-label support text-[length:var(--text-small)] text-gray">
-              {/* First credential of each attorney, verbatim. */}
-              {attorneys
-                .map((a) => a.homeCredential.split(". ")[0].replace(/\.$/, ""))
-                .join(" · ")}
-              .
+              {home.facts.experience.label}
             </p>
           </li>
           <li className="fact">
@@ -82,14 +74,16 @@ export default function HomePage() {
               <em>{numberWord(practiceAreas.length)}</em> practice areas
             </p>
             <p className="fact-label support text-[length:var(--text-small)] text-gray">
-              {/* The ledger's own titles, verbatim (content/practice-areas.ts). */}
-              {joinNatural(practiceAreas.map((a) => a.title))}.
+              {/* The ledger's own titles. Listed without a final "and" at
+                  the client's request — it reads as a table, not a
+                  sentence. */}
+              {practiceAreas.map((a) => a.title).join(", ")}.
             </p>
           </li>
         </ul>
       </section>
 
-      {/* 3 · Practice index — the ledger, I–V. */}
+      {/* 3 · Practice index — the ledger. */}
       <PracticeIndex />
 
       {/* 4 · Second courthouse band with caption label. */}
@@ -129,7 +123,7 @@ export default function HomePage() {
                   </span>
                 </p>
                 <p className="support mt-3 max-w-[var(--measure)] text-[length:var(--text-small)] text-gray">
-                  {attorney.homeCredential}
+                  {withEmphasis(attorney.homeCredential)}
                 </p>
               </Link>
             </li>
@@ -137,53 +131,14 @@ export default function HomePage() {
         </ul>
       </section>
 
-      {/* 6 · Close — the page ends on a clear next step, not a footer. */}
-      <section
-        aria-labelledby="contact-heading"
-        className="border-t border-rule"
-      >
-        <div className="mx-auto grid max-w-[var(--container)] gap-8 px-5 py-[var(--space-section)] md:grid-cols-[1fr_minmax(0,22rem)] md:gap-16">
-          <div className="rise">
-            <p className="label label-kicker text-accent">Contact</p>
-            {/* The approved site description, verbatim (config/site.ts). */}
-            <h2 id="contact-heading" className="mt-3 max-w-2xl text-[length:var(--text-ledger)]">
-              {site.description}
-            </h2>
-            <Link href="/contact" className="cta mt-8">
-              Discuss a matter <span className="cta-arrow" aria-hidden="true">→</span>
-            </Link>
-          </div>
-          <div className="rise grid content-end gap-6 md:justify-items-end md:text-right">
-            {/* Location is a region, not an address — see site.serviceArea. */}
-            <p className="label label-caption text-gray">{site.serviceArea}</p>
-            <ul className="grid gap-4 md:justify-items-end">
-              {site.contacts.map((contact) => (
-                <li key={contact.phone}>
-                  <p className="support text-[length:var(--text-small)]">
-                    {contact.attorney}
-                    <br />
-                    <a
-                      href={`tel:+1${contact.phone.replace(/\D/g, "")}`}
-                      className="link"
-                    >
-                      {contact.phone}
-                    </a>
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
+      {/*
+        The homepage used to close on its own contact section. The client
+        had it removed: the nav carries a Contact link and the footer
+        carries both offices and both numbers directly below, so the
+        section repeated itself one scroll from the end.
+      */}
     </>
   );
-}
-
-/** "Arkansas courts, the U.S. Courts of Appeals, and the Supreme Court" */
-function joinNatural(items: readonly string[]): string {
-  if (items.length <= 1) return items.join("");
-  if (items.length === 2) return `${items[0]} and ${items[1]}`;
-  return `${items.slice(0, -1).join(", ")}, and ${items.at(-1)}`;
 }
 
 /** Small counts read as words in the ledger ("Five practice areas"). */

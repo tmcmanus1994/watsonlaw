@@ -1,11 +1,23 @@
 /**
  * Single source of truth for firm identity and contact details.
  *
- * ⚠️ The name "Watson & Watson LLP" is the expected filing but is NOT yet
- * registered with the Arkansas Secretary of State, and the expected domain
- * (watsonlawllp.com) is NOT bought. Nothing outside this file may hardcode
- * the name — nav, footer, wordmark, monogram, metadata, JSON-LD, and email
- * subjects all read from here, so a name change stays a one-file edit.
+ * ⚠️ THE NAME IS STILL NOT SETTLED. As of 16 September the Secretary of
+ * State has not accepted "Watson & Watson LLP" — they lost the filing, then
+ * rejected the name on one employee's reading of the statute, and their
+ * legal team is reviewing it. The client's fallback is
+ * "Watson & Watson, Attorneys at Law, LLP".
+ *
+ * That fallback matters to the wordmark, not just to this file. The lockup
+ * sets `entitySuffix()` beneath the name in wide tracking, and the suffix
+ * goes from "LLP" (3 characters) to ", Attorneys at Law, LLP" (23) — see
+ * the note in components/BrandMark.tsx before switching.
+ *
+ * The expected domain (watsonlawllp.com) is also NOT bought, and the
+ * contact form and the published contact address both now depend on it.
+ *
+ * Nothing outside this file may hardcode the name — nav, footer, wordmark,
+ * monogram, metadata, JSON-LD and email subjects all read from here, so a
+ * name change stays a one-file edit.
  */
 
 /**
@@ -37,8 +49,13 @@ function siteUrl(): string {
 export const site = {
   name: "Watson & Watson",
   legalName: "Watson & Watson LLP",
-  /** Kicker line used in the hero and metadata. */
-  tagline: "Appellate & Constitutional Litigation · Arkansas",
+  /*
+   * No tagline. The hero and footer both carried "Appellate &
+   * Constitutional Litigation · Arkansas" until the client asked for it
+   * removed — they do not want to be read as limited to one region or one
+   * practice area. `description` below is metadata only and still names
+   * both, which is where search engines look.
+   */
   description:
     "An appellate and constitutional litigation firm in Arkansas, practicing before the Arkansas courts, the U.S. Courts of Appeals, and the Supreme Court of the United States.",
 
@@ -49,34 +66,32 @@ export const site = {
   url: siteUrl(),
 
   /**
-   * How the firm's location is presented — a region, not an address.
+   * Two offices, each with the attorney who answers it. The client settled
+   * this in the September review: they want North Little Rock and Searcy
+   * named, the way multi-office Arkansas firms present themselves, rather
+   * than the single vague region the site carried while the question was
+   * open.
    *
-   * Brett and Noah are not putting a street or home location behind the
-   * firm, so the site names an area only: no offices, no cities. This is
-   * the ONE value every location line on the site reads from, and it is
-   * deliberately vague.
-   *
-   * TODO: client decision. Brett and Noah will say how they want location
-   * presented. When they do, change this string (and, if they want a
-   * mailing address shown again, see the note on mailingAddress below).
+   * Still no street address — only a city, a name and a number.
    */
-  serviceArea: "Central Arkansas",
-
-  /**
-   * Direct lines, by attorney. Previously these were labelled as two
-   * offices; they are simply the number each attorney answers.
-   */
-  contacts: [
-    { attorney: "Noah P. Watson", phone: "(501) 388-4514" },
-    { attorney: "Brett D. Watson", phone: "(501) 281-2468" },
+  offices: [
+    {
+      city: "North Little Rock",
+      attorney: "Noah P. Watson",
+      phone: "(501) 388-4514",
+    },
+    {
+      city: "Searcy",
+      attorney: "Brett D. Watson",
+      phone: "(501) 281-2468",
+    },
   ],
 
   /**
-   * Correspondence address. Retained here because it is real and the firm
-   * may need it, but deliberately NOT rendered anywhere on the site — it
-   * names a city, and the site presents a region only until the client
-   * decides otherwise. It is also kept out of the JSON-LD, so search
-   * results cannot show a locality the pages themselves do not.
+   * Correspondence address. Real, and still NOT rendered anywhere: the
+   * client asked for cities and offices back but said nothing about a
+   * mailing address, so it stays out until they do. Also kept out of the
+   * JSON-LD.
    *
    * To bring it back: render it in the /contact aside and restore the
    * PostalAddress block in lib/structured-data.ts.
@@ -88,8 +103,42 @@ export const site = {
     zip: "72145-0707",
   },
 
-  /** Contact form submissions deliver to BOTH addresses. */
-  contactRecipients: ["watson@bdwpllc.com", "noah.watson57@gmail.com"],
+  /**
+   * The address shown to visitors.
+   *
+   * ⚠️ NOT LIVE YET. The client named this as the firm's general contact
+   * address in the September review, but it is on the expected domain,
+   * which is not registered — so mail sent to it goes nowhere until that
+   * happens. It is already printed on /contact in the client's own intake
+   * wording, so registering the domain is now a launch dependency, not a
+   * nice-to-have.
+   */
+  contactEmail: "watson@watsonlawllp.com",
+
+  /**
+   * Where the contact form delivers.
+   *
+   * ⚠️ NEITHER OF THESE CAN RECEIVE MAIL YET. Brett's address moved to
+   * brett@watsonlawllp.com on the client's instruction, and Noah's
+   * counterpart plus the general `contactEmail` are on the same domain —
+   * which nobody has registered. Until it resolves, a live form would send
+   * every enquiry into nothing.
+   *
+   * That is a deliberate trade: the previous entries (watson@bdwpllc.com
+   * and noah.watson57@gmail.com) did work, but shipping a form that quietly
+   * routes potential-client mail to an old address is its own failure. The
+   * form cannot go live before the domain either way — Resend needs a
+   * verified sending domain — so both depend on the same step.
+   *
+   * ⚠️ AT LAUNCH, before announcing the site: register the domain, set
+   * RESEND_API_KEY and CONTACT_FROM, then send a real message through the
+   * form and confirm it arrives. Do not assume it.
+   *
+   * Open question for the client: Noah asked for the form to go to the
+   * general address (`contactEmail`). It currently goes to the two of them
+   * individually. Confirm which they want — or all three.
+   */
+  contactRecipients: ["brett@watsonlawllp.com", "noah.watson57@gmail.com"],
 
   jurisdictions: [
     "Arkansas courts",
