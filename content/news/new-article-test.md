@@ -1,6 +1,7 @@
 ---
 title: New Article Test
 date: 2026-09-04
+excerpt: Just a test
 draft: false
 attachments: []
 ---
