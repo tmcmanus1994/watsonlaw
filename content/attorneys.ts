@@ -109,7 +109,7 @@ export const attorneys: Attorney[] = [
           "Arkansas Judicial Discipline and Disability Commission (Commissioner)",
           "Arkansas Bar Association Board of Trustees (Trustee)",
           "Arkansas Bar Association (Member)",
-          "The Arkansas Lawyer Editorial Board (Member)",
+          "*The Arkansas Lawyer* Editorial Board (Member)",
         ],
       },
       {
