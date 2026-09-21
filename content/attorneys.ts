@@ -15,9 +15,13 @@
  * The 450+ appeals figure on the homepage is FIRM-WIDE — never attribute it
  * to either attorney personally.
  *
- * Headshots: replace the placeholder PNGs in /public/images/attorneys at
- * the same 4:5 ratio (800×1000); dimensions are locked here so the swap
- * cannot shift layout.
+ * Headshots are the studio shots delivered 21 September, used at their
+ * native 720×928 rather than cropped to the 4:5 the placeholders assumed —
+ * re-encoding a professional portrait to save 28 pixels is not worth the
+ * quality. Both are the same ratio, which is what actually keeps the two
+ * pages consistent. Any later replacement should match 720×928, or change
+ * these numbers to whatever it really is: they are declared here so the
+ * browser reserves the right box and the swap cannot shift layout.
  */
 
 export type Attorney = {
@@ -49,10 +53,10 @@ export const attorneys: Attorney[] = [
     slug: "brett-watson",
     name: "Brett D. Watson",
     headshot: {
-      src: "/images/attorneys/brett-watson.png",
-      alt: "Portrait of Brett D. Watson (photograph forthcoming)",
-      width: 800,
-      height: 1000,
+      src: "/images/attorneys/brett-watson.jpg",
+      alt: "Portrait of Brett D. Watson",
+      width: 720,
+      height: 928,
     },
     /* Client-approved homepage line (September review). NOTE: it reads
        "Chair", while Brett's own credential sheet says "Co-Chair" — see the
@@ -143,10 +147,10 @@ export const attorneys: Attorney[] = [
     slug: "noah-watson",
     name: "Noah P. Watson",
     headshot: {
-      src: "/images/attorneys/noah-watson.png",
-      alt: "Portrait of Noah P. Watson (photograph forthcoming)",
-      width: 800,
-      height: 1000,
+      src: "/images/attorneys/noah-watson.jpg",
+      alt: "Portrait of Noah P. Watson",
+      width: 720,
+      height: 928,
     },
     homeCredential:
       "Former Deputy Solicitor General of Arkansas. Law clerk, U.S. Court of Appeals for the Eighth Circuit.",
