@@ -223,12 +223,21 @@ samples in their titles and opening line and describe no real matter —
 ## Contact form
 
 `app/contact/actions.ts` delivers to **both** addresses in
-`site.contactRecipients` via Resend. Required env:
+`site.contactRecipients` — currently `brett@` and `noah@watsonlawllp.com` —
+via Resend, with reply-to set to the enquirer so either attorney can answer
+directly. Required env:
 
 - `RESEND_API_KEY` — without it, production **fails loudly** (the form
   shows an error with the direct emails; dev logs-and-continues and says so
   in the UI). Message bodies are never logged.
-- `CONTACT_FROM` — verified sender (defaults to Resend's onboarding sender).
+- `CONTACT_FROM` — a sender on a domain **verified in Resend**. Defaults to
+  Resend's onboarding sender, which works for testing but should not be
+  what a potential client sees.
+
+⚠️ A successful send is not proof of delivery. Resend accepts mail for any
+address on a verified domain; if the mailbox behind it does not exist, it
+bounces afterwards and the form still reports success. Send a real message
+through the live form and confirm it arrives in both inboxes.
 
 Spam protection is a honeypot plus a minimum-time check — no third-party
 service.

@@ -22,7 +22,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/keystatic", "/api/"],
+      // /articles is an alias for /keystatic — keep both out.
+      disallow: ["/keystatic", "/articles", "/api/"],
     },
     sitemap: `${site.url}/sitemap.xml`,
   };
