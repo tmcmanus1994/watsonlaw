@@ -42,11 +42,10 @@ export default async function AttorneyPage({ params }: Props) {
             height={attorney.headshot.height}
             className="w-full max-w-xs border border-rule"
             sizes="(min-width: 768px) 20rem, 100vw"
-            priority
+            /* Replaces `priority`, deprecated in Next 16. The headshot is
+               the LCP on this page. */
+            preload
           />
-          <p className="label label-caption mt-3 text-gray">
-            Photograph · shoot week of Sept 14
-          </p>
         </div>
 
         <div>
