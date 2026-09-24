@@ -21,12 +21,12 @@ export const home = {
      * lands, drop it in /public/media and set the path here.
      */
     videoSrc: null as string | null,
-    /** Poster / static still — Trav's pre-graded still (Sept 3). */
+    /** Poster / static still — Trav's pre-graded still (Sept 24). */
     still: {
-      src: "/images/hero/hero-still.avif",
+      src: "/images/hero/hero-still.webp",
       alt: "", // decorative: background imagery behind the headline
-      width: 3870,
-      height: 2580,
+      width: 2880,
+      height: 1620,
     },
   },
 
@@ -57,17 +57,21 @@ export const home = {
 
   courtBand: {
     /**
-     * ⚠️ Caption is the approved deck copy. The current still is stand-in
-     * photography (per the deck: stand-ins until the September shoot) — when
-     * the real Arnold Courthouse still lands, swap the file; if a stand-in
-     * ships at launch, confirm with the client that the caption stays.
+     * The caption names the building in the photograph, and the photograph
+     * changed: the delivered still (Sept 24) is the Pulaski County
+     * Courthouse, not the Richard Sheppard Arnold United States Courthouse
+     * the deck specified. Noah flagged the old caption in the September
+     * review — he was right, it named a building that was never in frame.
+     * A caption that misnames a courthouse is the kind of error this
+     * audience notices first, so it tracks the file: change one, change
+     * the other.
      */
-    caption: "Richard Sheppard Arnold United States Courthouse · Little Rock",
+    caption: "Pulaski County Courthouse · Little Rock",
     image: {
-      src: "/images/courts/courthouse-band.avif",
-      alt: "Marble columns and coffered ceiling of a courthouse portico",
-      width: 3871,
-      height: 2580,
+      src: "/images/courts/courthouse-band.webp",
+      alt: "The Pulaski County Courthouse facade at sunset, its upper colonnade lit gold",
+      width: 2880,
+      height: 1620,
     } as {
       src: string;
       alt: string;

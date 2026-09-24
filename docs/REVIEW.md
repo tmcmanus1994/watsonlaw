@@ -1,13 +1,11 @@
 # Reviewing the site
 
-For Brett and Noah. A client-ready rendering of this document — the version
-actually sent to them — is published at
-https://claude.ai/code/artifact/4f2aefc7-bfea-4414-bfd4-21e47f549407
-Keep the two in step if either changes. This is the preview of the firm's website. Everything
+For Brett and Noah. This is the preview of the firm's website. Everything
 here works — it is the real site, not a picture of one. Click through it,
 and leave a note anywhere something is wrong.
 
-Your first round of notes is in. This page now describes what is left.
+Two rounds of your notes are in, and everything you asked for is done. This
+page describes what is left.
 
 ---
 
@@ -25,7 +23,7 @@ is the one worth doing, because it lets you leave notes directly on the page
 read everything; you'll send your notes back by email instead.
 
 Either way: keep the link. It always shows the newest version, so there's no
-"which draft am I looking at." The site is not public and is not in Google.
+"which draft am I looking at."
 
 ## Leaving a comment
 
@@ -49,59 +47,59 @@ convenience, not a requirement.
 
 ---
 
-## Please don't report these — they're known and already scheduled
+## What changed since your last round
 
-| What you'll see | Status |
-| --- | --- |
-| Grey blocks reading "Placeholder · court photography pending" | Court photography still to come. Real stills drop into the same spaces. |
-| News posts titled "Sample post — …" | Written to demonstrate the publishing tool. Deleted before launch. They describe no real matter. |
-| The contact form not sending | It cannot until the domain is registered — both the address it sends *from* and the addresses it sends *to* live on it. |
-| The web address | The domain isn't registered yet. |
+Everything you sent has been applied. In short:
 
-Closed since the first round: your headshots are in, Brett's biography is
-live, the firm story is on The Firm page, the contact wording is on
-/contact, the offices read North Little Rock and Searcy, and there is no
-advertising disclaimer.
+- **Your words, as you wrote them.** The five practice-area descriptions,
+  the firm story on The Firm page, the contact wording, Noah's opening
+  paragraph, Brett's full credentials — all printed verbatim.
+- **Both biographies are live.** Brett's page now matches Noah's in
+  structure and ordering.
+- **Your headshots are in.**
+- **The photography is final.** Eight frames of the Arkansas State Capitol
+  and the Pulaski County Courthouse, all shot at the same golden hour, on
+  the homepage, the practice pages and the practice index. Nothing on the
+  site is a grey placeholder any more.
+- **North Little Rock and Searcy**, each with the attorney who answers it.
+- **No advertising disclaimer**, per your instruction.
+- **The Roman numerals, the "Five Areas" counter, the tagline and the
+  homepage contact block** are gone.
+- **Type is larger throughout** — about 12%, as Brett asked.
 
 ---
 
 ## What we most need you to look at
 
-Four things only you can decide.
-
-**1. Your own words.** The five practice-area descriptions and Noah's
-biography are printed exactly as you supplied them — nothing has been
-rewritten. Read them as they now appear and tell us if anything should
-change.
+**1. Your own words.** They are printed exactly as you supplied them and
+nothing has been rewritten. Read them as they now appear.
 
 **2. Credentials and case names.** Every court, title, date, and case name
-on the attorney pages. Please check these as carefully as you'd check a
-brief — an error here is the kind that matters.
+on both attorney pages. Please check these as carefully as you'd check a
+brief — an error here is the kind that matters. Two specific ones:
 
-**3. Location.** Right now the site says only "Central Arkansas." It names
-no city, no office, and no mailing address anywhere, including in the code
-search engines read. Tell us how you want location presented and it changes
-in one place.
+- Brett's homepage line and his page both read **"Co-Chair"**, Drafting
+  Committee, *Handling Appeals in Arkansas*, which is what his own
+  credential sheet says. An earlier draft said "Chair". Which is right?
+- Brett's biography opens "Brett has handled…" while Noah's opens
+  "Noah P. Watson served as…". Both are your own wording. Do you want them
+  to match?
 
-Worth confirming with your own read of the Arkansas advertising rules
-whether a region-only reference is sufficient, or whether an address has to
-appear somewhere.
+**3. The photographs and the caption.** The band across the homepage is the
+**Pulaski County Courthouse**, and the caption now says so — the earlier
+caption named the Richard Sheppard Arnold courthouse, which Noah correctly
+flagged as not the building in the picture. Confirm both the buildings and
+the caption read the way you want.
 
-**4. The two slots that need your language.** The attorney advertising
-disclaimer (bottom of every page) and the engagement wording above the
-contact form. Both are deliberately empty — that language is yours to
-write, not ours. Send the text and it goes in.
+**4. The Firm page.** Your note said to replace the text on that page with
+the firm story. Taken literally that would also have deleted the
+**Jurisdictions** list and the **With Trial Counsel** section, which you
+didn't comment on. Both are still there. Tell us if they should go.
 
----
-
-## The firm story
-
-The Firm page currently carries only facts you gave us in intake. It is
-marked as a draft on the page itself so no one mistakes it for finished.
-
-If you write a paragraph or two about the firm, it goes in as written. If
-you'd rather it stay this short, that's a decision too — tell us and we'll
-drop the draft label.
+**5. Where enquiries should go.** The form currently sends to
+`brett@watsonlawllp.com` **and** `noah@watsonlawllp.com`, and /contact also
+prints the general address `watson@watsonlawllp.com`. Should the form reach
+the general address, the two of you individually, or all three?
 
 ---
 
@@ -109,6 +107,8 @@ drop the draft label.
 
 Not optional, and not something to leave until after launch: we need to know
 the editor works the way you want while there is still time to change it.
+
+The editor is at **watsonlawllp.com/articles**.
 
 1. Sign in and set up your account.
 2. Write a post — a real one or nonsense, it doesn't matter.
@@ -122,22 +122,10 @@ missing, and whether a published post looks right.
 
 You cannot break anything — every change is saved with a history.
 
----
-
-## Where enquiries should go
-
-The form is built and currently addressed to `brett@watsonlawllp.com` and
-`noah.watson57@gmail.com`.
-
-**One thing still to settle:** Noah asked for the form to go to the general
-address, `watson@watsonlawllp.com`. It currently goes to the two of you
-individually. Tell us which you want — the general address, the two
-individual ones, or all three.
-
-**Nothing can be tested until the domain exists.** Both the address the form
-sends *from* and most of the addresses it sends *to* are on
-watsonlawllp.com. Before the site is announced we will register it, connect
-the form, send a real message through it, and confirm it arrives.
+**One thing that catches everybody:** there is a **Draft** checkbox on each
+post. Ticked, the post saves but deliberately does not appear on the site.
+That is what happened to the sample Noah tried to publish. Untick it and
+publish again.
 
 ---
 
@@ -145,17 +133,17 @@ the form, send a real message through it, and confirm it arrives.
 
 **Waiting on you**
 
-- The domain. Nothing about email works without it, and the site currently
-  prints an address that cannot receive mail.
-- Which inbox the contact form should reach (see above).
-- The court photography — whether the buildings currently shown are ones you
-  are happy to have on the site.
-
-**Confirmations**
-
-- The five practice-area descriptions, printed verbatim.
-- Every credential, court, title and case name.
-- The courthouse caption on the homepage — it names the Richard Sheppard
-  Arnold United States Courthouse, and must change if the final photograph
-  is a different building.
+- Which inbox the contact form should reach.
+- Confirmation of the courthouse caption and the photography.
+- "Chair" or "Co-Chair" on Brett's line.
+- Whether Jurisdictions and With Trial Counsel stay on The Firm page.
 - Whether you want any social or directory profiles linked. None are set.
+- The firm name. The site reads **Watson & Watson LLP** throughout. If the
+  Secretary of State lands on "Watson & Watson, Attorneys at Law, LLP"
+  instead, tell us — it is one edit, but the longer name changes how the
+  wordmark sits and we'd want to look at it with you.
+
+**On our side before launch**
+
+- Sending a real message through the contact form and confirming it arrives
+  in both inboxes. Until that is done, please don't rely on the form.

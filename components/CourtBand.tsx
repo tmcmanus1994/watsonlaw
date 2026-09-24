@@ -2,9 +2,10 @@ import Image from "next/image";
 import { home } from "@/content/home";
 
 /**
- * Full-width courthouse photography band with its caption label. Until
- * Trav's pre-graded stills land, a marked placeholder block in the rule
- * color holds the exact slot (fixed height — no shift on swap).
+ * Full-width courthouse photography band with its caption label. The
+ * photograph landed 24 September; the placeholder branch stays because the
+ * slot is typed nullable and a marked block is a better failure than an
+ * empty band — it holds the exact height either way, so nothing shifts.
  */
 export function CourtBand() {
   const { image, caption } = home.courtBand;
