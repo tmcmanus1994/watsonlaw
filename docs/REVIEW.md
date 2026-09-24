@@ -1,6 +1,11 @@
 # Reviewing the site
 
-For Brett and Noah. This is the preview of the firm's website. Everything
+For Brett and Noah. A client-ready rendering of this document — the version
+actually sent to them, set in the firm's own type — is published at
+https://claude.ai/artifact/An1MciupYpSnvuCxsvC5Nn
+Keep the two in step if either changes.
+
+This is the preview of the firm's website. Everything
 here works — it is the real site, not a picture of one. Click through it,
 and leave a note anywhere something is wrong.
 
