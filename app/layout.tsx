@@ -66,6 +66,13 @@ export const metadata: Metadata = {
     locale: "en_US",
   },
   /*
+   * The card image itself is app/opengraph-image.tsx, which Next wires
+   * into both og: and twitter: automatically. This only asks the clients
+   * that read twitter:card — X, and several chat apps that follow it — for
+   * the large format rather than the small thumbnail beside a text block.
+   */
+  twitter: { card: "summary_large_image" },
+  /*
    * Preview deployments are shared with the client with protection off, so
    * the URL is effectively public. Keep every non-production build out of
    * the index — robots.txt alone would not stop a crawler that reaches a

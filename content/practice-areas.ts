@@ -22,11 +22,15 @@ export type PracticeArea = {
   slug: string;
   title: string;
   /**
-   * ⚠️ STAND-IN. Detail crop of one of the two approved photographs, used in
-   * the practice-index hover pane and as this area's page header. The two
-   * sources are different temperatures (warm sandstone / cool marble), so
-   * the five do not yet read as one graded set — replace with the September
-   * shoot's pre-graded stills at the same 4:5 ratio and nothing shifts.
+   * This area's photograph: the practice-index hover pane and this area's
+   * page header. Delivered 24 September as one graded set — five square
+   * frames of the Arkansas State Capitol and the Pulaski County
+   * Courthouse, all shot at the same golden hour, so the five finally read
+   * as one set rather than two temperatures.
+   *
+   * They are square; both slots are `fill` + `object-cover` (a 4:5 pane, a
+   * wide header band), so each is centre-cropped and the assignment below
+   * is a one-line swap with no layout consequence.
    */
   image?: AreaImage;
   /**
@@ -45,9 +49,9 @@ export const practiceAreas: PracticeArea[] = [
     slug: "appeals",
     image: {
       src: "/images/courts/detail-appeals.avif",
-      alt: "Dome and weathervane of the courthouse at dusk",
-      width: 1400,
-      height: 1750,
+      alt: "The Arkansas and United States flags above the Pulaski County Courthouse cornice",
+      width: 2048,
+      height: 2048,
     },
     title: "Appeals",
     indexDescription:
@@ -62,9 +66,9 @@ export const practiceAreas: PracticeArea[] = [
     slug: "litigation-strategy",
     image: {
       src: "/images/courts/detail-litigation-strategy.avif",
-      alt: "Marble column capitals beneath a courthouse portico",
-      width: 1400,
-      height: 1750,
+      alt: "The dome of the Arkansas State Capitol at sunset",
+      width: 2048,
+      height: 2048,
     },
     title: "Litigation Strategy",
     indexDescription:
@@ -81,9 +85,9 @@ export const practiceAreas: PracticeArea[] = [
       "Litigating Arkansas and U.S. constitutional issues with comprehensive knowledge from experience defending and challenging government actions.",
     image: {
       src: "/images/courts/detail-constitutional-litigation.avif",
-      alt: "Stone balustrade and cornice of the courthouse",
-      width: 1400,
-      height: 1750,
+      alt: "The west front of the Arkansas State Capitol, dome and portico seen head-on",
+      width: 2048,
+      height: 2048,
     },
     title: "Constitutional Litigation",
     summary:
@@ -98,9 +102,9 @@ export const practiceAreas: PracticeArea[] = [
       "Drafting amicus briefs to fill gaps in the parties’ arguments by presenting clients’ unique interests and expertise to the court.",
     image: {
       src: "/images/courts/detail-amicus-briefing.avif",
-      alt: "Coffered marble ceiling of a courthouse portico",
-      width: 1400,
-      height: 1750,
+      alt: "A corner pediment of the Arkansas State Capitol against an evening sky",
+      width: 2048,
+      height: 2048,
     },
     title: "Amicus Briefing",
     summary:
@@ -114,10 +118,17 @@ export const practiceAreas: PracticeArea[] = [
     indexDescription:
       "Guiding clients through high-stakes election-law contexts, including ballot initiatives, Ethics Commission proceedings, campaign finance, and candidate eligibility.",
     image: {
+      /*
+       * ⚠️ Lowest-resolution frame of the five: the delivered master is
+       * 816px square, where the other four are ~4000px. It is ample for
+       * the 21rem index pane but soft as this page's full-width header on
+       * a large display. A re-export at the set's native size drops
+       * straight in — same name, nothing else to change.
+       */
       src: "/images/courts/detail-election-law.avif",
-      alt: "Fluted marble columns rising to their capitals",
-      width: 1400,
-      height: 1750,
+      alt: "The colonnade along the flank of the Arkansas State Capitol in low sun",
+      width: 816,
+      height: 816,
     },
     title: "Election Law",
     summary:
@@ -148,12 +159,21 @@ export function indexDescriptionFor(area: PracticeArea): string {
 }
 
 /**
- * Wide header image for the practice index (/practice). Also a STAND-IN,
- * framed differently from the homepage hero so the two do not repeat.
+ * Wide header image for the practice index (/practice).
+ *
+ * The same photograph as the homepage hero, at the client's request. It
+ * was previously the second wide frame — a three-quarter view across the
+ * lawn — chosen so the two pages would not read as the same picture
+ * twice. His call: the regraded hero is the strongest frame in the set,
+ * and /practice is a click away from the homepage rather than beside it.
+ * The band crops to a different part of the frame than the full-height
+ * hero does, so they do not read as identical.
+ *
+ * The frame this replaced is in git history if it is ever wanted back.
  */
 export const practiceIndexImage: AreaImage = {
-  src: "/images/courts/practice-header.avif",
-  alt: "Cornice and balustrade of the courthouse at dusk",
-  width: 2400,
-  height: 1000,
+  src: "/images/hero/hero-still.avif",
+  alt: "The dome of the Arkansas State Capitol at sunset, framed by trees",
+  width: 3840,
+  height: 2202,
 };

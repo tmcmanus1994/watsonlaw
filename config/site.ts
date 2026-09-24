@@ -12,8 +12,10 @@
  * goes from "LLP" (3 characters) to ", Attorneys at Law, LLP" (23) — see
  * the note in components/BrandMark.tsx before switching.
  *
- * The expected domain (watsonlawllp.com) is also NOT bought, and the
- * contact form and the published contact address both now depend on it.
+ * The domain (watsonlawllp.com) IS registered and the site is served from
+ * it. That closed the launch blocker the earlier note here described — but
+ * see contactEmail and contactRecipients below: a resolving domain is not
+ * a provisioned mailbox, and the two failures look identical from outside.
  *
  * Nothing outside this file may hardcode the name — nav, footer, wordmark,
  * monogram, metadata, JSON-LD and email subjects all read from here, so a
@@ -106,12 +108,12 @@ export const site = {
   /**
    * The address shown to visitors.
    *
-   * ⚠️ NOT LIVE YET. The client named this as the firm's general contact
-   * address in the September review, but it is on the expected domain,
-   * which is not registered — so mail sent to it goes nowhere until that
-   * happens. It is already printed on /contact in the client's own intake
-   * wording, so registering the domain is now a launch dependency, not a
-   * nice-to-have.
+   * ⚠️ NOT CONFIRMED TO RECEIVE. The client named this as the firm's
+   * general contact address in the September review, and it is printed on
+   * /contact in their own intake wording. The domain is registered now, so
+   * the address at least can exist — but nobody has yet sent mail to it
+   * and watched it arrive. An unprovisioned box bounces silently from the
+   * sender's point of view, and this address is public. Test it.
    */
   contactEmail: "watson@watsonlawllp.com",
 

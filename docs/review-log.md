@@ -163,3 +163,29 @@ to hold the page instead.
 LLP", with a decision expected Monday. See the warning at the top of
 `config/site.ts` — the fallback lengthens the wordmark's suffix from 3
 characters to 23 and needs a look at the lockup before it is switched.
+
+---
+
+## Round 4 — 24 September (final photography)
+
+Not client feedback: the delivered image set, and what it closed.
+
+| # | What | Disposition | Note |
+| --- | --- | --- | --- |
+| 45 | Eight final stills delivered | `fixed` | Arkansas State Capitol and Pulaski County Courthouse, one golden hour, one grade. Replaces every stand-in crop. Masters were 6000px; committed at 2880 wide (three wide frames) and 1800 square (five area images) |
+| 46 | Round 1 #18 — "are these the real courthouses?" | `fixed` | Answered by the delivery. Both buildings are Arkansas, both are ones the firm actually practises in front of, neither is a stock courthouse from somewhere else |
+| 47 | Round 1 #19 — "I don't recall this being the Arnold courthouse" | `fixed` | He was right. The homepage band caption read "Richard Sheppard Arnold United States Courthouse · Little Rock" and the photograph was never that building. It now reads **"Pulaski County Courthouse · Little Rock"**, which is what is in frame. Still worth one confirmation from them |
+| 48 | Brett: "the hero is too dark" | `fixed` | The new hero is the Capitol dome at golden hour against open sky — the brightest frame in the set |
+
+**Photo-to-area mapping is arbitrary and reversible.** The five squares went
+to the practice areas in delivery order (Box 1 → Appeals … Box 5 → Election
+Law). Only one pairing is deliberate: Box 1 is the courthouse and it heads
+Appeals; the other four are the Capitol. Each is a one-line swap in
+`content/practice-areas.ts` with no layout consequence.
+
+**One frame is under-resolution.** `detail-election-law.webp` came in at
+816px square where the other four are ~4000. It is fine in the 21rem index
+pane and soft as that page's full-width header on a large display. A
+re-export at the set's native size drops in under the same name — flagged
+to Trav rather than silently upscaled, which would only have made it blurry
+in a way nobody could then diagnose.

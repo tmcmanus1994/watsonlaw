@@ -2,10 +2,10 @@ import Image from "next/image";
 
 /**
  * Graded photo header with the page title set over a scrim on the image —
- * no box behind the title (deck rule). Until Trav's pre-graded stills
- * land, the image layer is a marked placeholder block in the rule color;
- * the scrim and type treatment are identical either way, so the photo
- * swap is a data edit with zero layout shift.
+ * no box behind the title (deck rule). With no image the layer falls back
+ * to a marked block in the rule color; the scrim and type treatment are
+ * identical either way, so swapping a photograph is a data edit with zero
+ * layout shift.
  */
 export function PhotoHeader({
   kicker,
@@ -23,7 +23,9 @@ export function PhotoHeader({
           src={image.src}
           alt={image.alt}
           fill
-          priority
+          /* Replaces `priority`, deprecated in Next 16. On the pages that
+             use this component the header photograph is the LCP. */
+          preload
           sizes="100vw"
           className="object-cover"
         />

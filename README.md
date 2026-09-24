@@ -24,9 +24,10 @@ npm run lint
 | Firm name, service area, phones, recipients, jurisdictions | `config/site.ts` |
 | Design tokens — every color, font, size, spacing value | `app/tokens.css` |
 | Font files (Source Serif 4, Libre Franklin — self-hosted, OFL) | `app/fonts/` (see Fonts) |
+| Link-preview card (generated from config, never a committed PNG) | `app/opengraph-image.tsx` |
 | Homepage hero + courthouse band media slots | `content/home.ts` |
 | Practice areas (client's verbatim blurbs) | `content/practice-areas.ts` |
-| Attorney profiles (Brett is `draft: true` pending his sheet) | `content/attorneys.ts` |
+| Attorney profiles (both live; `draft: true` holds a page back) | `content/attorneys.ts` |
 | News posts (markdown; written via /keystatic) | `content/news/` |
 | News PDF attachments / images | `public/files/news/`, `public/images/news/` |
 | Court photography (pre-graded stills from Trav) | `public/images/courts/` |
@@ -85,7 +86,28 @@ f.flavor = "woff2"; f.save("app/fonts/source-serif-4-latin-opsz-normal.woff2")
 ```
 
 Characters outside the subset fall back to Georgia per-glyph rather than
-tofu. No italic face is shipped — nothing on the site sets italic serif.
+tofu.
+
+**The italic is shipped too**, subset to exactly the roman's coverage.
+Legal writing italicises case names and publication titles — Brett's
+credential line sets *Handling Appeals in Arkansas* — and markdown in a
+news post can emit `<em>` at any time. Without a real italic the browser
+synthesises a slant, which on a serif reads as a mistake.
+
+**Two `*-og.ttf` faces sit alongside them and are never served to a
+browser.** They exist only for `app/opengraph-image.tsx`: the OG renderer
+takes ttf/otf/woff and cannot read woff2. They are static instances of the
+same variable fonts (Source Serif 4 at `opsz` 60, Libre Franklin at
+`wght` 500), so the link-preview card is set in the firm's real type
+rather than the renderer's substitute face. Regenerate them the same way:
+
+```py
+from fontTools.ttLib import TTFont
+from fontTools.varLib.instancer import instantiateVariableFont
+f = TTFont("app/fonts/source-serif-4-latin-opsz-normal.woff2"); f.flavor = None
+instantiateVariableFont(f, {"wght": 400, "opsz": 60}, inplace=True)
+f.save("app/fonts/source-serif-4-og.ttf")
+```
 
 ### Which family goes where
 
@@ -157,11 +179,46 @@ that area's page header, and in the `/practice` counterweight pane (the
 sticky image that dissolves between areas on hover/focus, wide hover-capable
 viewports only, driven by `:has()` — no JS).
 
-⚠️ **All six are STAND-IN crops** of the two approved photographs. The two
-sources are different temperatures (warm sandstone / cool marble), so they
-do not yet read as one graded set. Replace with the September shoot's
-pre-graded stills at the same 4:5 ratio (2400×1000 for the index header) and
-nothing shifts.
+The final set landed 24 September: graded frames of the Arkansas State
+Capitol and the Pulaski County Courthouse, all shot at one golden hour, so
+the photography finally reads as a single set. The hero does double duty
+as the /practice header, at the client's request — the band crops to the
+dome where the full-height hero shows the whole building, so the two do
+not read as the same picture.
+
+Both slots are `fill` + `object-cover`, so the square area images are
+centre-cropped (a 4:5 pane, a wide header band) and the mapping of photo to
+practice area is a one-line swap with no layout consequence.
+
+⚠️ **`detail-election-law.avif` is 816px square** where the other four are
+2048. Ample for the index pane; soft as that page's full-width header on a
+large display. A re-export at the set's native size drops in under the same
+name.
+
+### How the files are encoded, and why
+
+Everything in `public/images/courts/` and `public/images/hero/` is **AVIF
+at quality 80**, committed at 3840 (hero), 3200 (the two wide frames) and
+2048 (the squares). That is the archive copy, not what anyone downloads —
+`next/image` resizes and re-encodes it per request.
+
+The numbers behind those choices, measured on the hero against its own
+15MB master (PSNR at 1920px, so higher is closer to the original):
+
+| Committed as | Size | Delivered quality |
+| --- | --- | --- |
+| the 15MB PNG master | 15 MB | 40.3 dB |
+| AVIF q80 | 0.75 MB | 40.0 dB |
+| WebP q90 | 0.84 MB | 38.9 dB |
+
+AVIF q80 costs 0.3 dB against keeping a 15MB PNG in git forever. WebP at
+the same file size costs four times that, because a sunset sky is one long
+smooth gradient and that is precisely where WebP bands.
+
+**Do not re-encode a committed file in place.** Each pass is lossy and
+they compound. Re-export from the master, or pull the previous upload out
+of git history (the client's originals are in the `Add files via upload`
+commits) — that is how this set was regraded.
 
 ## Media pipeline (photos land late — zero layout shift)
 
@@ -170,12 +227,21 @@ nothing shifts.
   match that, or update `width`/`height` in `content/attorneys.ts` to the
   real dimensions — they are declared so the browser reserves the right box
   and nothing shifts.
-- **Court stills**: drop pre-graded files in `public/images/courts/` and
-  set the paths in `content/home.ts` (band) — no CSS re-grading on top.
+- **Court stills**: delivered 24 September. Drop replacements in
+  `public/images/courts/` and set the paths in `content/home.ts` (hero and
+  band) and `content/practice-areas.ts` (the five areas and the index
+  header) — no CSS re-grading on top. See the encoding note above before
+  converting anything.
+
+  The band's caption in `content/home.ts` **names the building in the
+  photograph**. It changed with the file once already (the deck specified
+  the Richard Sheppard Arnold United States Courthouse; the delivered frame
+  is the Pulaski County Courthouse). If the photograph changes again, the
+  caption changes with it.
 - **Hero footage**: 6–10s muted H.264 loop, compressed hard, into
   `public/media/`; set `videoSrc` in `content/home.ts`. Static still shows
-  on mobile and for reduced-motion visitors; the placeholder still is
-  marked and lives at `public/images/hero/`.
+  on mobile and for reduced-motion visitors; it lives at
+  `public/images/hero/`.
 - **Lottie wordmark**: `public/media/watson-logo.json`, configured at
   `site.brandLottie`. Plays once on the **homepage header only** (the file
   is paper-coloured, so it reads over the hero photograph and would be

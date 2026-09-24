@@ -21,12 +21,26 @@ export const home = {
      * lands, drop it in /public/media and set the path here.
      */
     videoSrc: null as string | null,
-    /** Poster / static still — Trav's pre-graded still (Sept 3). */
+    /**
+     * Poster / static still — Trav's regraded still (Sept 24, second pass:
+     * the first was soft and the grade was warmer than he wanted).
+     * Committed from a 15MB master as AVIF at quality 80, which measures
+     * within 0.3 dB of the master once next/image has resized it, at a
+     * twentieth of the bytes.
+     */
     still: {
       src: "/images/hero/hero-still.avif",
       alt: "", // decorative: background imagery behind the headline
-      width: 3870,
-      height: 2580,
+      width: 3840,
+      height: 2202,
+      /*
+       * 16px wide, inlined. The hero is the first paint and sits on an ink
+       * background, so without it the first thing a visitor sees is a
+       * black rectangle where the photograph will be. 116 bytes buys the
+       * shape and the colour of the sky immediately.
+       */
+      blurDataURL:
+        "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoQAAkAA8BgJQBOgCLC32Ypq5AA/Nc8lWEmblOnHkq2bDx3u+Dj4qgDhEwJsnqQItAr5mgeqtfSIUQA+atXmwBQJir2fTOOMAA=",
     },
   },
 
@@ -57,17 +71,21 @@ export const home = {
 
   courtBand: {
     /**
-     * ⚠️ Caption is the approved deck copy. The current still is stand-in
-     * photography (per the deck: stand-ins until the September shoot) — when
-     * the real Arnold Courthouse still lands, swap the file; if a stand-in
-     * ships at launch, confirm with the client that the caption stays.
+     * The caption names the building in the photograph, and the photograph
+     * changed: the delivered still (Sept 24) is the Pulaski County
+     * Courthouse, not the Richard Sheppard Arnold United States Courthouse
+     * the deck specified. Noah flagged the old caption in the September
+     * review — he was right, it named a building that was never in frame.
+     * A caption that misnames a courthouse is the kind of error this
+     * audience notices first, so it tracks the file: change one, change
+     * the other.
      */
-    caption: "Richard Sheppard Arnold United States Courthouse · Little Rock",
+    caption: "Pulaski County Courthouse · Little Rock",
     image: {
       src: "/images/courts/courthouse-band.avif",
-      alt: "Marble columns and coffered ceiling of a courthouse portico",
-      width: 3871,
-      height: 2580,
+      alt: "The Pulaski County Courthouse facade at sunset, its upper colonnade lit gold",
+      width: 3200,
+      height: 1801,
     } as {
       src: string;
       alt: string;
