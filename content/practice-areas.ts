@@ -159,14 +159,21 @@ export function indexDescriptionFor(area: PracticeArea): string {
 }
 
 /**
- * Wide header image for the practice index (/practice) — the second of the
- * two wide frames, a three-quarter view of the Capitol across the lawn,
- * deliberately framed wider than the homepage hero so the two do not read
- * as the same photograph twice.
+ * Wide header image for the practice index (/practice).
+ *
+ * The same photograph as the homepage hero, at the client's request. It
+ * was previously the second wide frame — a three-quarter view across the
+ * lawn — chosen so the two pages would not read as the same picture
+ * twice. His call: the regraded hero is the strongest frame in the set,
+ * and /practice is a click away from the homepage rather than beside it.
+ * The band crops to a different part of the frame than the full-height
+ * hero does, so they do not read as identical.
+ *
+ * The frame this replaced is in git history if it is ever wanted back.
  */
 export const practiceIndexImage: AreaImage = {
-  src: "/images/courts/practice-header.avif",
-  alt: "The Arkansas State Capitol seen across its lawn, flags flying, at sunset",
-  width: 3200,
-  height: 1800,
+  src: "/images/hero/hero-still.avif",
+  alt: "The dome of the Arkansas State Capitol at sunset, framed by trees",
+  width: 3840,
+  height: 2202,
 };

@@ -179,9 +179,12 @@ that area's page header, and in the `/practice` counterweight pane (the
 sticky image that dissolves between areas on hover/focus, wide hover-capable
 viewports only, driven by `:has()` — no JS).
 
-The final set landed 24 September: eight graded frames of the Arkansas
-State Capitol and the Pulaski County Courthouse, all shot at one golden
-hour, so the photography finally reads as a single set.
+The final set landed 24 September: graded frames of the Arkansas State
+Capitol and the Pulaski County Courthouse, all shot at one golden hour, so
+the photography finally reads as a single set. The hero does double duty
+as the /practice header, at the client's request — the band crops to the
+dome where the full-height hero shows the whole building, so the two do
+not read as the same picture.
 
 Both slots are `fill` + `object-cover`, so the square area images are
 centre-cropped (a 4:5 pane, a wide header band) and the mapping of photo to
