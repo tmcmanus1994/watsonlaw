@@ -181,19 +181,41 @@ viewports only, driven by `:has()` — no JS).
 
 The final set landed 24 September: eight graded frames of the Arkansas
 State Capitol and the Pulaski County Courthouse, all shot at one golden
-hour, so the photography finally reads as a single set. The masters were
-6000px; they are committed resized — 2880px wide for the three wide frames,
-1800px square for the five area images — which is 2× the widest slot
-anything renders at.
+hour, so the photography finally reads as a single set.
 
 Both slots are `fill` + `object-cover`, so the square area images are
 centre-cropped (a 4:5 pane, a wide header band) and the mapping of photo to
 practice area is a one-line swap with no layout consequence.
 
-⚠️ **`detail-election-law.webp` is 816px square** where the other four are
-1800. Ample for the index pane; soft as that page's full-width header on a
+⚠️ **`detail-election-law.avif` is 816px square** where the other four are
+2048. Ample for the index pane; soft as that page's full-width header on a
 large display. A re-export at the set's native size drops in under the same
 name.
+
+### How the files are encoded, and why
+
+Everything in `public/images/courts/` and `public/images/hero/` is **AVIF
+at quality 80**, committed at 3840 (hero), 3200 (the two wide frames) and
+2048 (the squares). That is the archive copy, not what anyone downloads —
+`next/image` resizes and re-encodes it per request.
+
+The numbers behind those choices, measured on the hero against its own
+15MB master (PSNR at 1920px, so higher is closer to the original):
+
+| Committed as | Size | Delivered quality |
+| --- | --- | --- |
+| the 15MB PNG master | 15 MB | 40.3 dB |
+| AVIF q80 | 0.75 MB | 40.0 dB |
+| WebP q90 | 0.84 MB | 38.9 dB |
+
+AVIF q80 costs 0.3 dB against keeping a 15MB PNG in git forever. WebP at
+the same file size costs four times that, because a sunset sky is one long
+smooth gradient and that is precisely where WebP bands.
+
+**Do not re-encode a committed file in place.** Each pass is lossy and
+they compound. Re-export from the master, or pull the previous upload out
+of git history (the client's originals are in the `Add files via upload`
+commits) — that is how this set was regraded.
 
 ## Media pipeline (photos land late — zero layout shift)
 
@@ -205,7 +227,8 @@ name.
 - **Court stills**: delivered 24 September. Drop replacements in
   `public/images/courts/` and set the paths in `content/home.ts` (hero and
   band) and `content/practice-areas.ts` (the five areas and the index
-  header) — no CSS re-grading on top.
+  header) — no CSS re-grading on top. See the encoding note above before
+  converting anything.
 
   The band's caption in `content/home.ts` **names the building in the
   photograph**. It changed with the file once already (the deck specified

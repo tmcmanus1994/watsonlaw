@@ -23,7 +23,9 @@ export function PhotoHeader({
           src={image.src}
           alt={image.alt}
           fill
-          priority
+          /* Replaces `priority`, deprecated in Next 16. On the pages that
+             use this component the header photograph is the LCP. */
+          preload
           sizes="100vw"
           className="object-cover"
         />

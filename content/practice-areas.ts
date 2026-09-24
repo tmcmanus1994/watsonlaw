@@ -48,10 +48,10 @@ export const practiceAreas: PracticeArea[] = [
   {
     slug: "appeals",
     image: {
-      src: "/images/courts/detail-appeals.webp",
+      src: "/images/courts/detail-appeals.avif",
       alt: "The Arkansas and United States flags above the Pulaski County Courthouse cornice",
-      width: 1800,
-      height: 1800,
+      width: 2048,
+      height: 2048,
     },
     title: "Appeals",
     indexDescription:
@@ -65,10 +65,10 @@ export const practiceAreas: PracticeArea[] = [
   {
     slug: "litigation-strategy",
     image: {
-      src: "/images/courts/detail-litigation-strategy.webp",
+      src: "/images/courts/detail-litigation-strategy.avif",
       alt: "The dome of the Arkansas State Capitol at sunset",
-      width: 1800,
-      height: 1800,
+      width: 2048,
+      height: 2048,
     },
     title: "Litigation Strategy",
     indexDescription:
@@ -84,10 +84,10 @@ export const practiceAreas: PracticeArea[] = [
     indexDescription:
       "Litigating Arkansas and U.S. constitutional issues with comprehensive knowledge from experience defending and challenging government actions.",
     image: {
-      src: "/images/courts/detail-constitutional-litigation.webp",
+      src: "/images/courts/detail-constitutional-litigation.avif",
       alt: "The west front of the Arkansas State Capitol, dome and portico seen head-on",
-      width: 1800,
-      height: 1800,
+      width: 2048,
+      height: 2048,
     },
     title: "Constitutional Litigation",
     summary:
@@ -101,10 +101,10 @@ export const practiceAreas: PracticeArea[] = [
     indexDescription:
       "Drafting amicus briefs to fill gaps in the parties’ arguments by presenting clients’ unique interests and expertise to the court.",
     image: {
-      src: "/images/courts/detail-amicus-briefing.webp",
+      src: "/images/courts/detail-amicus-briefing.avif",
       alt: "A corner pediment of the Arkansas State Capitol against an evening sky",
-      width: 1800,
-      height: 1800,
+      width: 2048,
+      height: 2048,
     },
     title: "Amicus Briefing",
     summary:
@@ -125,7 +125,7 @@ export const practiceAreas: PracticeArea[] = [
        * a large display. A re-export at the set's native size drops
        * straight in — same name, nothing else to change.
        */
-      src: "/images/courts/detail-election-law.webp",
+      src: "/images/courts/detail-election-law.avif",
       alt: "The colonnade along the flank of the Arkansas State Capitol in low sun",
       width: 816,
       height: 816,
@@ -165,8 +165,8 @@ export function indexDescriptionFor(area: PracticeArea): string {
  * as the same photograph twice.
  */
 export const practiceIndexImage: AreaImage = {
-  src: "/images/courts/practice-header.webp",
+  src: "/images/courts/practice-header.avif",
   alt: "The Arkansas State Capitol seen across its lawn, flags flying, at sunset",
-  width: 2880,
-  height: 1620,
+  width: 3200,
+  height: 1800,
 };

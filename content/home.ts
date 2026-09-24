@@ -21,12 +21,26 @@ export const home = {
      * lands, drop it in /public/media and set the path here.
      */
     videoSrc: null as string | null,
-    /** Poster / static still — Trav's pre-graded still (Sept 24). */
+    /**
+     * Poster / static still — Trav's regraded still (Sept 24, second pass:
+     * the first was soft and the grade was warmer than he wanted).
+     * Committed from a 15MB master as AVIF at quality 80, which measures
+     * within 0.3 dB of the master once next/image has resized it, at a
+     * twentieth of the bytes.
+     */
     still: {
-      src: "/images/hero/hero-still.webp",
+      src: "/images/hero/hero-still.avif",
       alt: "", // decorative: background imagery behind the headline
-      width: 2880,
-      height: 1620,
+      width: 3840,
+      height: 2202,
+      /*
+       * 16px wide, inlined. The hero is the first paint and sits on an ink
+       * background, so without it the first thing a visitor sees is a
+       * black rectangle where the photograph will be. 116 bytes buys the
+       * shape and the colour of the sky immediately.
+       */
+      blurDataURL:
+        "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoQAAkAA8BgJQBOgCLC32Ypq5AA/Nc8lWEmblOnHkq2bDx3u+Dj4qgDhEwJsnqQItAr5mgeqtfSIUQA+atXmwBQJir2fTOOMAA=",
     },
   },
 
@@ -68,10 +82,10 @@ export const home = {
      */
     caption: "Pulaski County Courthouse · Little Rock",
     image: {
-      src: "/images/courts/courthouse-band.webp",
+      src: "/images/courts/courthouse-band.avif",
       alt: "The Pulaski County Courthouse facade at sunset, its upper colonnade lit gold",
-      width: 2880,
-      height: 1620,
+      width: 3200,
+      height: 1801,
     } as {
       src: string;
       alt: string;
