@@ -19,7 +19,14 @@ export function CourtBand() {
             alt={image.alt}
             fill
             sizes="100vw"
-            className="object-cover"
+            /*
+             * Anchored to the top, not centred. The band is a 300-440px
+             * slice of a 16:9 frame, and a centred slice of this
+             * photograph lands on a row of windows — the cornice, the
+             * arms cartouche and the flag, which are what identify the
+             * building, all sit above the cut.
+             */
+            className="object-cover object-top"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-rule">
