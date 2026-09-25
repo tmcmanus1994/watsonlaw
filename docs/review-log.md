@@ -9,11 +9,14 @@ Do not copy them from the dashboard one at a time — it is how threads get
 missed. The Vercel CLI dumps the lot:
 
 ```bash
-npm i -g vercel
-vercel login
-vercel link                      # once, in this repo
-vercel comments list --status all --all-branches --limit 100 --json > comments.json
+npx vercel@latest login
+npx vercel@latest link           # once, in this repo
+npx vercel@latest comments list --status all --all-branches --limit 100 --json > comments.json
 ```
+
+Run them **one line at a time**. `npm i -g vercel` needs write access to
+the global prefix and fails with EACCES on a default macOS node install —
+`npx` sidesteps it entirely and always fetches the current CLI.
 
 Three flags matter, and every one of them is a default that will quietly
 hide comments from you:
