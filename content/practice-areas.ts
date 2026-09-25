@@ -30,7 +30,13 @@ export type PracticeArea = {
    *
    * They are square; both slots are `fill` + `object-cover` (a 4:5 pane, a
    * wide header band), so each is centre-cropped and the assignment below
-   * is a one-line swap with no layout consequence.
+   * is a one-line swap with no layout consequence — which is what Noah
+   * asked for on 25 September, rotating three of the five between areas.
+   *
+   * THE FILENAMES ARE SLOTS, NOT SUBJECTS. detail-appeals.avif is no
+   * longer the photograph on Appeals. Follow the `src` here, never the
+   * name; renaming the files to chase the rotation would break the commit
+   * history that shows which frame is which.
    */
   image?: AreaImage;
   /**
@@ -48,8 +54,8 @@ export const practiceAreas: PracticeArea[] = [
   {
     slug: "appeals",
     image: {
-      src: "/images/courts/detail-appeals.avif",
-      alt: "The Arkansas and United States flags above the Pulaski County Courthouse cornice",
+      src: "/images/courts/detail-litigation-strategy.avif",
+      alt: "The dome of the Arkansas State Capitol at sunset",
       width: 2048,
       height: 2048,
     },
@@ -65,10 +71,18 @@ export const practiceAreas: PracticeArea[] = [
   {
     slug: "litigation-strategy",
     image: {
-      src: "/images/courts/detail-litigation-strategy.avif",
-      alt: "The dome of the Arkansas State Capitol at sunset",
-      width: 2048,
-      height: 2048,
+      /*
+       * ⚠️ Lowest-resolution frame of the five: its master is 816px
+       * square where the other four are ~4000px. Ample for the 21rem index
+       * pane, soft as this page's full-width header on a large display. It
+       * arrived on this area with Noah's 25 September rotation — the weak
+       * frame changed page, it did not go away. A re-export at the set's
+       * native size drops in under the same filename.
+       */
+      src: "/images/courts/detail-election-law.avif",
+      alt: "The colonnade along the flank of the Arkansas State Capitol in low sun",
+      width: 816,
+      height: 816,
     },
     title: "Litigation Strategy",
     indexDescription:
@@ -118,17 +132,10 @@ export const practiceAreas: PracticeArea[] = [
     indexDescription:
       "Guiding clients through high-stakes election-law contexts, including ballot initiatives, Ethics Commission proceedings, campaign finance, and candidate eligibility.",
     image: {
-      /*
-       * ⚠️ Lowest-resolution frame of the five: the delivered master is
-       * 816px square, where the other four are ~4000px. It is ample for
-       * the 21rem index pane but soft as this page's full-width header on
-       * a large display. A re-export at the set's native size drops
-       * straight in — same name, nothing else to change.
-       */
-      src: "/images/courts/detail-election-law.avif",
-      alt: "The colonnade along the flank of the Arkansas State Capitol in low sun",
-      width: 816,
-      height: 816,
+      src: "/images/courts/detail-appeals.avif",
+      alt: "The Arkansas and United States flags above the Pulaski County Courthouse cornice",
+      width: 2048,
+      height: 2048,
     },
     title: "Election Law",
     summary:

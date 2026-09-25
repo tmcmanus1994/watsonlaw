@@ -22,6 +22,13 @@ export function CourtBand() {
             /*
              * 32% from the top, not centred and not flush to it.
              *
+             * ⚠️ DERIVED FOR THE PHOTOGRAPH THAT WAS HERE. The reasoning
+             * below is about the Pulaski courthouse's carved frieze; the
+             * band is now the Capitol across its lawn, where the anchor
+             * only decides how much sky and lawn survive. Kept because the
+             * arithmetic is what matters if the photograph changes again —
+             * re-derive it, do not nudge it.
+             *
              * The band is a fixed 440px slice of a 16:9 frame, so the
              * wider the screen the LESS of the photograph it shows:
              * object-cover scales to the width, and at 1440px that leaves

@@ -134,8 +134,20 @@ export function BrandMark({
           ))}
         </span>
         {entitySuffix() && (
+          /*
+           * Serif, regular weight — the same face as the name above it.
+           *
+           * This was Libre Franklin semibold, which put a geometric sans
+           * inside a serif lockup. It showed: on the homepage the mark is
+           * drawn by the Lottie, whose LLP is outlined Source Serif, so
+           * the header suffix changed typeface the moment you navigated
+           * off the homepage. Noah caught it on 25 September and asked for
+           * every page to match the homepage. The homepage is the one that
+           * cannot be edited here — it is a vector file — so this is the
+           * side that moves.
+           */
           <span
-            className="mt-1 font-label text-[0.62em] font-semibold uppercase leading-none tracking-[var(--tracking-suffix)] opacity-85"
+            className="mt-1 font-serif text-[0.62em] uppercase leading-none tracking-[var(--tracking-suffix)] opacity-85"
             style={{ paddingLeft: "var(--tracking-suffix)" }}
           >
             {entitySuffix()}
