@@ -4,7 +4,7 @@ date: 2026-09-24
 draft: false
 attachments: []
 ---
-Noah Watson was recently asked for a comment on an Arkansas Democrat-Gazette article about moving from public service to Watson & Watson LLP. Read Noah's full comment:
+Noah Watson was recently asked for a comment on an Arkansas Democrat-Gazette article about moving from public service and forming Watson & Watson LLP. Read Noah's full comment:
 
 > It has been a pleasure serving Arkansans for the past 3.5+ years with Attorney General Griffin. I am immensely grateful to the Attorney General for the opportunities he trusted me with, and I will always fondly remember my experiences and coworkers at the Attorney General's office.
 > 
