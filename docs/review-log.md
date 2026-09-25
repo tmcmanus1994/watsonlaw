@@ -9,11 +9,14 @@ Do not copy them from the dashboard one at a time — it is how threads get
 missed. The Vercel CLI dumps the lot:
 
 ```bash
-npm i -g vercel
-vercel login
-vercel link                      # once, in this repo
-vercel comments list --status all --all-branches --limit 100 --json > comments.json
+npx vercel@latest login
+npx vercel@latest link           # once, in this repo
+npx vercel@latest comments list --status all --all-branches --limit 100 --json > comments.json
 ```
+
+Run them **one line at a time**. `npm i -g vercel` needs write access to
+the global prefix and fails with EACCES on a default macOS node install —
+`npx` sidesteps it entirely and always fetches the current CLI.
 
 Three flags matter, and every one of them is a default that will quietly
 hide comments from you:
@@ -189,3 +192,44 @@ pane and soft as that page's full-width header on a large display. A
 re-export at the set's native size drops in under the same name — flagged
 to Trav rather than silently upscaled, which would only have made it blurry
 in a way nobody could then diagnose.
+
+---
+
+## Round 5 — 25 September
+
+Seven Vercel threads plus three items in Noah's email. Pulled with the CLI
+(`--status all --all-branches --limit 100`), which returned 46 threads —
+the 39 from September 13 and these seven.
+
+| # | Page | What they asked for | Disposition | Note |
+| --- | --- | --- | --- | --- |
+| 49 | / header | Put "LLP" on one line with the name, as the footer does. And the name "still feels small compared to the link options to the right" | `fixed` — **at the cost of the animation** | Header mark 0.88/1.02 → 1/1.18rem, and LLP now sits on the name's line from `md` up (stacked on phones, where inline leaves the menu button nothing to sit in — his note was explicitly about the desktop). The Lottie draws the stacked form as outlined layers, so it is **switched off** until Trav re-exports it: a homepage animating into a different shape from every other page is worse than no animation. Trav's call, 25 September. `withLottie={false}` in SiteHeader is one word from restoring it |
+| 50 | all but / | The "LLP" is a different font on interior pages | `fixed` | It was Libre Franklin semibold — a geometric sans inside a serif lockup — against the Lottie's outlined Source Serif. The static suffix is now serif at regular weight. The homepage side is a vector file and cannot be edited here, so this side moved |
+| 51 | / facts | "30+ years' experience" on one line — "might just be my screen width" | `fixed` | It was his screen width, and he was right about the cause. `--text-ledger` caps at 2.125rem from ~1720px up; the string then needs 312px in a 290px column, and it is the MIDDLE column, which pays the gutter on both sides. `.fact-value` now caps at 1.95rem and the gutter is 2rem. Nobody sees smaller type than a 1440px laptop already renders |
+| 52 | /firm | Delete the Jurisdictions list and the With Trial Counsel section | `fixed` | **Closes the round-2 open question.** The literal reading of their September instruction would have deleted both; they were left standing because deleting uncommented client content on an ambiguous instruction is harder to notice than not deleting it. The "Learn more about our practice, and meet us." line lived inside With Trial Counsel — it is kept, per round 2 #21, and moves up |
+| 53 | /firm | More blank space between the title and the first paragraph than on other pages | `fixed` | Correct: this page alone stepped up to `--space-section` at md where /news and /attorneys stay at `--space-section-sm`. Now matches them |
+| 54 | footer | Spell out "Arkansas"; distinguish the place from the name and number, "sort of like on the Contact page" | `fixed` | The place is now a kicker label in oxblood above the name and number, which is exactly what /contact does with its office headings. `site.stateName` added beside the postal `state` — an address label and a colophon want different forms |
+| 55 | /practice | Rotate three pictures: Litigation Strategy's → Appeals, Appeals' → Election Law, Election Law's → Litigation Strategy | `fixed` | Done as a rotation of `src`+`alt`. **The filenames are slots, not subjects** — `detail-appeals.avif` no longer heads Appeals. Renaming them to chase this would break the history showing which frame is which |
+
+**From the email, not Vercel**
+
+| # | What | Disposition | Note |
+| --- | --- | --- | --- |
+| 56 | Contact form should send to watson@watsonlawllp.com | `fixed` | Replaces both individual addresses; neither attorney is a recipient now. This was round 3 #42, deferred then because the domain did not exist. It does now. **Still unproven end to end** — a resolving domain is not a provisioned mailbox, and Resend reports a send to a dead box as accepted |
+| 57 | The Pulaski County Courthouse "is not particularly connected to our practice. We almost never practice there." Remove or replace with a different courthouse | `fixed`, with a caveat | Off the homepage; the band is now the Arkansas State Capitol across its lawn. **The Pulaski courthouse is the only courthouse in the delivered set** — another one means another shoot. Flagged to them |
+| 58 | Send all the portraits so we can choose | `theirs` / Trav | Not a code change. Trav holds the shoot files |
+
+**The Pulaski overlap.** #57 takes the Pulaski courthouse off the homepage
+because they do not practise there. #55 moves a *different* frame of the
+same building onto the Election Law page. Both instructions are followed
+literally and they are not contradictory — a practice-page pane is not the
+homepage band — but it is worth one sentence to them in case they had not
+registered that Box 1 is the same courthouse.
+
+**The Capitol now appears twice on the homepage** — the hero (dome, close,
+framed by trees) and the band (three-quarter across the lawn). Different
+enough not to read as a repeat, and it is what the delivered set allows.
+
+**The low-resolution frame moved, it did not go away.** The 816px square is
+now Litigation Strategy's rather than Election Law's. Still ample for the
+index pane, still soft as a full-width page header.

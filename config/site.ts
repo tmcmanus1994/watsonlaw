@@ -101,9 +101,15 @@ export const site = {
   mailingAddress: {
     line1: "PO Box 707",
     city: "Searcy",
+    /* Postal abbreviation, for an address block. Prose uses `stateName`
+       below: Noah asked on 25 September for the footer to spell Arkansas
+       out, and an address label and a sentence want different forms. */
     state: "AR",
     zip: "72145-0707",
   },
+
+  /** The state written out, for anywhere that reads as prose. */
+  stateName: "Arkansas",
 
   /**
    * The address shown to visitors.
@@ -118,21 +124,25 @@ export const site = {
   contactEmail: "watson@watsonlawllp.com",
 
   /**
-   * Where the contact form delivers — both attorneys, on the firm domain.
+   * Where the contact form delivers.
    *
-   * The form sends to both addresses at once and sets reply-to as the
-   * enquirer, so either of them can answer directly and the other sees it
-   * was asked. Adding or removing a recipient is an edit to this array and
-   * nothing else.
+   * The general address, on Noah's instruction of 25 September: "Please
+   * have the contact form send e-mails to watson@watsonlawllp.com." It
+   * replaces the two individual addresses, so neither attorney is now a
+   * recipient — enquiries reach them through whatever that box forwards
+   * to, which is the firm's arrangement to make, not this file's.
    *
-   * ⚠️ These are only as good as the mailboxes behind them. The domain
-   * resolves now, but a registered domain does not mean an address exists:
+   * Reply-to is set to the enquirer, so answering goes straight back to
+   * them. Adding a recipient is an edit to this array and nothing else.
+   *
+   * ⚠️ This is only as good as the mailbox behind it. The domain
+   * resolves, but a registered domain does not mean an address exists:
    * mail to an unprovisioned box bounces, and Resend reports the send as
-   * accepted, so the form will look fine while enquiries go nowhere. Send a
-   * real message through the live form and confirm it lands in both inboxes
+   * accepted, so the form will look fine while every enquiry goes nowhere.
+   * Send a real message through the live form and confirm it arrives
    * before telling anyone the site is open for business.
    */
-  contactRecipients: ["brett@watsonlawllp.com", "noah@watsonlawllp.com"],
+  contactRecipients: ["watson@watsonlawllp.com"],
 
   jurisdictions: [
     "Arkansas courts",

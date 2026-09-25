@@ -31,25 +31,31 @@ export function SiteFooter() {
             Offices
           </p>
           {/* City, attorney, number. No street address — the client has not
-              asked for one to be shown. */}
-          <ul className="mt-4 grid gap-4">
+              asked for one to be shown.
+
+              The place is set as a kicker label in oxblood above the name
+              and number, the way /contact sets its office headings. Noah
+              asked for the two to be told apart on 25 September: in one
+              undifferentiated stack, "North Little Rock, AR" read as part
+              of the same run of text as the attorney and the phone. The
+              state is spelled out here for the same reason — this is a
+              colophon, not an envelope. */}
+          <ul className="mt-4 grid gap-5">
             {site.offices.map((office) => (
-              <li
-                key={office.city}
-                className="support text-[length:var(--text-small)]"
-              >
-                <span className="text-ink">
-                  {office.city}, {site.mailingAddress.state}
-                </span>
-                <br />
-                {office.attorney}
-                <br />
-                <a
-                  href={`tel:+1${office.phone.replace(/\D/g, "")}`}
-                  className="link text-gray"
-                >
-                  {office.phone}
-                </a>
+              <li key={office.city}>
+                <p className="label label-kicker text-accent">
+                  {office.city}, {site.stateName}
+                </p>
+                <p className="support mt-2 text-[length:var(--text-small)]">
+                  {office.attorney}
+                  <br />
+                  <a
+                    href={`tel:+1${office.phone.replace(/\D/g, "")}`}
+                    className="link text-gray"
+                  >
+                    {office.phone}
+                  </a>
+                </p>
               </li>
             ))}
           </ul>

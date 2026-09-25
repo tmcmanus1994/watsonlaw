@@ -629,7 +629,22 @@ h3 {
 }
 .fact-value {
   font-family: var(--font-serif);
-  font-size: var(--text-ledger);
+  /*
+   * The ledger clamp with a lower ceiling (2.125rem -> 1.95rem).
+   *
+   * "30+ years' experience" is the longest of the three and sits in the
+   * MIDDLE column, which is also the narrowest: it carries the 2rem gutter
+   * on both sides where the outer two carry it on one. Below ~1720px the
+   * clamp has not reached its cap and the line fits; at and above it, it
+   * needs 312px in a 290px column and breaks in two. Noah saw it, guessed
+   * it was his screen width, and was exactly right.
+   *
+   * Capping lower costs nobody anything: 1.95rem is already what a 1440px
+   * laptop renders, so no reader sees smaller type than they do today. It
+   * is set here rather than on --text-ledger because the practice ledger
+   * shares that token and has room for it.
+   */
+  font-size: clamp(1.5rem, 1vw + 1.05rem, 1.95rem);
   line-height: 1.1;
   color: var(--color-ink);
   font-variant-numeric: lining-nums;
@@ -646,12 +661,14 @@ h3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0;
   }
+  /* 2rem, not 2.5: see .fact-value. The middle column pays this gutter
+     twice, so every 0.5rem here costs it 1rem of measure. */
   .fact:not(:last-child) {
-    padding-right: 2.5rem;
+    padding-right: 2rem;
   }
   .fact + .fact {
     border-left: var(--hairline);
-    padding-left: 2.5rem;
+    padding-left: 2rem;
   }
 }
 

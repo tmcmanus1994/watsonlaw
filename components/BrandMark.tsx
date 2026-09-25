@@ -95,6 +95,25 @@ export function BrandMark({
   // The name: one line for the site mark, split at the ampersand for the
   // standalone lockup.
   const lines = variant === "lockup" ? wordmarkLines() : [site.name];
+  /*
+   * The site mark sets the entity suffix ON THE NAME'S LINE; the standalone
+   * lockup keeps it stacked beneath. Noah asked for this on 25 September —
+   * "put the LLP on one line with Watson & Watson, sort of like it is at
+   * the bottom of the page" — where the bottom of the page is the `inline`
+   * variant used in the footer.
+   *
+   * ONE LINE FROM md UP, STACKED BELOW IT. Inline, the lockup is about
+   * 40% wider, which on a 390px phone leaves the menu button nothing to
+   * sit in. His note was explicitly about the desktop — "at least on a
+   * computer monitor" — so the phone keeps the stacked form. It is one
+   * element either way, laid out by CSS, not two renderings.
+   *
+   * This is why the animation is currently off (see SiteHeader): the
+   * Lottie draws the stacked form as outlines, and a header that animates
+   * into a different shape from the one every other page shows is worse
+   * than no animation.
+   */
+  const suffixInline = variant === "mark";
 
   /*
    * Fit the composition so its ARTWORK — not its canvas — lands on the
@@ -117,7 +136,11 @@ export function BrandMark({
   return (
     <span className={`relative block ${className}`}>
       <span
-        className="flex flex-col items-center border-y border-current px-4 py-2"
+        className={`flex flex-col items-center border-y border-current px-4 py-2 ${
+          suffixInline
+            ? "md:flex-row md:items-baseline md:justify-center md:gap-[0.5em] md:whitespace-nowrap"
+            : ""
+        }`}
         aria-hidden={hideStatic || undefined}
         style={hideStatic ? { visibility: "hidden" } : undefined}
       >
@@ -134,8 +157,22 @@ export function BrandMark({
           ))}
         </span>
         {entitySuffix() && (
+          /*
+           * Serif, regular weight — the same face as the name above it.
+           *
+           * This was Libre Franklin semibold, which put a geometric sans
+           * inside a serif lockup. It showed: on the homepage the mark is
+           * drawn by the Lottie, whose LLP is outlined Source Serif, so
+           * the header suffix changed typeface the moment you navigated
+           * off the homepage. Noah caught it on 25 September and asked for
+           * every page to match the homepage. The homepage is the one that
+           * cannot be edited here — it is a vector file — so this is the
+           * side that moves.
+           */
           <span
-            className="mt-1 font-label text-[0.62em] font-semibold uppercase leading-none tracking-[var(--tracking-suffix)] opacity-85"
+            className={`mt-1 font-serif text-[0.62em] uppercase leading-none tracking-[var(--tracking-suffix)] opacity-85 ${
+              suffixInline ? "md:mt-0" : ""
+            }`}
             style={{ paddingLeft: "var(--tracking-suffix)" }}
           >
             {entitySuffix()}

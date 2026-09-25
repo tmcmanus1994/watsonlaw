@@ -71,21 +71,26 @@ export const home = {
 
   courtBand: {
     /**
-     * The caption names the building in the photograph, and the photograph
-     * changed: the delivered still (Sept 24) is the Pulaski County
-     * Courthouse, not the Richard Sheppard Arnold United States Courthouse
-     * the deck specified. Noah flagged the old caption in the September
-     * review — he was right, it named a building that was never in frame.
-     * A caption that misnames a courthouse is the kind of error this
-     * audience notices first, so it tracks the file: change one, change
-     * the other.
+     * ⚠️ THE CAPTION NAMES THE BUILDING IN FRAME. It has been wrong once
+     * already — it read "Richard Sheppard Arnold United States Courthouse"
+     * over a photograph that was never that building, and Noah caught it.
+     * If the photograph changes, this line changes in the same commit.
+     *
+     * The band is now the Arkansas State Capitol. It was the Pulaski
+     * County Courthouse until 25 September, when Noah asked for it off the
+     * homepage: "not particularly connected to our practice. We almost
+     * never practice there." He offered removal or another courthouse —
+     * but the Pulaski courthouse is the ONLY courthouse in the delivered
+     * set, so another one means another shoot. The Capitol is where their
+     * election and constitutional work actually happens, and it is the one
+     * wide frame available that is not already the hero.
      */
-    caption: "Pulaski County Courthouse · Little Rock",
+    caption: "Arkansas State Capitol · Little Rock",
     image: {
-      src: "/images/courts/courthouse-band.avif",
-      alt: "The Pulaski County Courthouse facade at sunset, its upper colonnade lit gold",
+      src: "/images/courts/home-band.avif",
+      alt: "The Arkansas State Capitol seen across its lawn, flags flying, at sunset",
       width: 3200,
-      height: 1801,
+      height: 1800,
     } as {
       src: string;
       alt: string;
