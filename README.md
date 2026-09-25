@@ -242,8 +242,21 @@ commits) — that is how this set was regraded.
   `public/media/`; set `videoSrc` in `content/home.ts`. Static still shows
   on mobile and for reduced-motion visitors; it lives at
   `public/images/hero/`.
-- **Lottie wordmark**: `public/media/watson-logo.json`, configured at
-  `site.brandLottie`. Plays once on the **homepage header only** (the file
+- **Lottie wordmark**: ⚠️ **currently switched off** — `withLottie={false}`
+  in `components/SiteHeader.tsx`, one word from returning.
+
+  On 25 September the client asked for "LLP" on the same line as the name
+  in the header. The animation draws the STACKED lockup: name, LLP and the
+  two rules are separate outlined layers, with LLP on its own line. A
+  homepage that animates into a different shape from the one every other
+  page shows is worse than no animation, so it waits for a re-exported
+  file. To restore it: drop the new `.json` in, **re-measure the artwork
+  bounds** into `site.brandLottie.artwork` (they position the canvas over
+  the static mark's box, and that box changed shape), and set
+  `withLottie={overHero}` again.
+
+  `public/media/watson-logo.json`, configured at
+  `site.brandLottie`. Played once on the **homepage header only** (the file
   is paper-coloured, so it reads over the hero photograph and would be
   invisible on interior pages) and settles on its final frame. The static
   typographic mark renders first, defines the box, and remains the fallback

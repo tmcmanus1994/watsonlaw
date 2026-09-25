@@ -34,8 +34,23 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex max-w-[var(--container)] items-center justify-between gap-6 px-5 py-4">
         <Link href="/" className="no-underline text-current">
-          {/* The animated mark is paper-coloured and reads over the hero
-              photograph, so it runs on the homepage only. */}
+          {/*
+            ⚠️ ANIMATION OFF — one word from returning.
+            `withLottie={overHero}` brings it back.
+
+            The Lottie draws the STACKED lockup: "WATSON & WATSON", "LLP"
+            and the two rules are separate outlined layers, with LLP on its
+            own line beneath the name. On 25 September the client asked for
+            LLP on the name's line, which the static mark now does. A
+            homepage that animates into a different shape from the one
+            every other page shows is worse than no animation, so the
+            animation waits for a re-exported file.
+
+            When it lands: drop it at public/media/watson-logo.json, re-
+            measure the artwork bounds into site.brandLottie.artwork (they
+            position the canvas over the static mark's box and the box just
+            changed shape), and restore withLottie={overHero}.
+          */}
           {/* Sized up twice at the client's request: 0.72/0.8rem to
               0.88/1.02 in September, and again here — Noah's note of 25
               September was that the name "still feels small to us compared
@@ -44,7 +59,7 @@ export function SiteHeader() {
               two still occupy the same box. */}
           <BrandMark
             variant="mark"
-            withLottie={overHero}
+            withLottie={false}
             className="text-[1rem] md:text-[1.18rem]"
           />
           <span className="sr-only">Home</span>
