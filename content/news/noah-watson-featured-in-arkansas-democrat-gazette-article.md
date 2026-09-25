@@ -1,5 +1,5 @@
 ---
-title: 'ADG: Deputy solicitor general Noah Watson ... go[es] to private practice'
+title: 'ADG: "Deputy solicitor general Noah Watson ... go[es] to private practice"'
 date: 2026-09-24
 draft: false
 attachments: []
