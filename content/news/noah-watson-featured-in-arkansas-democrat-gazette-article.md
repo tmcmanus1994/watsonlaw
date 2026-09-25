@@ -1,5 +1,7 @@
 ---
-title: Noah Watson featured in Arkansas Democrat-Gazette article
+title: >-
+  Watson & Watson LLP will serve Arkansans, with a practice focused on appeals,
+  litigation strategy, constitutional law, election law, and amicus briefing.
 date: 2026-09-24
 draft: false
 attachments: []
